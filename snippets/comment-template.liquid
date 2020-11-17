@@ -1,0 +1,22 @@
+<div class="row">
+
+  <div class="comment-head clearfix">
+    <div class="post">
+      <span class="author">{{ 'blogs.comment_template.post_by' | t }} <span class="bold">{{ comment.author }}</span></span>
+      <span class="date">{{ 'blogs.comment_template.on' | t }} {% assign published_at = article.published_at | date: format: 'day_month_and_year' %}{{ 'blogs.article.posted_on_date' | t: date: published_at }}</span>      
+    </div>
+
+    <div class="post-reply">
+      {% if article.comments_enabled? %}
+      <button class="btn enable" onclick="window.location='{{article.url}}#comment-form'" title="Add your thoughts">{{ 'blogs.comment_template.reply' | t }}</button>
+      {% else %}
+      <button class="btn disabled">{{ 'blogs.article.comment_disabled' | t }}</button>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="comment-content">
+    {{ comment.content }}
+  </div>
+
+</div>

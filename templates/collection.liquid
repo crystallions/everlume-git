@@ -1,0 +1,567 @@
+<div id="collection-content">
+  <!-- Tags loading -->
+  <div id="tags-load" style="display:none;"><i class="fa fa-spinner fa-pulse fa-2x"></i></div>
+  {% comment %}
+  <div id="page-header" class="col-sm-24">
+    <h1 id="page-title">{{ collection.title }}</h1>
+  </div> 
+  {% endcomment %}
+
+
+
+
+  <div class="container">
+    <div class="clearfix filter filter-outer">
+
+      {% assign gender_tags = "Women's,Men's,All" | split: ',' %}
+      {% assign sub_type_tags = "Promise, Engagement, Bridal Set, Wedding Band, Wedding Band Set, Fine Jewelry, Designer, High Jewelry" | split: ',' %}
+      {% assign style_type_tags = "Statement, Stackable, Pinky, Signet, Solitaire, 2 Stone, 3 Stone, 5 Stone, Halo, Band, Pave Band, Bangle, Chain, Soft, Bead, Cuff, Tennis, Charm, Multi-Strand, Pendant, Lariat, Princess, Collier, Chandelier, Drop, Stud Solitaire, Climber, Hoop, Halo & Cluster, Jacket, Threader, Barbell, Cuffs" | split: ',' %}
+      {% assign type_tags = "Bracelets,Brooches & Pins,Pendants & Charms , Cuff Links ,Earrings, Necklaces , Rings , Watches , Other" | split: ',' %}
+      {% assign stone_tags = "Sapphire, Emerald, Ruby, Diamond, Abalone Shell, Agate, Alexandrite, Amber, Amethyst, Ametrine, Ammonite Triplet, Apatite, Aqua, Aquamarine, Aventurine, Bloodstone, Blue Topaz, Cameo, Carnelian, Citirine, Coral, Corundum, Garnet, Jadeite, Lapis, Larimar, Lolite, London Blue Topaz, Malachite, Moissanite, Moonstone, Morganite, Mother of Pearl, Multi-Gemstone, Onyx, Opal, Orthoclase, Pearl, Peridot, Quartz, Rubellite, Russian Jadeite, Serpentine, Sodalite, Spinel, Tanzanite, Tiger Eye, Topaz, Tourmaline, Tsavorite, Turquoise, Zircon, Other" | split: ',' %}
+      {% assign material_tags = "Rose Gold, White Gold, Yellow Gold, Platinum, Silver, Titanium, Tungsten, Other" | split: ',' %}
+
+
+      {% if collection.handle contains 'gifts-for' or collection.handle contains 'gifts-discover'  %}
+      <div class="filter-column">
+        <div class="filter-button" onclick="openMenu(event, this)">Gender</div>
+
+        <select onclick="openMenu(event, this)" class="coll-filter">
+          <option value="">Gender</option>
+          {% for tag in gender_tags %}
+          }
+          {% if current_tags contains tag %}
+          <option value="{{ tag | handle }}" selected>{{ tag }}</option>
+          {% else %}
+          <option value="{{ tag | handle }}">{{ tag }}</option>
+          {% endif %}
+
+          {% endfor %}
+
+        </select>
+         <div class="filter-select">
+          <div class="filter-list-box">
+
+            {% for tag in gender_tags %}
+            <label class="container-checkbox">{{ tag }}
+              <input type="radio" value="{{ tag | handle }}" name="gender">
+              <span class="checkmark"></span>
+            </label>
+            {% endfor %}
+            
+          </div>
+          <button onclick="filterThis('type', this)">APPLY</button>
+        </div>
+        <div onclick="hideMenu(this)" class="backdrop"></div>
+
+      </div>
+      {% endif %}
+      
+      {% if collection.handle contains 'women-s-materials' or collection.handle contains 'men-s-materials-shop' or collection.handle contains 'gifts-for' or collection.handle contains 'gifts-discover' %}
+       
+      <div class="filter-column">
+
+        <div class="filter-button" onclick="openMenu(event, this)">Jewlery type</div>
+
+        <select onclick="openMenu(event, this)" class="coll-filter">
+          <option value="">Jewlery type</option>
+          {% for tag in type_tags %}
+
+          {% if current_tags contains tag %}
+          <option value="{{ tag | handle }}" selected>{{ tag }}</option>
+          {% else %}
+          <option value="{{ tag | handle }}">{{ tag }}</option>
+          {% endif %}
+
+          {% endfor %}
+			<option value="all">View all</option>
+        </select>
+
+        <div class="filter-select">
+          <div class="filter-list-box">
+			<label class="container-checkbox">View all
+              <input type="radio" value="all" name="Style">
+              <span class="checkmark"></span>
+            </label>
+            {% for tag in type_tags %}
+            <label class="container-checkbox">{{ tag }}
+              <input type="radio" value="{{ tag | handle }}" name="type">
+              <span class="checkmark"></span>
+            </label>
+            {% endfor %}
+             
+          </div>
+          <button onclick="filterThis('type', this)">APPLY</button>
+        </div>
+        <div onclick="hideMenu(this)" class="backdrop"></div>
+
+
+      </div>
+       {% endif %}
+
+
+      {% if collection.handle contains 'women-s-materials' or collection.handle contains 'men-s-materials-shop' or collection.handle contains 'gifts-for' or collection.handle contains 'gifts-discover' %}
+      <div class="filter-column">
+        <div class="filter-button" onclick="openMenu(event, this)">Sub type</div>
+
+        <select onclick="openMenu(event, this)" class="coll-filter">
+          <option value="">Sub type</option>
+          {% for tag in sub_type_tags %}
+
+          {% if current_tags contains tag %}
+          <option value="{{ tag | handle }}" selected>{{ tag }}</option>
+          {% else %}
+          <option value="{{ tag | handle }}">{{ tag }}</option>
+          {% endif %}
+
+          {% endfor %}
+			<option value="all">View all</option>
+        </select>
+        
+          <div class="filter-select">
+          <div class="filter-list-box">
+			 <label class="container-checkbox">View all
+              <input type="radio" value="all" name="subtype">
+              <span class="checkmark"></span>
+            </label>
+            {% for tag in sub_type_tags %}
+            <label class="container-checkbox">{{ tag }}
+              <input type="radio" value="{{ tag | handle }}" name="subtype">
+              <span class="checkmark"></span>
+            </label>
+            {% endfor %}
+            
+          </div>
+          <button onclick="filterThis('Style', this)">APPLY</button>
+        </div>
+        <div onclick="hideMenu(this)" class="backdrop"></div>
+        
+      </div>
+      {% endif %}
+
+     
+
+      
+      
+      <div class="filter-column">
+        <div class="filter-button" onclick="openMenu(event, this)">Style type</div>
+
+        <select onclick="openMenu(event, this)" class="coll-filter">
+          <option value="">Style type</option>
+          {% for tag in style_type_tags %}
+
+          {% if current_tags contains tag %}
+          <option value="{{ tag | handle }}" selected>{{ tag }}</option>
+          {% else %}
+          <option value="{{ tag | handle }}">{{ tag }}</option>
+          {% endif %}
+
+          {% endfor %}
+          <option value="all">View all</option>
+        </select>
+
+        <div class="filter-select">
+          <div class="filter-list-box">
+			 <label class="container-checkbox">View all
+              <input type="radio" value="all" name="Style">
+              <span class="checkmark"></span>
+            </label>
+            {% for tag in style_type_tags %}
+            <label class="container-checkbox">{{ tag }}
+              <input type="radio" value="{{ tag | handle }}" name="Style">
+              <span class="checkmark"></span>
+            </label>
+            {% endfor %}
+            
+          </div>
+          <button onclick="filterThis('Style', this)">APPLY</button>
+        </div>
+        <div onclick="hideMenu(this)" class="backdrop"></div>
+
+
+
+      </div>
+     
+      <div class="filter-column">
+        <div class="filter-button" onclick="openMenu(event, this)">Stone</div>
+
+        <select onclick="openMenu(event, this)" class="coll-filter">
+          <option value="">Stone</option>
+          {% for tag in stone_tags %}
+
+          {% if current_tags contains tag %}
+          <option value="{{ tag | handle }}" selected>{{ tag }}</option>
+          {% else %}
+          <option value="{{ tag | handle }}">{{ tag }}</option>
+          {% endif %}
+
+          {% endfor %}
+          <option value="all">View all</option>
+
+        </select>
+
+        <div class="filter-select">
+          <div class="filter-list-box">
+			 <label class="container-checkbox">View all
+              <input type="radio" value="all" name="Stone">
+              <span class="checkmark"></span>
+            </label>
+            {% for tag in stone_tags %}
+            <label class="container-checkbox">{{ tag }}
+              <input type="radio" value="{{ tag | handle }}" name="Stone">
+              <span class="checkmark"></span>
+            </label>
+            {% endfor %}
+           
+          </div>
+          <button onclick="filterThis('Stone', this)">APPLY</button>
+        </div>
+        <div onclick="hideMenu(this)" class="backdrop"></div>
+
+
+      </div>
+
+
+      <div class="filter-column">
+        <div class="filter-button" onclick="openMenu(event, this)">Material</div>
+
+        <select onclick="openMenu(event, this)" class="coll-filter">
+          <option value="">Material</option>
+          {% for tag in material_tags %}
+
+          {% if current_tags contains tag %}
+          <option value="{{ tag | handle }}" selected>{{ tag }}</option>
+          {% else %}
+          <option value="{{ tag | handle }}">{{ tag }}</option>
+
+          {% endif %}
+
+          {% endfor %}
+          <option value="all">View all</option>
+
+        </select>
+
+        <div class="filter-select">
+          <div class="filter-list-box">
+           
+              <label class="container-checkbox">View all
+              <input type="radio" value="all" name="Material">
+              <span class="checkmark"></span>
+            </label>
+            {% for tag in material_tags %}
+            <label class="container-checkbox">{{ tag }}
+              <input type="radio" value="{{ tag | handle }}" name="Material">
+              <span class="checkmark"></span>
+            </label>
+            {% endfor %}
+           
+          </div>
+          <button onclick="filterThis('Material', this)">APPLY</button>
+        </div>
+        <div onclick="hideMenu(this)" class="backdrop"></div>
+
+
+      </div>
+      <div class="filter-column">
+        <div class="filter-button" onclick="openMenu(event, this)">Sort By</div>
+        <select></select>
+
+        <div class="filter-select">
+          <div class="filter-list-box">
+
+            <label class="container-checkbox">{{'collections.sorting.featured'|t}}
+              <input type="radio" value="?sort_by=manual" name="Price">
+              <span class="checkmark"></span>
+            </label>
+            <label class="container-checkbox">{{'collections.sorting.price_ascending'|t}}
+              <input type="radio" value="?sort_by=price-ascending" name="Price">
+              <span class="checkmark"></span>
+            </label>
+            <label class="container-checkbox">{{'collections.sorting.price_descending'|t}}
+              <input type="radio" value="?sort_by=price-descending" name="Price">
+              <span class="checkmark"></span>
+            </label>
+            <label class="container-checkbox">{{'collections.sorting.az'|t}}
+              <input type="radio" value="?sort_by=title-ascending" name="Price">
+              <span class="checkmark"></span>
+            </label>
+            <label class="container-checkbox">{{'collections.sorting.za'|t}}
+              <input type="radio" value="?sort_by=title-descending" name="Price">
+              <span class="checkmark"></span>
+            </label>
+          </div>
+          <button onclick="filterThis('Price', this, true)">APPLY</button>
+        </div>
+        <div onclick="hideMenu(this)" class="backdrop"></div>
+
+
+
+      </div>
+    </div>
+  </div>
+  <script>
+    /* Product Tag Filters - Good for any number of filters on any type of collection pages */
+    /* Brought to you by Caroline Schnapp */
+    var collFilters = jQuery('.coll-filter');
+    collFilters.change(function () {
+     
+      var newTags = [];
+      collFilters.each(function () {
+       if(jQuery(this).val()!="all"){
+          if (jQuery(this).val()) {
+
+            newTags.push(jQuery(this).val());
+
+          }
+       }
+       
+      });
+      
+     
+      
+      if (newTags.length) {
+       
+        
+          var query = newTags.join('+');
+          window.location.href = jQuery('{{ 'tag' | link_to_tag: 'tag' }}').attr('href').replace('tag', query);
+                                       
+      }
+      else {
+                                
+        {% if collection.handle %}
+        window.location.href = '/collections/{{ collection.handle }}';
+        {% elsif collection.products.first.type == collection.title %}
+        window.location.href = '{{ collection.title | url_for_type }}';
+        {% elsif collection.products.first.vendor == collection.title %}
+        window.location.href = '{{ collection.title | url_for_vendor }}';
+        {% endif %}
+      }
+    });
+  </script>
+  {% comment %} Banner {% endcomment %}
+  <div class="collection-warper col-sm-24 clearfix">
+    {% if template == 'collection' %}
+    {% if settings.collection_banner %}
+    <div class="collection-panner">
+      <img src="{{ 'collection_banner.jpg' | asset_url }}" class="img-responsive" alt="" />
+    </div>
+    {% endif %}
+    {% endif %}
+
+    {% if settings.collection_image or settings.collection_desc %}
+    <div class="collection-image-wrapper row">
+
+      {% if settings.collection_image %}
+      <div
+        class="collection-image{% if settings.collection_desc %} col-sm-8{% else %} col-sm-24{% endif %} text-center">
+        {% if collection.image %}
+        <img src="{{ collection.image.src | collection_img_url: 'original' }}" alt="{{ collection.title | escape }}" />
+        {% else %}
+        <img src="{{ collection.products.first.featured_image | product_img_url: 'original' }}"
+          alt="{{ collection.title | escape }}" />
+        {% endif %}
+      </div>
+      {% endif %}
+
+      {% if settings.collection_desc %}
+      {% if collection.description != empty %}
+      <div class="{% if settings.collection_image %}col-sm-16{% else %}col-sm-24{% endif %}">
+        <div class="collection-description text-left">
+          <div class="description content">{{ collection.description }}</div>
+        </div>
+      </div>
+      {% endif %}
+      {% endif %}
+    </div>
+    {% endif %}
+
+  </div>
+  <div class="collection-main-content">
+    {% assign layout = "col-xs-24 col-sm-24" %}
+    {% if setting.show_sidebar_prodcoll or settings.collection_layout == "left" or settings.collection_layout == "right" or collection.handle == "sample-collection-with-right-slidebar" or collection.handle == "sample-collection-with-left-slidebar" %}
+    {% capture layout %}col-xs-24 col-sm-18 no_full_width{% endcapture %}
+    {% endif %}
+    {% if settings.collection_layout == "full" and collection.handle != "sample-collection-with-right-slidebar" and collection.handle != "sample-collection-with-left-slidebar" %}
+    {% capture layout %}col-xs-24 col-sm-24{% endcapture %}
+    {% endif %}
+
+    {% paginate collection.products by settings.collection_pagination_limit %}
+    <div id="col-main"
+      class="collection collection-page {{layout}} {% if settings.collection_layout == "left" or collection.handle == "sample-collection-with-left-slidebar" and collection.handle != "sample-collection-with-right-slidebar" %}have-left-slidebar{% endif %}">
+
+      {% if collection.products.size > 0 %}
+      <div class="container-nav clearfix">
+
+        {% comment %} <div id="options" class="container-nav clearfix">
+          <ul class="list-inline text-right">
+            {% if settings.collection_grid_list %}
+            <li class="grid_list">
+              <ul class="list-inline option-set hidden-xs" data-option-key="layoutMode">
+                <li data-option-value="fitRows" id="goGrid" class="goAction btooltip active" data-toggle="tooltip"
+                  data-placement="top" title="{{'collections.view_as.grid'|t}}">
+                  <span></span>
+                </li>
+                <li data-option-value="straightDown" id="goList" class="goAction btooltip" data-toggle="tooltip"
+                  data-placement="top" title="{{'collections.view_as.list'|t}}">
+                  <span></span>
+                </li>
+              </ul>
+            </li>
+            {% endif %}
+
+
+
+          </ul>
+        </div> {% endcomment %}
+      </div>
+
+      <div id="sandBox-wrapper"
+        class="group-product-item row {% if settings.collection_layout == "full" or collection.handle != "sample-collection-with-right-slidebar" and collection.handle != "sample-collection-with-left-slidebar" %}collection-full{% endif %}">
+        <div id="AjaxinateContainer">
+          <ul id="sandBox" class="list-unstyled">
+
+            {% for product in collection.products %}
+            <li class="element{% cycle ' first', '', '' %} no_full_width" data-alpha="{{product.title}}"
+              data-price="{{product.price}}">
+              {% include 'product-item' with collection.handle %}
+            </li>
+            {% endfor %}
+
+          </ul>
+        </div>
+      </div>
+      {% comment %}
+      {% include 'pagination' %}
+      {% endcomment %}
+
+      <div id="AjaxinatePagination">
+        {% if paginate.next %}
+        <a href="{{ paginate.next.url }}" id="col-load-more">Load More</a>
+        {% endif %}
+      </div>
+
+      {% else %}
+      <h2 class="empty">{{ 'collections.general.empty' | t }}</h2>
+      {% endif %}
+
+    </div>
+    {% endpaginate %}
+
+    {% if collection.handle == "sample-collection-with-left-slidebar" or settings.show_sidebar_prodcoll and settings.collection_layout == "left" and collection.handle != "sample-collection-with-right-slidebar" %}
+    <div id="prodcoll" class="left-slidebar col-xs-24 col-sm-6">
+      {% include 'sidebar-prodcoll' %}
+    </div>
+    {% endif %}
+
+    {% if settings.show_sidebar_prodcoll %}
+    {% if settings.collection_layout == "right" or collection.handle == "sample-collection-with-right-slidebar" and collection.handle != "sample-collection-with-left-slidebar" %}
+    <div id="prodcoll" class="right-slidebar col-xs-24 col-sm-6">
+      {% include 'sidebar-prodcoll' %}
+    </div>
+    {% endif %}
+    {% endif %}
+  </div>
+</div>
+<script type="text/javascript">
+
+  $(document).ready(function () {
+    if (location.search.search("sort_by=") == -1) {
+
+    }
+    else {
+      if (location.search != "") {
+        var stpo = location.search.search("sort_by=") + 8, sortby_url = '.' + location.search.substr(stpo).split('='), sortby_url_a = sortby_url + " a";
+        $(sortby_url).addClass("active");
+        $('#sortButton .name').html($(sortby_url_a).html());
+      }
+      else {
+        $('.manual').addClass("active");
+      }
+    }
+  });
+</script>
+{% include 'wiser_trending' %}{% include 'wiser_recentview' %}{% include 'wiser_newarrivals' %}{% include 'wiser_featured' %}{% include 'wiser_topselling' %}{% include 'wiser_recent_related' %}
+
+{{ 'ajaxinate.min.js' | asset_url | script_tag }}
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var endlessScroll = new Ajaxinate({
+      method: 'click'
+    });
+  });
+</script>
+
+<script>
+
+  $('#sortForm .sort a').on('click', function (e) {
+
+    e.preventDefault();
+
+    var href = $(this).attr('href');
+
+    var href = href.substr(href.indexOf("?"));
+    var old = window.location.href.substr(0, window.location.href.indexOf('?'));
+    window.location = old + href;
+
+
+  }); 
+</script>
+
+<script>
+  function filterThis(filter, btn, isPrice) {
+
+    var filterVal = $("input[name='" + filter + "']:checked").val();
+    if (isPrice) {
+      if (window.location.href.includes('?')) {
+        var path = window.location.href.split('?')
+        window.location = path[0] + filterVal;
+      }
+      else {
+        window.location = window.location.href + filterVal;
+      }
+    }
+    else {
+      if (filterVal) {
+        $(btn).parent().next().removeClass('active');
+        $(btn).parent().prev().val(filterVal).trigger('change');
+      }
+    }
+  }
+
+  function openMenu(e, elem) {
+    $(elem).next().next().addClass('active');
+    $(elem).next().next().next().addClass('active');
+  }
+
+  function hideMenu(elem) {
+    $(elem).prev().removeClass('active');
+    $(elem).removeClass('active');
+  }
+  
+  {% if current_tags %}
+  var current_tags = {{ '' | append: current_tags | join: '", "' }};
+  for (let index = 0; index < current_tags.length; index++) {
+    let radio = $('input[value="' + current_tags[index].toLowerCase().replace(' ','-') + '"]');
+
+    radio.prop("checked", true);
+    radio.parent().parent().parent().prev().prev().text(radio.parent().text());
+  }
+  {% endif %}
+
+  if(window.location.href.includes('?')){
+    var path = window.location.href.split('?')
+    console.log(path[1]);
+    let r = $('input[value="?' + path[1] + '"]');
+    r.prop("checked", true);
+    r.parent().parent().parent().prev().prev().text(r.parent().text());
+
+  }
+  
+  $('.filter-select input[type="radio"]').click(function(){
+    $(this).parents('.filter-select').children('button').trigger( "click" );
+  
+});
+
+
+</script>
+

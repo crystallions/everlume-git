@@ -1,0 +1,21 @@
+<div class="label_spec">
+  SPECIFICATION <span class="fa fa-caret-up"></span>
+</div>
+
+<script>
+  
+  
+  $(".label_spec .fa").click(function(){
+    if($(".jewelry-item-details").hasClass("close-detail")){
+      $(".jewelry-item-details").removeClass("close-detail");
+      $(this).removeClass('fa-caret-down').addClass('fa-caret-up');
+    }
+    else
+    {
+      $(".jewelry-item-details").addClass("close-detail");
+     $(this).removeClass('fa-caret-up').addClass('fa-caret-down');
+    }
+    
+});
+</script>
+

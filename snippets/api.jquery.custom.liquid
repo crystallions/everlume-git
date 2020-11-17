@@ -1,0 +1,152 @@
+<script type="text/javascript">
+  Shopify.updateCartInfo = function(cart, cart_summary_id, cart_count_id) {
+    if ((typeof cart_summary_id) === 'string') {
+      var cart_summary = jQuery(cart_summary_id);
+      if (cart_summary.length) {
+        // Start from scratch.
+        cart_summary.empty();
+        // Pull it all out.
+        
+        jQuery.each(cart, function(key, value) {
+          if (key === 'items') {
+
+            
+            if (value.length) {
+              
+			  jQuery('<div class="cart-header"><h2 title="title">Shopping cart</h2><a class="sidecart-close" href="javascript:void(0);" onclick="sidebarClose()"></a></div></div><div class="items control-container"></div>').appendTo(cart_summary);
+              var table = jQuery(cart_summary_id + ' div.items');
+       
+              jQuery.each(value, function(i, item) { 
+                jQuery('<div class="row items-wrapper"><a class="cart-close" title="Remove" href="javascript:void(0);" onclick="Shopify.removeItem(' + item.variant_id + ')">Remove</a><div class="col-md-7 cart-left"><a class="cart-image" href="' + item.url + '"><img src="' + Shopify.resizeImage(item.image, 'compact') + '" alt="" title=""/></a> <div class="cart-quantity"><input type="button" value="-" class="qtyminus"   field="updates_'+ item.id +'" /><input type="number" name="updates[]" id="updates_'+ item.id +'" class="quantity" variantid="'+ item.id +'" value="'+ item.quantity +'" /><input type="button" value="+" class="qtyplus" field="updates_'+ item.id +'" /></div></div><div class="col-md-17 cart-right"><div class="cart-title"><a href="' + item.url + '">' + item.title + '</a></div><div class="cart-price">' + Shopify.formatMoney(item.price, "{{shop.money_format}}") + '</div></div></div>').appendTo(table);
+              });
+                       
+              jQuery('<div class="subtotal"><span>Total</span><span class="cart-total-right">' + Shopify.formatMoney(cart.total_price, "{{shop.money_format}}") + '</span></div>').appendTo(cart_summary);
+              
+              jQuery('<div class="action"><button class="btn" onclick="window.location=\'/checkout\'">{{ 'layout.cart_dropdown.checkout' | t }}</button></div>').appendTo(cart_summary);
+              
+
+            }
+            else {
+              jQuery('<div class="cart-header"><h2 title="title">Shopping cart</h2><a class="sidecart-close" href="javascript:void(0);" onclick="sidebarClose()"></a></div><div class="empty text-center"><em>{{ 'layout.cart_dropdown.empty_text' | t }}. <a href="/collections/all" class="btn">Continue Shopping</a></em></div>').appendTo(cart_summary);
+            }
+          }
+        });
+      }
+    }
+    // Update cart count.
+    if ((typeof cart_count_id) === 'string') {
+      if (cart.item_count == 0) { 
+        jQuery('#' + cart_count_id).html('your cart is empty'); 
+      }
+      else if (cart.item_count == 1) {
+        jQuery('#' + cart_count_id).html('1 item in your cart');
+      }
+        else {
+          jQuery('#' + cart_count_id).html(cart.item_count + ' items in your cart');
+        }
+    }
+    
+    /* Update cart info */
+    updateCartDesc(cart);
+  };
+  
+  function updateCartDesc(data){
+    var $cartLinkText = $('.cart-link .icon:first .number');
+           switch(data.item_count){
+         case 0:
+           $cartLinkText.html('0');
+           break;
+         case 1:
+           $cartLinkText.html('1');
+           break;
+         default:
+           $cartLinkText.html(data.item_count);
+           break;
+       } 
+    var $cartPrice = '<span class="total"> - '+ Shopify.formatMoney(data.total_price, "{{shop.money_format}}") +'</span>';
+    {% if settings.show_multiple_currencies %}
+    /* Update currency */
+    currenciesCallbackSpecial('#umbrella span.money');
+     {% endif %}
+  }
+  
+  Shopify.onCartUpdate = function(cart) {
+    Shopify.updateCartInfo(cart, '#cart-info #cart-content', 'shopping-cart');
+  };
+  
+  $(window).load(function() {
+    // Let's get the cart and show what's in it in the cart box.	
+    Shopify.getCart(function(cart) {
+      
+      Shopify.updateCartInfo(cart, '#cart-info #cart-content');		
+    });
+  });
+</script>
+<script type="text/javascript">
+
+  
+jQuery(document).ready(function(){
+    // This button will increment the value
+   $("#cart-content").on("click", ".qtyplus", function(e){
+        // Stop acting like a button
+        e.preventDefault();
+        // Get the field name
+        fieldName = $(this).attr('field');
+     	  fieldId = $('input[id='+fieldName+']').attr('variantid');
+     var variantid= parseInt(fieldName.replace("updates_", ""));
+        // Get its current value
+        var currentVal = parseInt($('input[id='+fieldName+']').val());
+        // If is not undefined
+        if (!isNaN(currentVal)) {
+            // Increment
+            $('input[id='+fieldName+']').val(currentVal + 1);
+        } else {
+            // Otherwise put a 0 there
+            $('input[id='+fieldName+']').val(0);
+        }
+         updateDrawer(fieldId,$('input[id='+fieldName+']').val());
+		
+    });
+    // This button will decrement the value till 0
+    $("#cart-content").on("click", ".qtyminus", function(e){
+        // Stop acting like a button
+        e.preventDefault();
+        // Get the field name
+     	
+        fieldName = $(this).attr('field');
+       fieldId = $('input[id='+fieldName+']').attr('variantid');
+        // Get its current value
+        var currentVal = parseInt($('input[id='+fieldName+']').val());
+        // If it isn't undefined or its greater than 0
+        if (!isNaN(currentVal) && currentVal > 0) {
+            // Decrement one
+            $('input[id='+fieldName+']').val(currentVal - 1);
+        } else {
+            // Otherwise put a 0 there
+            $('input[id='+fieldName+']').val(0);
+        }
+      	updateDrawer(fieldId,$('input[id='+fieldName+']').val());
+      });	
+});
+  
+  function updateDrawer(id, quantity){ 
+   $.ajax({
+          type: 'POST',
+          url: '/cart/change.js',
+          // data: { updates: {  id :  $('input[id='+fieldName+']').val() } },
+     		data: {
+                        quantity: quantity,
+                        id: id
+                    },
+          dataType: 'json',
+          success: function() {
+             Shopify.getCart(function(cart) {
+      
+              Shopify.updateCartInfo(cart, '#cart-info #cart-content');		
+            });
+          }
+        });
+      
+   
+   }
+</script>

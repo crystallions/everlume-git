@@ -1,0 +1,354 @@
+html,
+body {
+  max-width: 1680px;
+  margin: auto;
+}
+
+#home-slider {
+  max-height: 650px;
+}
+
+.rel-container h6.general-title,
+.insta-title h3 {
+  margin-bottom: 65px;
+  letter-spacing: -0.5px;
+}
+
+#jewelry-product .product-single__prices {
+  margin-bottom: 14px !important;
+}
+
+#jewelry-product #AddToCartForm {
+  margin-bottom: 22px !important;
+}
+
+@media (min-width: 768px) {
+  /* .jewelry-app-product-images .jewelry-images-container {
+    display: flex;
+    align-items: center;
+
+    .jewelry-container {
+      height: 100% !important;
+
+      .jewelry-zoom-container {
+        text-align: left !important;
+      }
+    }
+  } */
+
+  .jewelry-app-product-images .jewelry-images-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .jewelry-images-list {
+    display: none;
+  }
+
+  .element .row-left a.container_item {
+    max-height: 400px;
+    max-width: 400px;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    display: flex;
+  }
+  .element > ul.row-container.list-unstyled.clearfix {
+    height: 100%;
+    li {
+      height: 100%;
+    }
+  }
+}
+
+@media (max-width: 769px) {
+  .templateProduct #content section.content {
+    padding-bottom: 0px;
+  }
+  #jewelry-product .product-single__prices {
+    margin-bottom: -5px !important;
+  }
+  .shipping_det_section ul li {
+    padding-left: 24px;
+    padding-top: 0;
+    margin-bottom: 10px;
+    &:before {
+      left: -3px;
+      top: 2px;
+    }
+  }
+  .shipping_det_section h3 {
+    margin-bottom: 28px;
+  }
+  .shipping_det_section p {
+    margin-bottom: 25px;
+    margin-top: -18px;
+  }
+  .payment_box {
+    padding: 40px 20px 0px;
+  }
+  .rel-container h6.general-title,
+  .insta-title h3 {
+    margin-bottom: 10px;
+  }
+  /* .owl-carousel .owl-item {
+    width: 20px !important;
+    .jewelry-image {
+      float: none;
+      width: 7px !important;
+      height: 7px;
+      overflow: hidden;
+      border-radius: 50%;
+      background: gray;
+      margin: 0 7px;
+      &.active {
+        background: #56c8e4;
+      }
+    }
+  } 
+  .jewelry-images-list .owl-wrapper {
+    display: flex !important;
+    justify-content: center;
+  } */
+
+  .jewelry-app-product-images .jewelry-images-container .jewelry-images-list > a {
+    float: none;
+    width: 7px !important;
+    height: 7px !important;
+    overflow: hidden;
+    border-radius: 50%;
+    background: #d8d8d8;
+    margin: 10px 7px 0 7px;
+    border-color: transparent;
+  }
+
+  .jewelry-app-product-images .jewelry-images-container .jewelry-images-list > a.active {
+    background: #56c8e4;
+    border-color: transparent !important;
+  }
+
+  .jewelry-app-product-images .jewelry-images-container .jewelry-images-list > a img {
+    display: none;
+  }
+}
+
+.article-content {
+  max-width: 1544px;
+  margin: auto;
+  float: none;
+}
+
+.evm-wscontainer {
+  padding: 52px 0 10px !important;
+}
+
+.post-content {
+  margin-bottom: 75px !important;
+}
+
+.blogs-image.article-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    width: auto;
+    max-width: initial;
+  }
+}
+
+#presets2 .ws-card_image_container {
+  background-color: #f2f2f2 !important;
+  border: 1px solid #dcdcdc;
+}
+
+#presets2 .ws-card__background-image {
+  background-color: transparent !important;
+}
+
+@media only screen and (max-width: 769px) {
+  #presets2 {
+    .ws-card__header {
+      padding-top: 32px;
+
+      .ws-card__title {
+        margin-top: 0px !important;
+      }
+    }
+
+    .ws-card_image_container {
+      padding: 30px 0 35px;
+    }
+
+    .ws-card__price {
+      margin-top: 1px !important;
+    }
+
+    .ws-box-wrapper {
+      padding: 4px !important;
+      margin-bottom: 7px;
+    }
+  }
+
+  .blogs-item h2 {
+    margin-top: 11px !important;
+  }
+
+  .article-content .blog-title {
+    margin-bottom: 27px !important;
+  }
+
+  .post-content p {
+    margin-bottom: 25px !important;
+  }
+
+  .evm-wscontainer {
+    padding: 10px 0 0 !important;
+  }
+}
+
+.article {
+  .insta-title h3 {
+    margin-top: 3px !important;
+  }
+}
+
+.add-to-cart {
+  white-space: nowrap;
+}
+
+#presets2 .ws-card__background-image2 {
+  background-color: #f2f2f2 !important;
+}
+
+.jewelry-attribute-selector {
+  display: none;
+}
+
+.filter-outer {
+  position: relative;
+}
+
+.filter-column {
+  @media (min-width: 769px) {
+    position: relative;
+  }
+  .filter-select {
+    position: absolute;
+    background: white;
+    z-index: 999;
+    margin-top: 10px;
+    border: 1px solid #e0e0e0;
+    width: calc(100vw - 20px);
+    left: 5px;
+    padding: 10px;
+    box-shadow: 1px 6px 23px -6px rgba(0, 0, 0, 0.75);
+    opacity: 0;
+    transition: 300ms all;
+    display: none;
+
+    &.active {
+      display: block;
+      opacity: 1;
+    }
+    .filter-list-box {
+      max-height: 250px;
+      overflow-y: auto;
+    }
+    @media (min-width: 769px) {
+      width: 100%;
+      right: 5px;
+    }
+
+    label {
+      display: block;
+      position: relative;
+      padding-left: 38px;
+      margin-bottom: 14px;
+      cursor: pointer;
+      font-size: 14px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      text-align: left;
+      color: black;
+      font-weight: 500;
+
+      input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+        &:checked ~ .checkmark:after {
+          display: block;
+        }
+      }
+      .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        border: 1px solid #e0e0e0;
+        border-radius: 3px;
+
+        &:after {
+          left: 8px;
+          top: 3px;
+          width: 9px;
+          height: 14px;
+          border: solid #56c8e4;
+          border-width: 0 4px 4px 0;
+          -webkit-transform: rotate(45deg);
+          -ms-transform: rotate(45deg);
+          transform: rotate(45deg);
+          content: "";
+          position: absolute;
+          display: none;
+        }
+      }
+    }
+    button {
+      text-transform: uppercase;
+      position: relative;
+      width: 100%;
+      display: block;
+      padding: 8px 16px;
+      margin: 0;
+      font-weight: 400;
+      font-style: normal;
+      text-decoration: none;
+      text-align: center;
+      white-space: nowrap;
+      cursor: pointer;
+      border: 1px solid transparent;
+      color: #fff;
+      background-color: #56c8e4 !important;
+      font-size: 14px !important;
+      line-height: 24px !important;
+      font-family: "VisbyCFBold" !important;
+      height: 0px !important;
+      margin-top: 0px !important;
+      letter-spacing: 3px;
+      padding-top: 0px !important;
+      visibility:hidden;
+    }
+  }
+  .backdrop {
+    display: none;
+    position: fixed;
+    z-index: 998;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    &.active {
+      display: block;
+    }
+  }
+}

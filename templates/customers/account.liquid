@@ -1,0 +1,50 @@
+{% layout settings.customer_layout %}
+
+<div id="page-header" class="col-md-24">
+  <h1 id="page-title">{{ 'customer.account.title' | t }}</h1> 
+</div>
+
+<div class="col-sm-6 col-md-6 sidebar">
+  {% include 'sidebar-account' %}
+</div>
+
+<div id="col-main" class="account-page col-sm-18 col-md-18 clearfix">
+  
+  <div id="customer_orders">
+    <h6 class="sb-title">{{ 'customer.orders.order_history' | t }}</h6>
+    <span class="mini-line"></span>
+    {% if customer.orders.size != 0 %}
+    <div class="row wrap-table">
+      <table class="table-hover">
+        <thead>
+          <tr>
+            <th class="order_number">{{ 'customer.orders.order_number' | t }}</th>
+            <th class="date">{{ 'customer.orders.date' | t }}</th>
+            <th class="payment_status">{{ 'customer.orders.payment_status' | t }}</th>
+            <th class="fulfillment_status">{{ 'customer.orders.fulfillment_status' | t }}</th>
+            <th class="total">{{ 'customer.orders.total' | t }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order in customer.orders %}
+          <tr class="{% cycle 'odd', 'even' %} {% if order.cancelled %}cancelled_order{% endif %}">
+            <td>{{ order.name | link_to: order.customer_url }}</td>
+            <td><span class="note">{{ order.created_at | date: "%b, %d %Y" }}</span></td>
+            <td><span class="status_{{ order.financial_status }}">{{ order.financial_status }}</span></td>
+            <td><span class="status_{{ order.fulfillment_status }}">{{ order.fulfillment_status }}</span></td>
+            <td><span class="total">{{ order.total_price | money }}</span></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <div class="alert alert-success">
+      <button type="button" class="close btooltip" data-toggle="tooltip" data-placement="top" title="Close" data-dismiss="alert">×</button>
+      <ul>
+        <li>{{ 'customer.orders.none' | t }}</li>
+      </ul>
+    </div>
+    {% endif %}
+  </div>
+</div>

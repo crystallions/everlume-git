@@ -1,0 +1,55 @@
+{% if template contains 'customers' %}
+{{ "shopify_common.js" | shopify_asset_url | script_tag }}
+{{ "cs.customerArea.js"  | asset_url | script_tag }}
+{% endif %}
+
+{{ 'jquery-1.9.1.min.js' | asset_url | script_tag }}
+{{ 'jquery.imagesloaded.min.js' | asset_url | script_tag }}
+
+{{ 'bootstrap.min.3x.js' | asset_url | script_tag }}
+
+{% if template == 'index' and settings.show_slideshow %}
+{{ 'jquery.easing.1.3.js' | asset_url | script_tag }}
+{{ 'jquery.camera.min.js' | asset_url | script_tag }}
+{{ 'jquery.mobile.customized.min.js' | asset_url | script_tag }}
+{% endif %}
+
+{% if template == 'page.contact' and settings.contact_map %}
+{{ '//maps.google.com/maps/api/js?sensor=false' | script_tag }}
+{{ 'jquery.gmap.min.js' | asset_url | script_tag }}
+{% endif %}
+
+{{ 'cookies.js' | asset_url | script_tag }}
+{{ 'modernizr.js' | asset_url | script_tag }}
+{{ 'cs.optionSelect.js' | asset_url | script_tag }}
+{{ 'cs.customSelect.js' | asset_url | script_tag }}  
+{{ 'application.js' | asset_url | script_tag }}
+
+
+
+{% if template != 'product.jewelry' %}
+{{ 'jquery.owl.carousel.min.js' | asset_url | script_tag }}
+{% endif %}
+
+{% if template == 'product.jewelry' %}
+{{ 'owl.carousel.pr.min.js' | asset_url | script_tag }}
+
+{% endif %}
+
+{{ 'jquery.bxslider.js' | asset_url | script_tag }}
+{{ 'skrollr.min.js' | asset_url | script_tag }}
+
+
+{% if template == 'collection' or template == 'search' %}
+{{ 'jquery.isotope.min.js' | asset_url | script_tag }}
+{% endif %}
+
+{% if settings.main_image_display != 'none' %}
+{{ 'jquery.fancybox-buttons.js' | asset_url | script_tag }}
+{% endif %}
+
+{{ 'jquery.zoom.js' | asset_url | script_tag }}
+
+{{ "/services/javascripts/currencies.js" | script_tag }}
+{{ "jquery.currencies.min.js" | asset_url | script_tag }}
+{{ 'cs.script.js' | asset_url | script_tag }}

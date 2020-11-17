@@ -1,0 +1,100 @@
+<div class="group_sidebar">
+  
+  {% comment %} tag filter {% endcomment %}
+  {% if template contains "collection" %}
+  <div class="sb-wrapper">
+    {% include 'collection_tag-filter' %}
+  </div>
+  {% endif %}
+  
+  {% comment %} product collections {% endcomment %}
+  {% if settings.show_allcollections_widget %}
+  <div class="home-collection-wrapper sb-wrapper clearfix">
+    <h6 class="sb-title">{{ settings.allcollections_heading }}</h6>
+    <ul class="list-unstyled sb-content list-styled">
+      {% for collection in collections %}
+      {% unless collection.handle == 'frontpage' or collection.handle == 'all' %}
+      <li>
+        <a href="{{ collection.url }}"><span><i class="fa fa-circle"></i> {{ collection.title | escape }}</span><span class="collection-count"> ({{collection.products_count}})</span></a>
+      </li>
+      {% endunless %}
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+  
+  {% comment %} featured products {% endcomment %}
+  {% if settings.featured_prod_visible and collections[settings.featured_prod_collection].products != empty %}
+  
+    <div class="deal-product-wrapper sb-wrapper clearfix">
+    <div class="group_deal_products">
+      <div class="">
+        <div class="home_deal_fp">
+          <h6 class="sb-title">{{ settings.featured_prod_heading }}</h6>
+          <div class="home_deal_fp_wrapper sb-content">
+            <div id="home_deal_fp">
+              {% assign collection = settings.featured_prod_collection %}
+              {% assign number = settings.featured_prod_num | plus:0 %}
+              {% for product in collections[collection].products limit: number %}
+              <div class="element full_width not-animated" data-animate="fadeInUp" data-delay="{{forloop.index0 | times:200}}">
+                {% include 'deal-products' %}
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  {% comment %} text widget {% endcomment %}
+  {% if settings.textwidget_visible %}
+  <div class="sb-wrapper">
+    <h6 class="sb-title">{{ settings.textwidget_heading }}</h6>
+    <ul class="list-unstyled sb-content textwidget list-styled">
+      <li><p>{{ settings.textwidget_content }}</p></li>
+    </ul>
+  </div>
+  {% endif %}
+
+
+  {% comment %} product vendors {% endcomment %}
+  {% if settings.show_vendors_widget %}
+  <div class="sb-wrapper left-sample-block">
+    <h6 class="sb-title">{{ settings.vendors_widget_heading }}</h6>
+    <ul class="list-unstyled sb-content list-styled">
+      {% for vendor in shop.vendors %}
+      <li>
+        <i class="fa fa-circle"></i> {{ vendor | link_to_vendor }}
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  {% comment %} product types {% endcomment %}
+  {% if settings.show_types_widget %}
+  <div class="sb-wrapper left-sample-block">
+    <h6 class="sb-title">{{ settings.types_widget_heading }}</h6>
+    <ul class="list-unstyled sb-content list-styled">
+      {% for product_type in shop.types %}
+      <li>
+        <i class="fa fa-circle"></i> {{ product_type | link_to_type }}
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+  
+  {% comment %} banner {% endcomment %}
+  {% if settings.blog_banner_active %}
+  <div class="sb-item slidebar-banner">
+    <h6 class="sb-title">{{ settings.blog_banner_heading }}</h6>
+    <div class="">
+      <img src="{{ 'blog-slidebar-banner' | append: '.jpg' | asset_url }}" alt="" />
+    </div>    
+  </div><!--End sb-item-->   
+  {% endif %}
+
+</div><!--end group_sidebar-->

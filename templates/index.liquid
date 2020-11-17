@@ -1,0 +1,671 @@
+<div id="col-main" class="clearfix">
+
+  {% comment %} No Products {% endcomment %}
+  {% include 'if-shop-has-no-products' %}
+
+   {% comment %} Featured Collection {% endcomment %}
+  {% if settings.featured_collections_show %}
+  <div class="featured-collection-wrapper">
+
+     <div class="featured-col">
+         <div class="home_collections_item_inner">
+                  <div class="collection-details">
+                    {% assign col1_image = 'col1_image' %}
+                    {% assign col1_image_mobile = 'col1_image-mobile' %}
+                    <img class="pulse img-banner-caption" src="{{ col1_image | append: '.png' | asset_url }}" alt="" />
+                    <img class="pulse mobile img-banner-caption" src="{{ col1_image_mobile | append: '.jpg' | asset_url }}" alt="" />
+                  </div>
+                  <div class="hover-overlay">
+                    <span class="col-name">{{ settings.col1_heading }}</span>
+                    <div class="collection-action">
+                      <a href="{{ settings.col1_button }}">{{ settings.col1_button_label }}</a>
+                    </div>
+                  </div>
+                </div>
+      </div>
+    
+     <div class="featured-col">
+         <div class="home_collections_item_inner">
+                  <div class="collection-details">
+                    {% assign col2_image = 'col2_image' %}
+                    {% assign col2_image_mobile = 'col2_image-mobile' %}
+                     <img class="pulse img-banner-caption" src="{{ col2_image | append: '.png' | asset_url }}" alt="" />
+                     <img class="pulse mobile img-banner-caption" src="{{ col2_image_mobile | append: '.jpg' | asset_url }}" alt="" />
+                  </div>
+                  <div class="hover-overlay">
+                    <h2 class="col-name">{{ settings.col2_heading }}</h2>
+                    <div class="collection-action">
+                      <a href="{{ settings.col2_button }}">{{ settings.col2_button_label }}</a>
+                    </div>
+                  </div>
+                </div>
+      </div>
+ 
+  
+  </div>
+  {% endif %}
+  
+  
+  {% comment %} Featured Product {% endcomment %}
+  {% if settings.featured_section_show %}
+  <div class="home-feature">
+  <div class="container-fluid">
+    <div class="group_featured_products row">
+      <div class="col-md-24">
+        <div class="home_fp">
+          <h6 class="general-title">{{ settings.featured_section_heading }}</h6>
+          <div class="home_fp_wrapper">
+            <div id="home_fp">
+              {% assign collection = settings.featured_section_collection %}
+              {% assign number = settings.featured_section_number | plus:0 %}
+	 {% assign featured_col = collections[settings.featured_section_collection] %}
+              {% for product in collections[collection].products limit: number %}
+              <div class="element no_full_width not-animated" data-animate="fadeInUp" data-delay="{{forloop.index0 | times:200}}">
+                {% include 'product-item' %}
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          
+          <div class="more-action">
+            <a href="{{ featured_col.url }}">View all products</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  </div>
+  {% endif %}
+  
+  
+   {% comment %} Block Banner {% endcomment %}
+  {% if settings.home_col_banner_show %}
+  <div class="home-col-banner">
+
+      <div id="home-banner" class="text-center clearfix">
+        <img class="pulse img-banner-caption" src="{{ 'home_col_image_text' | append: '.png' | asset_url }}" alt="" />
+        <img class="pulse img-banner-caption mobile" src="{{ 'home_col_image_text_mobile' | append: '.png' | asset_url }}" alt="" />
+       
+		<div class="home-banner-left-info">
+        {% if settings.home_col_banner_caption %}
+         <div class="home-banner-caption">
+          <p>{{settings.home_col_banner_caption}}</p>
+        </div>
+         {% endif %}
+        {% if settings.home_banner_action %}
+        <div class="home-banner-action">
+          <a href="{{ settings.home_col_banner_link }}">{{settings.home_col_banner_action}}</a>
+        </div>
+        {% endif %}
+        </div>
+      </div>
+  </div>
+  {% endif %}
+  
+  
+   {% comment %} Featured Collection {% endcomment %}
+  {% if settings.featured_collections2_show %}  
+  <div class="featured-collection-wrapper fc2">
+
+     <div class="featured-col">
+         <div class="home_collections_item_inner">
+                  <div class="collection-details">
+                    {% assign col1_image2 = 'col1_image2' %}
+                    {% assign col1_image2_mobile = 'col1_image2_mobile' %}
+                    <img class="pulse img-banner-caption" src="{{ col1_image2 | append: '.png' | asset_url }}" alt="" />
+                   <img class="pulse img-banner-caption mobile" src="{{ col1_image2_mobile | append: '.png' | asset_url }}" alt="" />
+
+                  </div>
+                  <div class="hover-overlay">
+                    <span class="col-name">{{ settings.col1_heading2 }}</span>
+                    <div class="collection-action">
+                      <a href="{{ settings.col1_button2 }}">{{ settings.col1_button_label2 }}</a>
+                    </div>
+                  </div>
+                </div>
+      </div>
+    
+     <div class="featured-col">
+         <div class="home_collections_item_inner">
+                  <div class="collection-details">
+                    {% assign col2_image2 = 'col2_image2' %}
+                    {% assign col2_image2_mobile = 'col2_image2_mobile' %}
+                    <img class="pulse img-banner-caption" src="{{ col2_image2 | append: '.png' | asset_url }}" alt="" />
+                    <img class="pulse img-banner-caption mobile" src="{{ col2_image2_mobile | append: '.png' | asset_url }}" alt="" />
+
+                  </div>
+                  <div class="hover-overlay">
+                    <span class="col-name">{{ settings.col2_heading2 }}</span>
+                    <div class="collection-action">
+                      <a href="{{ settings.col2_button2 }}">{{ settings.col2_button_label2 }}</a>
+                    </div>
+                  </div>
+                </div>
+      </div>
+ 
+  
+  </div>
+  {% endif %}
+  
+  
+  
+    {% comment %} Block Banner {% endcomment %}
+  {% if settings.home_banner_show2 %}
+  <div class="home-banner">  
+
+    <div class="container">
+      <div id="home-banner" class="text-center clearfix">
+        
+		{% if settings.home_banner_caption2 %}
+         <div class="home-banner-caption">
+          <p>{{settings.home_banner_caption2}}</p>
+        </div>
+         {% endif %}
+        
+        
+		{% if settings.home_banner_caption2_small %}
+         <div class="home-banner-caption-small">
+          <p>{{settings.home_banner_caption2_small}}</p>
+        </div>
+         {% endif %}
+       
+       
+      </div>
+    </div>
+  </div>
+  {% endif %}
+  
+  
+  {% comment %} 4 Featured Collections {% endcomment %}
+  {% if settings.featured4_collections_show %}
+<div class="home-popular-collections">
+   <div class="group_home_collections">
+     
+        <div class="home_collections">
+          <div class="home_collections_wrapper">
+            <div id="home_collections">
+
+              {% if settings.featured4_col_name_1 != blank  %}
+              <div class="home_collections_item">
+                <div class="home_collections_item_inner">
+                  <div class="collection-details">
+                      {% assign featured4_image1 = 'featured4_image1' %} 
+                   
+                      <img src="{{ featured4_image1 | append: '.png' | asset_url }}" alt="{{ settings.featured4_col_name_1 }}" />
+                      <img class="mobile" src="{{ 'featured4_image1_mobile' | append: '.png' | asset_url }}" alt="{{ settings.featured4_image2 }}" />
+
+                  </div>
+                  <div class="hover-overlay">
+                   
+                    <div class="collection-action">
+                      <a href="{{ settings.featured4_col_link_1 }}">{{ settings.featured4_button_text }}</a>
+                    </div>
+                  </div>
+                  
+                </div>
+                <span class="col-name"> <a href="{{ settings.featured4_col_link_1 }}">{{ settings.featured4_col_name_1 }}</a></span>
+              </div>
+              {% endif %}
+              
+                {% if settings.featured4_col_name_2 != blank  %}
+              <div class="home_collections_item">
+                <div class="home_collections_item_inner">
+                  <div class="collection-details">
+                    {% assign featured4_image2 = 'featured4_image2' %}
+                   
+                    <img src="{{ featured4_image2 | append: '.png' | asset_url }}" alt="{{ settings.featured4_image2 }}" />
+                    <img class="mobile" src="{{ 'featured4_image2_mobile' | append: '.png' | asset_url }}" alt="{{ settings.featured4_image2 }}" />
+        
+                  </div>
+                  <div class="hover-overlay">
+                    
+                    <div class="collection-action">
+                      <a href="{{ settings.featured4_col_link_2 }}">{{ settings.featured4_button_text }}</a>
+                    </div>
+                  </div>
+                 
+                  
+                </div>
+                <span class="col-name"><a href="{{ settings.featured4_col_link_2 }}">{{ settings.featured4_col_name_2 }}</a></span>
+              </div>
+              {% endif %}
+
+             
+			  {% if settings.featured4_col_name_3 != blank  %}
+              <div class="home_collections_item">
+                <div class="home_collections_item_inner">
+                  <div class="collection-details">
+                    {% assign featured4_image3 = 'featured4_image3' %}
+                   
+                      <img src="{{ featured4_image3 | append: '.png' | asset_url }}" alt="{{ settings.featured4_image3 }}" />
+                      <img class="mobile" src="{{ 'featured4_image3_mobile' | append: '.png' | asset_url }}" alt="{{ settings.featured4_image2 }}" />
+
+                  </div>
+                  <div class="hover-overlay">
+                   
+                    <div class="collection-action">
+                      <a href="{{ settings.featured4_col_link_3 }}">{{ settings.featured4_button_text }}</a>
+                    </div>
+                  </div>
+                  
+                   
+                </div>
+                <span class="col-name"><a href="{{ settings.featured4_col_link_3 }}">{{ settings.featured4_col_name_3 }}</a></span>
+              </div>
+              {% endif %}
+              
+              
+               {% if settings.featured4_col_name_4 != blank  %}
+              <div class="home_collections_item">
+                <div class="home_collections_item_inner">
+                  <div class="collection-details">
+                    {% assign featured4_image4 = 'featured4_image4' %}
+                   
+                      <img src="{{ featured4_image4 | append: '.png' | asset_url }}" alt="{{ settings.featured4_image4 }}" />
+                      <img class="mobile" src="{{ 'featured4_image4_mobile' | append: '.png' | asset_url }}" alt="{{ settings.featured4_image2 }}" />
+
+                  </div>
+                  <div class="hover-overlay">
+                    
+                    <div class="collection-action">
+                      <a href="{{ settings.featured4_col_link_4 }}">{{ settings.featured4_button_text }}</a>
+                    </div>  
+                  </div>
+                  
+                </div>
+                <span class="col-name"><a href="{{ settings.featured4_col_link_3 }}">{{ settings.featured4_col_name_4 }}</a></span>
+              </div>
+              {% endif %}
+          
+
+            </div>
+          </div>
+        </div>
+		<script>
+          $(document).ready(function() {
+            $('.collection-details').hover(
+              function() {
+                $(this).parent().addClass("collection-hovered");
+              },
+              function() {
+              $(this).parent().removeClass("collection-hovered");
+              });
+          });
+          
+        </script>
+     
+    </div>
+  </div>
+  {% endif %}
+
+  
+    {% comment %} Block Banner {% endcomment %}
+  {% if settings.home_banner_show %}
+  <div class="home-banner-wrapper">
+
+    <div class="container">
+      <div id="home-banner" class="text-center clearfix">
+        {% if settings.home_banne_caption %}
+       <div class="home-banner-caption">
+          <p>{{settings.home_banne_caption}}</p>
+        </div>
+        {% endif %}
+        
+          {% if settings.home_banne_caption_small %}
+       <div class="home-banner-caption-small">
+          <p>{{settings.home_banne_caption_small}}</p>
+        </div>
+        {% endif %}
+
+        {% if settings.home_banner_action %}
+        <div class="home-banner-action">
+          <a href="{{ settings.home_banner_link }}">{{settings.home_banner_action}}</a>
+        </div>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+  {% endif %}
+  
+  
+   {% comment %} Popular Collections {% endcomment %}
+  {% if settings.popular_collections_show %}
+<div class="home-popular-collections">
+  <div class="container">
+    <div class="group_home_collections row">
+      <div class="col-md-24">
+
+        <div class="home_collections">
+          <h6 class="general-title">{{ settings.popular_collections_heading }}</h6>
+          <div class="home_collections_wrapper">
+            <div id="home_collections">
+
+              {% unless settings.popular_collections_1 == blank %}
+              <div class="home_collections_item">
+                <div class="home_collections_item_inner">
+                  <div class="collection-details">
+                    {% assign popular_col_1 = collections[settings.popular_collections_1] %}
+                    <a href="{{popular_col_1.url}}" title="{{'layout.home_page.browser'|t}} {{ popular_col_1.title | escape }}">
+                      {% if popular_col_1.image %}
+                      <img src="{{ popular_col_1.image.src | collection_img_url: 'large' }}" alt="{{ popular_col_1.title | escape }}" />
+                      {% else %}
+                      <img src="{{ popular_col_1.products.first.featured_image | product_img_url: 'large' }}" alt="{{ popular_col_1.title | escape }}" />
+                      {% endif %}
+                    </a>
+                  </div>
+                  <div class="hover-overlay">
+                    <span class="col-name"><a href="{{ popular_col_1.url }}">{{ popular_col_1.title }}</a></span>
+                    <div class="collection-action">
+                      <a href="{{ popular_col_1.url }}">{{'layout.home_page.view_collection'|t}}</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endunless %}
+
+              {% unless settings.popular_collections_2 == blank %}
+              <div class="home_collections_item">
+                <div class="home_collections_item_inner">
+                <div class="collection-details">
+                  {% assign popular_col_2 = collections[settings.popular_collections_2] %}
+                  <a href="{{popular_col_2.url}}" title="{{'layout.home_page.browser'|t}} {{ popular_col_2.title | escape }}">
+                    {% if popular_col_2.image %}
+                    <img src="{{ popular_col_2.image.src | collection_img_url: 'large' }}" alt="{{ popular_col_2.title | escape }}" />
+                    {% else %}
+                    <img src="{{ popular_col_2.products.first.featured_image | product_img_url: 'large' }}" alt="{{ popular_col_2.title | escape }}" />
+                    {% endif %}
+                  </a>
+                </div>
+                <div class="hover-overlay">
+                  <span class="col-name"><a href="{{ popular_col_2.url }}">{{ popular_col_2.title }}</a></span>
+                  <div class="collection-action">
+                    <a href="{{ popular_col_2.url }}">{{'layout.home_page.view_collection'|t}}</a>
+                  </div>
+                </div>
+                </div>
+              </div>
+              {% endunless %}
+
+              {% unless settings.popular_collections_3 == blank %}
+              <div class="home_collections_item">
+                <div class="home_collections_item_inner">
+                <div class="collection-details">
+                  {% assign popular_col_3 = collections[settings.popular_collections_3] %}
+                  <a href="{{popular_col_3.url}}" title="{{'layout.home_page.browser'|t}} {{ popular_col_3.title | escape }}">
+                    {% if popular_col_3.image %}
+                    <img src="{{ popular_col_3.image.src | collection_img_url: 'large' }}" alt="{{ popular_col_3.title | escape }}" />
+                    {% else %}
+                    <img src="{{ popular_col_3.products.first.featured_image | product_img_url: 'large' }}" alt="{{ popular_col_3.title | escape }}" />
+                    {% endif %}
+                  </a>
+                </div>
+                <div class="hover-overlay">
+                  <span class="col-name"><a href="{{ popular_col_3.url }}">{{ popular_col_3.title }}</a></span>
+                  <div class="collection-action">
+                    <a href="{{ popular_col_3.url }}">{{'layout.home_page.view_collection'|t}}</a>
+                  </div>
+                </div>
+                </div>
+              </div>
+              {% endunless %}
+
+              {% unless settings.popular_collections_4 == blank %}
+              <div class="home_collections_item">
+                <div class="home_collections_item_inner">
+                <div class="collection-details">
+                  {% assign popular_col_4 = collections[settings.popular_collections_4] %}
+                  <a href="{{popular_col_4.url}}" title="{{'layout.home_page.browser'|t}} {{ popular_col_4.title | escape }}">
+                    {% if popular_col_4.image %}
+                    <img src="{{ popular_col_4.image.src | collection_img_url: 'large' }}" alt="{{ popular_col_4.title | escape }}" />
+                    {% else %}
+                    <img src="{{ popular_col_4.products.first.featured_image | product_img_url: 'large' }}" alt="{{ popular_col_4.title | escape }}" />
+                    {% endif %}
+                  </a>
+                </div>
+                <div class="hover-overlay">
+                  <span class="col-name"><a href="{{ popular_col_4.url }}">{{ popular_col_4.title }}</a></span>
+                  <div class="collection-action">
+                    <a href="{{ popular_col_4.url }}">{{'layout.home_page.view_collection'|t}}</a>
+                  </div>
+                </div>
+                </div>
+              </div>
+              {% endunless %}
+
+              {% unless settings.popular_collections_5 == blank %}
+              <div class="home_collections_item">
+                <div class="home_collections_item_inner">
+                <div class="collection-details">
+                  {% assign popular_col_5 = collections[settings.popular_collections_5] %}
+                  <a href="{{popular_col_5.url}}" title="{{'layout.home_page.browser'|t}} {{ popular_col_5.title | escape }}">
+                    {% if popular_col_5.image %}
+                    <img src="{{ popular_col_5.image.src | collection_img_url: 'large' }}" alt="{{ popular_col_5.title | escape }}" />
+                    {% else %}
+                    <img src="{{ popular_col_5.products.first.featured_image | product_img_url: 'large' }}" alt="{{ popular_col_5.title | escape }}" />
+                    {% endif %}
+                  </a>                  
+                </div>
+                <div class="hover-overlay">
+                  <span class="col-name"><a href="{{ popular_col_5.url }}">{{ popular_col_5.title }}</a></span>
+                  <div class="collection-action">
+                    <a href="{{ popular_col_5.url }}">{{'layout.home_page.view_collection'|t}}</a>
+                  </div>
+                </div>
+                </div>
+              </div>
+              {% endunless %}
+
+              {% unless settings.popular_collections_6 == blank %}
+              <div class="home_collections_item">
+                <div class="home_collections_item_inner">
+                <div class="collection-details">
+                  {% assign popular_col_6 = collections[settings.popular_collections_6] %}
+                  <a href="{{popular_col_6.url}}" title="{{'layout.home_page.browser'|t}} {{ popular_col_6.title | escape }}">
+                    {% if popular_col_6.image %}
+                    <img src="{{ popular_col_6.image.src | collection_img_url: 'large' }}" alt="{{ popular_col_6.title | escape }}" />
+                    {% else %}
+                    <img src="{{ popular_col_6.products.first.featured_image | product_img_url: 'large' }}" alt="{{ popular_col_6.title | escape }}" />
+                    {% endif %}
+                  </a>
+                </div>
+                <div class="hover-overlay">
+                  <span class="col-name"><a href="{{ popular_col_6.url }}">{{ popular_col_6.title }}</a></span>
+                  <div class="collection-action">
+                    <a href="{{ popular_col_6.url }}">{{'layout.home_page.view_collection'|t}}</a>
+                  </div>
+                </div>
+                </div>
+              </div>
+              {% endunless %}
+
+              {% unless settings.popular_collections_7 == blank %}
+              <div class="home_collections_item">
+                <div class="home_collections_item_inner">
+                <div class="collection-details">
+                  {% assign popular_col_7 = collections[settings.popular_collections_7] %}
+                  <a href="{{popular_col_7.url}}" title="{{'layout.home_page.browser'|t}} {{ popular_col_7.title | escape }}">
+                    {% if popular_col_7.image %}
+                    <img src="{{ popular_col_7.image.src | collection_img_url: 'large' }}" alt="{{ popular_col_7.title | escape }}" />
+                    {% else %}
+                    <img src="{{ popular_col_7.products.first.featured_image | product_img_url: 'large' }}" alt="{{ popular_col_7.title | escape }}" />
+                    {% endif %}
+                  </a>
+                </div>
+                <div class="hover-overlay">
+                  <span class="col-name"><a href="{{ popular_col_7.url }}">{{ popular_col_7.title }}</a></span>
+                  <div class="collection-action">
+                    <a href="{{ popular_col_7.url }}">{{'layout.home_page.view_collection'|t}}</a>
+                  </div>
+                </div>
+                </div>
+              </div>
+              {% endunless %}
+
+              {% unless settings.popular_collections_8 == blank %}
+              <div class="home_collections_item">
+                <div class="home_collections_item_inner">
+                <div class="collection-details">
+                  {% assign popular_col_8 = collections[settings.popular_collections_8] %}
+                  <a href="{{popular_col_8.url}}" title="{{'layout.home_page.browser'|t}} {{ popular_col_8.title | escape }}">
+                    {% if popular_col_8.image %}
+                    <img src="{{ popular_col_8.image.src | collection_img_url: 'large' }}" alt="{{ popular_col_8.title | escape }}" />
+                    {% else %}
+                    <img src="{{ popular_col_8.products.first.featured_image | product_img_url: 'large' }}" alt="{{ popular_col_8.title | escape }}" />
+                    {% endif %}
+                  </a>
+                </div>
+                <div class="hover-overlay">
+                  <span class="col-name"><a href="{{ popular_col_8.url }}">{{ popular_col_8.title }}</a></span>
+                  <div class="collection-action">
+                    <a href="{{ popular_col_8.url }}">{{'layout.home_page.view_collection'|t}}</a>
+                  </div>
+                </div>
+                </div>
+              </div>
+              {% endunless %}
+
+            </div>
+          </div>
+        </div>
+		<script>
+          $(document).ready(function() {
+            $('.collection-details').hover(
+              function() {
+                $(this).parent().addClass("collection-hovered");
+              },
+              function() {
+              $(this).parent().removeClass("collection-hovered");
+              });
+          });
+          
+        </script>
+      </div>
+    </div>
+  </div>
+  </div>
+  {% endif %}
+
+  
+  
+  {% comment %} New Product {% endcomment %}
+  {% if settings.new_section_show %}
+  <div class="home-newproduct">
+    <div class="container">
+      <div class="group_home_products row">
+        <div class="col-md-24">
+
+          <div class="home_products">
+            <h6 class="general-title">{{ settings.new_section_heading }}</h6>
+            <div class="home_products_wrapper">
+              <div id="home_products">
+                {% assign collection = settings.new_section_collection %}
+                {% assign number = settings.new_section_number | plus:0 %}
+
+                {% for product in collections[collection].products limit: number %}
+                <div class="element no_full_width col-md-8 col-sm-8 not-animated" data-animate="fadeInUp" data-delay="{{forloop.index0 | times:1}}">
+                  {% include 'product-item' %}
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+
+
+  {% comment %} Promotion, Blog {% endcomment %}
+  {% if settings.home_bottom_banner_show or settings.home_blog_show %}
+  <div class="home-blog">
+  <div class="container">
+    <div class="home-promotion-blog row">
+      <h6 class="general-title">{{ settings.home_blog_title }}</h6>
+      {% if settings.home_bottom_banner_show %}
+      <div class="home-bottom_banner_wrapper col-md-12">
+        <div id="home-bottom_banner" class="home-bottom_banner">
+          <a href="{{ settings.home_promotion_link_1 }}"><img src="{{ 'home_bottom_banner.jpg' | asset_url}}" alt="" /></a>
+        </div>
+      </div>
+      {% endif %}
+
+      {% if settings.home_blog_show %}
+      <div class="home-blog-wrapper col-md-12">
+        <div id="home_blog" class="home-blog">
+          {% for article in blogs[settings.home_blog_use].articles limit:settings.home_blog_number %}
+          <div class="home-blog-item row">
+            <div class="date col-md-4">
+              <div class="date_inner">
+                <p><small>{{ article.published_at | date: "%B" }}</small><span>{{ article.published_at | date: "%d" }}</span></p>
+              </div>
+            </div>
+            <div class="home-blog-content col-md-20">
+              <h4><a href="{{ article.url }}">{{ article.title }}</a></h4>
+              <ul class="list-inline">
+                <li class="author"><i class="fa fa-user"></i> {{ article.author }}</li>
+                <li>/</li>
+                <li class="comment">
+                  <a href="{{article.url}}#comments">
+                    <span><i class="fa fa-pencil-square-o"></i> {{ article.comments_count }}</span> {{ article.comments_count | pluralize: 'Comment', 'Comments' }}
+                  </a>
+                </li>
+              </ul>
+              <div class="intro">{{ article.content | strip_html | truncatewords: 15 }}</div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+    </div>
+  </div>
+  </div>
+  {% endif %}
+
+  
+
+  {% comment %} Partners Logo {% endcomment %}
+  {% if settings.partners_show %}
+  <div class="home-partners">
+  <div class="container">
+    <div class="partners-logo row">
+
+      <div class="col-md-24">
+        <div id="partners-container" class="clearfix">
+          <h6 class="general-title">{{ settings.partners_heading }}</h6>
+          <div id="partners" class="clearfix">
+            {% for i in (1..10) %}
+            {% assign show = 'partners_logo_show_' | append: i %}
+
+            {% if settings[show] %}
+            {% assign logo = 'partners_logo_' | append: i %}
+            {% assign link = 'partners_link_' | append: i %}
+            {% assign logo_hover = 'partner_logo_hover_' | append: i %}
+
+            <div class="logo not-animated text-center" data-animate="bounceIn" data-delay="{{i | times:150}}">
+              <a class="animated" href="{{settings[link]}}">
+                <img class="pulse" src="{{ logo | append: '.png' | asset_url }}" alt="" />
+              </a>
+            </div>
+
+            {% endif %}
+
+            {% endfor %}
+          </div>
+
+        </div>
+      </div>
+      <div class="clearfix"></div>
+
+    </div>
+  </div>
+  </div>
+  {% endif %}
+
+</div>{% include 'wiser_recentview' %}{% include 'wiser_trending' %}{% include 'wiser_topselling' %}{% include 'wiser_newarrivals' %}{% include 'wiser_featured' %}{% include 'wiser_recent_related' %}

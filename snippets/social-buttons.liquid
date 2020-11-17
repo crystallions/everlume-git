@@ -1,0 +1,25 @@
+{% capture current_url %}{% if social-buttons == 'article' %}{{ shop.url }}{{ article.url }}{% else %}{{ canonical_url }}{% endif %}{% endcapture %}
+
+{% capture buttons %}
+<div class="social_buttons">
+  {% capture title %}{% if social-buttons == 'article' %}{{ article.title | truncate: 30 | url_escape }}{% else %}{{ product.title | truncate: 30 | url_escape }}{% endif %}{% endcapture %}
+  {% capture shop_name %}{{ shop.name | url_param_escape }}{% endcapture %}
+  {% capture twitter_name %}{{ settings.twitter_link | split: 'twitter.com/' | last }}{% endcapture %}
+<div class="share-btn facebook"><!--Facebook-->
+  <a target="_blank" class="icon-facebook-share" title="facebook" href="https://www.facebook.com/sharer/sharer.php?u={{ current_url }}"><span class="fa fa-facebook-square"></span>Share on Facebook</a>
+  </div>
+  
+  <div class="share-btn twitter"><!--Twitter-->
+    <a target="_blank" class="icon-twitter-share" title="twitter" href="https://twitter.com/intent/tweet?text={{ title | replace: '&','%26' }}&url={{ current_url }}{%- if twitter_name != blank -%}&via={{ twitter_name }}{%- endif -%}"><span class="fa fa-twitter"></span>Share on Twitter</a>
+  </div>
+
+  
+
+ 
+</div>
+
+{% endcapture %}
+
+  <div class="share_article">
+    {{ buttons }}
+  </div>

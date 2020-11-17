@@ -1,0 +1,38 @@
+{% case settings.header_font %}
+{% when "'Open Sans', sans-serif" %} 
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800' rel='stylesheet' type='text/css'>    
+{% when "'Cantata One', sans-serif" %}   
+<link href='//fonts.googleapis.com/css?family=Carrois+Gothic' rel='stylesheet' type='text/css'>
+{% when "'Lato', sans-serif " %}    
+<link href='//fonts.googleapis.com/css?family=Lato:100,300,400,700' rel='stylesheet' type='text/css'>
+{% when "'Raleway', sans-serif" %}    
+<link href='//fonts.googleapis.com/css?family=Raleway:400,100,200,300,700,500,600' rel='stylesheet' type='text/css'>
+{% when "'Belleza', sans-serif " %} 
+<link href='//fonts.googleapis.com/css?family=Belleza' rel='stylesheet' type='text/css'>
+{% endcase %} 
+
+{% case settings.general_font %}
+{% when "'Open Sans', sans-serif" %} 
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800' rel='stylesheet' type='text/css'>      
+{% when "'Lato', sans-serif " %}    
+<link href='//fonts.googleapis.com/css?family=Lato:100,300,400,700' rel='stylesheet' type='text/css'>
+{% when "'Raleway', sans-serif" %} 
+<link href='//fonts.googleapis.com/css?family=Raleway:400,100,200,300,700,500,600' rel='stylesheet' type='text/css'>
+{% endcase %}
+
+{% case settings.misc_font %}
+{% when "'Open Sans', sans-serif" %} 
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800' rel='stylesheet' type='text/css'>  
+{% when "'Cantata One', sans-serif" %}   
+<link href='//fonts.googleapis.com/css?family=Carrois+Gothic' rel='stylesheet' type='text/css'>
+{% when "'Lato', sans-serif " %}    
+<link href='//fonts.googleapis.com/css?family=Lato:100,300,400,700' rel='stylesheet' type='text/css'>
+{% when "'Raleway', sans-serif " %}    
+<link href='//fonts.googleapis.com/css?family=Raleway:400,600,500,700' rel='stylesheet' type='text/css'>
+{% when "'Quicksand', sans-serif " %}  
+<link href='//fonts.googleapis.com/css?family=Quicksand:300,400,700' rel='stylesheet' type='text/css'>
+{% endcase %}
+
+<link href="//fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+{{ '//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css' | stylesheet_tag }}

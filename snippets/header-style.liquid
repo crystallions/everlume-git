@@ -1,0 +1,33 @@
+{% if template == 'index' and settings.show_slideshow %}
+{{ 'jquery.camera.css' | asset_url | stylesheet_tag }}
+{% endif %}
+
+{% if settings.main_image_display != 'none' %}
+{{ 'jquery.fancybox-buttons.css' | asset_url | stylesheet_tag }}
+{% endif %}
+
+{{ 'cs.animate.css' | asset_url | stylesheet_tag }}
+{{ 'application.css' | asset_url | stylesheet_tag }}
+{{ 'swatch.css' | asset_url | stylesheet_tag }}
+
+
+{% if template != 'product.jewelry' %}
+{{ 'jquery.owl.carousel.css' | asset_url | stylesheet_tag }}
+{% endif %}
+
+{% if template == 'product.jewelry' %}
+{{ 'owl.carousel.pr.min.css' | asset_url | stylesheet_tag }}
+
+{% endif %}
+
+{{ 'jquery.bxslider.css' | asset_url | stylesheet_tag }}
+
+{{ 'bootstrap.min.3x.css' | asset_url | stylesheet_tag }}
+
+{{ 'cs.bootstrap.3x.css' | asset_url | stylesheet_tag }}
+
+{{ 'cs.global.css' | asset_url | stylesheet_tag }}
+{{ 'cs.style.css' | asset_url | stylesheet_tag }}
+{{ 'cs.media.3x.css' | asset_url | stylesheet_tag }}
+
+{{ 'theme.scss.css' | asset_url | stylesheet_tag }}  

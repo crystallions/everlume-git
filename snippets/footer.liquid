@@ -1,0 +1,201 @@
+<div id="footer-content">
+ 
+
+  <div class="footer-content footer-content-top clearfix">
+    {% comment %} Recent Blog {% endcomment %}
+
+    {% comment %} Link List 1 {% endcomment %}
+
+    {% if settings.show_footer_linklist_1 %}
+    <div class="footer-link-list col-md-3">
+      <div class="group">
+        {% assign list = linklists[settings.footer_linklist_1] %}
+        <ul class="list-unstyled list-styled">
+          {% for link in list.links %}
+          <li class="list-unstyled">
+            <a href="{{ link.url }}">{{ link.title | escape }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    {% endif %}
+
+    {% comment %} Link List 2 {% endcomment %}
+
+    {% if settings.show_footer_linklist_2 %}
+    <div class="footer-link-list col-md-5">
+      <div class="group">
+        {% assign list = linklists[settings.footer_linklist_2] %}
+        <ul class="list-unstyled list-styled">
+          {% for link in list.links %}
+          <li class="list-unstyled">
+            <a href="{{ link.url }}">{{ link.title | escape }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    {% endif %}
+
+    {% comment %} contact info {% endcomment %}
+
+  
+    <div class="footer-link-list que-col col-md-6">
+      <div class="group">
+        <ul>
+          <li class="heading">Have a question?</li>
+          <li><a href="tel:{{ settings.footer_phone_no}}" >{{ settings.footer_phone_no}}</a></li>
+          <li><a href="mailto:{{ settings.footer_mail}}" >{{ settings.footer_mail}}</a></li>
+        </ul>
+      </div>
+    </div>
+   
+
+   {% comment %} Link List 4 {% endcomment %}
+
+   <div class="footer-link-list col-md-14 logo-col visible-sm visible-xs">
+    {% assign footer_logo = 'footer_logo' %}
+      <a href="/" title="everlume">
+     <img class="footer-logo" src="{{ footer_brand_logo | append: '.png' | asset_url }}" alt="" />
+     </a>
+</div>
+
+    <div class="footer-link-list newsletter-col col-md-10">
+     {% comment %} <div class="group">
+        <h5 class="general-title">{{ settings.footer_linklist_heading_4 }}</h5>
+        {% assign list = linklists[settings.footer_linklist_4] %}
+        <ul class="list-unstyled list-styled">
+          {% for link in list.links %}
+          <li class="list-unstyled">
+            <a href="{{ link.url }}">{{ link.title | escape }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endcomment %}
+      
+      
+       
+      
+     
+      
+      {% comment %}   <h6 class="general-title contact-footer-title">Suscribe to our newsletter</h6>
+ Mailing with Mailchimp {% endcomment %}
+  {% if settings.show_mailing_list %}
+  <div id="widget-newsletter">
+      
+      {% if settings.show_mailing_list %}
+    <div class="newsletter">
+      {%- assign formId = 'ContactFooter' -%}
+      {% form 'customer', id: formId, novalidate: 'novalidate' %}
+      {%- if form.posted_successfully? -%}
+      <span class="news-desc">Thanks for subscribing!</span>
+      {%- endif -%}
+      <span class="news-desc">Stay in touch with our current offers</span>
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      
+      <div class="group_input">
+        <input class="form-control" value="{{ form.email }}" type="email" placeholder="{{'layout.footer.your_email'|t}}" name="contact[email]" id="{{ formId }}-email" />
+        <div class="unpadding-top">
+          <button class="btn btn-1" type="submit">SUBSCRIBE</button></div>
+      </div>
+      {% endform %}
+    </div>
+      {% endif %}          
+   
+  </div>
+  {% endif %}
+      
+      </div>
+      
+       <div class="footer-link-list col-md-14 logo-col hidden-sm hidden-xs">
+            {% assign footer_logo = 'footer_logo' %}
+          <a href="/" title="everlume">
+        
+             <img class="footer-logo" src="{{ footer_logo | append: '.png' | asset_url }}" alt="" />
+         </a>
+      </div>
+      
+      <div class="footer-link-list col-md-10 social-col">
+         {% comment %} Social media icons {% endcomment %}
+        {% if settings.social_icons_show %}
+        <div id="widget-social">
+          <ul class="list-inline">
+            {% if settings.social_icons_dribbble_show %}<li><a target="_blank" href="{{ settings.social_icons_dribbble_link }}" class="btooltip swing"><i class="fa fa-dribbble"></i></a></li>{% endif %}
+            {% if settings.social_icons_facebook_show %}<li><a target="_blank" href="{{ settings.social_icons_facebook_link }}" class="btooltip swing fb_social" ><img  src="{{ 'fb_icon.svg' | asset_url }}" alt="" /></a></li>{% endif %}
+            {% if settings.social_icons_youtube_show %}<li><a target="_blank" href="{{ settings.social_icons_youtube_link }}" class="btooltip swing"><i class="fa fa-youtube-play"></i></a></li>{% endif %}
+            {% if settings.social_icons_instagram_show %}<li><a target="_blank" href="{{ settings.social_icons_instagram_link }}" class="btooltip swing"><i class="fa fa-instagram"></i></a></li>{% endif %}
+        	{% if settings.social_icons_linkedin_show %}<li><a target="_blank" href="{{ settings.social_icons_linkedin_link }}" class="btooltip swing"><i class="fa fa-linkedin-square"></i></a></li>{% endif %}
+        	{% if settings.social_icons_mail_show %}<li><a target="_blank" href="{{ settings.social_icons_mail_link }}" class="btooltip swing"><i class="fa fa-envelope-o"></i></a></li>{% endif %}
+            {% if settings.social_icons_twitter_show %}<li><a target="_blank" href="{{ settings.social_icons_twitter_link }}" class="btooltip swing"><i class="fa fa-twitter"></i></a></li>{% endif %}
+            {% if settings.social_icons_vimeo_show %}<li><a target="_blank" href="{{ settings.social_icons_vimeo_link }}" class="btooltip swing"><i class="fa fa-vimeo-square"></i></a></li>{% endif %}
+            {% if settings.social_icons_google_show %}<li><a target="_blank" href="{{ settings.social_icons_google_link }}" class="btooltip swing"><i class="fa fa-google-plus"></i></a></li>{% endif %}
+            {% if settings.social_icons_pinterest_show %}<li><a target="_blank" href="{{ settings.social_icons_pinterest_link }}" class="btooltip swing"><i class="fa fa-pinterest"></i></a></li>{% endif %}
+            {% if settings.social_icons_tumblr_show %}<li><a target="_blank" href="{{ settings.social_icons_tumblr_link }}" class="btooltip swing"><i class="fa fa-tumblr"></i></a></li>{% endif %}
+            {% if settings.social_icons_atom_show %}<li><a target="_blank" href="{{ settings.social_icons_atom_link }}" class="btooltip swing"><i class="fa fa-rss"></i></a></li>{% endif %}
+            </ul>
+        </div>
+        {% endif %}
+      </div>
+    
+
+  </div>
+  <div class="footer-content footer-content-bottom clearfix">
+    <div class="container">
+  {% comment %} Footer Bottom {% endcomment %}
+
+    {% comment %} Copyright {% endcomment %}
+    <div class="copyright col-md-12">&copy; {{ 'now' | date: '%Y' }} <a href="/">{{ shop.name | escape }}.com</a> - All Rights Reserved.</div> 
+
+      
+        {% comment %} Link List 3 {% endcomment %}
+
+    {% if settings.show_footer_linklist_3 %}
+    <div class="footer-link-list col-md-12">
+      <div class="group">
+        {% assign list = linklists[settings.footer_linklist_3] %}
+        <ul class="list-unstyled list-styled">
+          {% for link in list.links %}
+          <li class="list-unstyled">
+            <a href="{{ link.url }}">{{ link.title | escape }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    {% endif %}  
+     
+      
+    {% comment %} Payment {% endcomment %}
+    {% if settings.show_visa or settings.show_mastercard or settings.show_amex or settings.show_paypal or settings.show_moneybookers %}
+    <div id="widget-payment" class="col-md-12">
+      <ul id="payments" class="list-inline animated">
+
+        {% if settings.show_visa %}
+        <li class="btooltip tada" data-toggle="tooltip" data-placement="top" title="{{'layout.footer.visa'|t}}"><a href="#" class="icons visa"></a></li>
+        {% endif %}
+
+        {% if settings.show_mastercard %}
+        <li class="btooltip tada" data-toggle="tooltip" data-placement="top" title="{{'layout.footer.mastercard'|t}}"><a href="#" class="icons mastercard"></a></li>
+        {% endif %}
+
+        {% if settings.show_amex %}
+        <li class="btooltip tada" data-toggle="tooltip" data-placement="top" title="{{'layout.footer.american_express'|t}}"><a href="#" class="icons amex"></a></li>
+        {% endif %}
+
+        {% if settings.show_paypal %}
+        <li class="btooltip tada" data-toggle="tooltip" data-placement="top" title="{{'layout.footer.paypal'|t}}"><a href="#" class="icons paypal"></a></li>
+        {% endif %}
+
+        {% if settings.show_moneybookers %}
+        <li class="btooltip tada" data-toggle="tooltip" data-placement="top" title="{{'layout.footer.moneybookers'|t}}"><a href="#;" class="icons moneybookers"></a></li>
+        {% endif %}
+      </ul>
+    </div>
+    {% endif %}
+  </div>
+  </div>
+
+</div>
+

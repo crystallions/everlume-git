@@ -1,0 +1,239 @@
+{% comment %}
+
+<div id="page-header" class="col-md-24">
+  <h1 id="page-title">{{ 'blogs.article.title' | t }}</h1>
+</div>
+
+{% endcomment %}
+
+
+ <div class="col_banner blog col_banner_collection">
+                   
+                <div class="col_banner_info">
+                  
+                    <div class="col_banner_caption">
+                       <h2>{{settings.blog_ban_heading}}</h2>
+                       <h3>{{settings.blog_ban_desc}}</h3>
+                    </div>
+                   
+                    {% if settings.blog_ban_action %}
+                    <div class="col-banner-action">
+                      <a href="{{ settings.blog_ban_link }}">{{settings.blog_ban_action}}</a>
+                    </div>
+                    {% endif %}
+                
+                   </div>
+              </div>
+
+
+{% if settings.blog_layout == "grid3" or settings.blog_layout == "grid2" or blog.handle == "sample-blog-with-grid-3-columns" or blog.handle == "sample-blog-with-grid-2-columns" %}
+  {% assign col = "col-sm-24 col-md-24" %}  
+  {% if settings.blog_layout == "grid3" or blog.handle == "sample-blog-with-grid-3-columns" %}
+  {% assign limitblog = settings.blog_pagination_limit | times: 3 %}
+  {% assign col = "col-sm-8 col-md-8" %}
+  {% else %}
+  {% assign limitblog = settings.blog_pagination_limit | times: 2 %}
+  {% assign col = "col-sm-12 col-md-12" %}
+  {% endif %}
+  {% paginate blog.articles by limitblog %}
+	
+
+  <div id="col-main" class="blog blog-page col-sm-24 col-md-24 blog-full-width {% if settings.blog_layout == "grid3" or blog.handle == "sample-blog-with-grid-3-columns" %} blog-3-col{% else %} blog-2-col{% endif %} ">
+	<div class="blog-content-wrapper">
+    {% for article in blog.articles %}
+    {% assign blogmod=forloop.index | modulo : limitblog %}
+      
+      {% if forloop.index == 1 %}
+      <div class="blog-container">
+      {% endif %}
+    <div class="blogs{% if blogmod == 0 or forloop.length == forloop.index %} last{% endif %} {{col}} clearfix">
+ 
+      <article class="blogs-item">
+
+        <div class="row">
+          <div class="article-content col-md-24">
+            <div class="article-content-inner">
+           
+              {% comment %}
+              <div>
+              <div class="date"><p><small>{{ article.published_at | date: "%B" }}</small><span>{{ article.published_at | date: "%d" }}</span></p></div>
+              
+            </div>
+              {% endcomment %}
+              
+           <div class="blogs-image">
+              <ul class="list-inline">
+                <li><a href="{{ article.url }}"><img src="{{article.image | img_url: 'master'}}" alt="" /></a></li>  
+              </ul>
+            </div>
+              <h4><a href="{{ article.url }}">{{ article.title }}</a></h4>
+            
+            <div class="intro">
+              
+               {% if article.excerpt == blank %}
+              {{ article.content | strip_html | truncatewords: 30 }}
+              {% else %}
+              {{ article.excerpt }}
+              {% endif %}
+              
+              </div>
+              
+              <a href="{{article.url}}"class="blog-read-more">Read More</a>
+
+            {% comment %}<ul class="post list-inline">
+              <li class="author">{{ article.author }}</li>
+              <li>/</li>
+              <li class="comment">
+                <a href="{{article.url}}#comments">
+                  <span>{{ article.comments_count }}</span> {{ article.comments_count | pluralize: 'Comment', 'Comment(s)' }}
+                </a>
+              </li>
+              <li class="post-action">
+                <a class="btn btn-1 enable hidden-xs" href="{{article.url}}#comments" title="Add your thoughts">{{ 'blogs.article.post_comment' | t }}</a>
+              </li>
+            </ul> {% endcomment %}
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+      
+      {% if forloop.index == 2 %}
+      </div>
+      <div class="col_banner blog-middle col_banner_collection">
+                   
+                <div class="col_banner_info">
+                  
+                    <div class="col_banner_caption">
+                       <h2>{{settings.blog_ban_heading2}}</h2>
+                       <h3>{{settings.blog_ban_desc2}}</h3>
+                      <p>{{settings.blog_ban_content2}}</p>
+                    </div>
+                   
+                    {% if settings.blog_ban_action2 %}
+                    <div class="col-banner-action">
+                      <a href="{{ settings.blog_ban_link2 }}">{{settings.blog_ban_action2}}</a>
+                    </div>
+                    {% endif %}
+                
+                   </div>
+              </div>
+      <div class="blog-container">
+      {% endif %}
+      
+    {% endfor %}
+    </div>
+    {% include 'pagination' %}
+  </div>
+    </div>
+  {% endpaginate %}
+
+{% else%}
+
+{% assign layout = "col-sm-24 col-md-24" %}
+{% if settings.blog_layout == "left" or settings.blog_layout == "right" or blog.handle =="sample-blog-with-left-slidebar" %}
+  {% capture layout %}col-xs-24 col-sm-18 col-content col-content{% endcapture %}
+{% endif %}
+{% if settings.blog_layout == "full" or blog.handle =="sample-blog-full-width" %}
+  {% capture layout %}col-sm-24 col-md-24 blog-full-width{% endcapture %}
+{% endif %}
+
+{% paginate blog.articles by settings.blog_pagination_limit %}
+<div id="col-main" class="blog blog-page {{layout}} {% if settings.blog_layout == "left" or blog.handle =="sample-blog-with-left-slidebar" %}have-left-slidebar{% endif %}">
+  <div class="blog-content-wrapper">
+  {% for article in blog.articles %}
+  {% assign limitblog = settings.blog_pagination_limit | plus:0 %}
+  {% assign blogmod=forloop.index | modulo : limitblog %}
+  <div class="blogs{% if blogmod == 0 or forloop.length == forloop.index %} last{% endif %} clearfix">
+
+    <article class="blogs-item">
+
+      <div class="row">
+        <div class="article-content col-md-24">
+          <div class="article-content-inner">
+          <div>
+            <div class="date"><p><small>{{ article.published_at | date: "%B" }}</small><span>{{ article.published_at | date: "%d" }}</span></p></div>
+            <h4><a href="{{ article.url }}">{{ article.title }}</a></h4>
+          </div>
+          <div class="blogs-image">
+            <ul class="list-inline">
+              <li><a href="{{ article.url }}"><img src="{{article.image | img_url: 'master'}}" alt="" /></a></li>  
+            </ul>
+          </div>
+          <div class="intro">{{ article.content }}</div>
+
+          <ul class="post list-inline">
+            <li class="author">{{ article.author }}</li>
+            <li>/</li>
+            <li class="comment">
+              <a href="{{article.url}}#comments">
+                <span>{{ article.comments_count }}</span> {{ article.comments_count | pluralize: 'Comment', 'Comment(s)' }}
+              </a>
+            </li>
+            <li class="post-action">
+              <a class="btn btn-1 enable hidden-xs" href="{{article.url}}#comments" title="Add your thoughts">{{ 'blogs.article.post_comment' | t }}</a>
+            </li>
+          </ul>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+  {% endfor %}
+  </div>
+  {% include 'pagination' %}
+</div>
+{% endpaginate %}
+
+
+
+
+{% if settings.blog_sidebar_show %}
+  {% if settings.blog_layout == "left" or blog.handle =="sample-blog-with-left-slidebar" and blog.handle !="sample-blog-full-width" %}
+  <div class="col-xs-24 col-sm-6 sidebar left-slidebar">
+    {% include 'sidebar-blog' %}
+  </div>
+  {% endif %}
+{% endif %}
+
+{% if settings.blog_sidebar_show %}
+  {% if settings.blog_layout == "right" and blog.handle !="sample-blog-with-left-slidebar" and blog.handle !="sample-blog-full-width" %}
+  <div class="col-xs-24 col-sm-6 sidebar right-slidebar">
+    {% include 'sidebar-blog' %}
+  </div>
+  {% endif %}
+{% endif %}
+
+
+
+
+{% endif %} <!-- End of layout -->
+
+{% if settings.bl_banner_show %}
+  <div class="home-banner-wrapper blog-banner-wrapper col-xs-24 col-sm-24  col-md-24">
+
+    <div class="container">
+      <div id="home-banner" class="text-center clearfix">
+        {% if settings.bl_banne_caption %}
+       <div class="home-banner-caption">
+          <p>{{settings.bl_banne_caption}}</p>
+        </div>
+        {% endif %}
+        
+          {% if settings.bl_banne_caption_small %}
+       <div class="home-banner-caption-small">
+          <p>{{settings.bl_banne_caption_small}}</p>
+        </div>
+        {% endif %}
+
+        {% if settings.bl_banner_action %}
+        <div class="home-banner-action">
+          <a href="{{ settings.bl_banner_link }}">{{settings.bl_banner_action}}</a>
+        </div>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+  {% endif %}
+

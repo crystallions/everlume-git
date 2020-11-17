@@ -1,0 +1,106 @@
+{% comment %}<div class="container">
+  <div class="row">
+    <div id="page-header" class="col-md-24">
+      <h1 id="page-title">{{ page.title }}</h1>
+    </div>
+  </div>
+</div>
+{% endcomment %}
+<div class="pagecontact container">
+  <div class="row">
+    <div id="page-header" class="contact-title col-md-24">
+      <h1 id="page-title">Help & Support</h1>
+    </div>
+  </div>
+
+
+<div class="row">
+ {% if settings.show_contact_link_list %}
+    <div class="sidebar-link-list col-md-6">
+      <div class="group">
+        {% assign list = linklists[settings.contact_linklist] %}
+        <ul class="list-unstyled list-styled">
+          {% for link in list.links %}
+          <li class="list-unstyled">
+            <a href="{{ link.url }}">{{ link.title | escape }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    {% endif %}  
+
+<div id="col-main" class="contact-page clearfix col-md-18"> 
+
+  <div class="group-contact clearfix">
+    <div class="container">
+      <div class="row">
+
+        <div class="left-block col-md-14">
+          {% form 'contact' %}
+
+          {% if form.posted_successfully? %}
+          <div class="alert alert-success">
+            <button type="button" class="close btooltip" data-toggle="tooltip" data-placement="top" title="Close" data-dismiss="alert">×</button>
+            <ul>
+              <li>{{ 'contact.form.post_success' | t }}</li>
+            </ul>
+          </div>
+          {% endif %}
+
+          {% if form.errors %}
+          <div class="alert alert-danger">
+            <button type="button" class="close btooltip" data-toggle="tooltip" data-placement="top" title="Close" data-dismiss="alert">×</button>
+            {{ form.errors | default_errors }}
+          </div>
+          {% endif %}
+
+          <ul id="contact-form" class="row list-unstyled">
+            <li class="contact-con">
+              <h3>{{settings.contact_map_heading}}</h3>
+              <p>{{settings.contact_content}}</p>
+            </li>
+            <li class="">
+              <input type="text" id="name" placeholder="{{ 'contact.form.name' | t }}" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.first_name }} {{ customer.last_name }}{% endif %}" class="form-control" name="contact[name]" />
+            </li>
+            <li class="clearfix"></li>
+            <li class="{% if form.errors contains 'email' %} has-error{% endif %}">
+              <input type="email" id="email" placeholder="{{ 'contact.form.email' | t }}" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" class="form-control email" name="contact[email]" required/>
+            </li>
+            <li class="clearfix"></li>
+             <li class="">
+              <input type="text" id="telephone" placeholder="Telephone" value="{% if form.telephone %}{{ form.telephone }}{% elsif customer %}{{ customer.telephone }}{% endif %}" class="form-control" name="contact[telephone]" />
+            </li>
+            <li class="clearfix"></li>
+            <li class="{% if form.errors contains 'body' %} has-error{% endif %}">
+              <textarea id="message" rows="5" placeholder="{{ 'contact.form.message' | t }}" class="form-control" name="contact[body]">{{ form.body }}</textarea>
+            </li>
+            <li class="clearfix"></li>
+            <li class="unpadding-top">
+              <button type="submit" class="btn">{{ 'contact.form.submit' | t }}</button>
+            </li>
+          </ul>
+          {% endform %}
+        </div>
+        
+        {% if page.content != empty %}
+        <div class="right-block contact-content col-md-12">
+          {{page.content}}
+        </div>
+        {% endif %}
+
+
+      </div>
+    </div>
+    
+  
+  </div>
+</div>
+  
+</div>
+  </div>
+  {% if settings.contact_map and settings.contact_address != '' %}
+    <div id="contact_map_wrapper">
+      <div id="contact_map" class="map"></div>
+    </div>
+    {% endif %}

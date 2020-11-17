@@ -1,0 +1,254 @@
+<!doctype html>
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+  {% if settings.favicon != null %}
+  <link rel="shortcut icon" href="{{ 'favicon.png' | asset_url }}" type="image/png" />
+  {% endif %}
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+  <link rel="canonical" href="{{ canonical_url }}" />  
+  <link href='//fonts.googleapis.com/css?family=Carrois+Gothic' rel='stylesheet' type='text/css'>
+  <link href='//fonts.googleapis.com/css?family=Lato:100,300,400,700' rel='stylesheet' type='text/css'>
+  <link href='//fonts.googleapis.com/css?family=Raleway:400,600,500,700' rel='stylesheet' type='text/css'>
+  <link href='//fonts.googleapis.com/css?family=Belleza' rel='stylesheet' type='text/css'>
+  <link href='//fonts.googleapis.com/css?family=Quicksand:300,400,700' rel='stylesheet' type='text/css'>
+  {% if page_description != '' %}
+  <meta name="description" content="{{ page_description }}" />
+  {% endif %}
+
+  
+   
+    <link rel="shortcut icon" href="{{ 'favicon' | append: '.png' | asset_url }}" type="image/png">
+ 
+  {% if template == 'index' %}
+  <title>{{ shop.name }}</title>
+  {% elsif template == '404' %}
+  <title>Page Not Found | {{ shop.name }}</title>
+  {% else %}
+  <title>{{ page_title }} | {{ shop.name }}</title>
+  {% endif %}  
+
+  {% include 'fb-open-graph' %}
+
+  {% include 'header-font' %}
+  {% include 'header-style' %}
+  {{ 'cs.wishlist.scss.css' | asset_url | stylesheet_tag }}  
+  {% include 'header-script' %}
+  {% include 'tracking-header' %}
+
+  
+  {{ content_for_header }}
+{% include 'wiser' %}
+ 
+  
+<script> window['_fs_debug'] = false; window['_fs_host'] = 'fullstory.com'; window['_fs_script'] = 'edge.fullstory.com/s/fs.js'; window['_fs_org'] = 'Y8DY0'; window['_fs_namespace'] = 'FS'; (function(m,n,e,t,l,o,g,y){ if (e in m) {if(m.console && m.console.log) { m.console.log('FullStory namespace conflict. Please set window["_fs_namespace"].');} return;} g=m[e]=function(a,b,s){g.q?g.q.push([a,b,s]):g._api(a,b,s);};g.q=[]; o=n.createElement(t);o.async=1;o.crossOrigin='anonymous';o.src='https://'+_fs_script; y=n.getElementsByTagName(t)[0];y.parentNode.insertBefore(o,y); g.identify=function(i,v,s){g(l,{uid:i},s);if(v)g(l,v,s)};g.setUserVars=function(v,s){g(l,v,s)};g.event=function(i,v,s){g('event',{n:i,p:v},s)}; g.anonymize=function(){g.identify(!!0)}; g.shutdown=function(){g("rec",!1)};g.restart=function(){g("rec",!0)}; g.log = function(a,b){g("log",[a,b])}; g.consent=function(a){g("consent",!arguments.length||a)}; g.identifyAccount=function(i,v){o='account';v=v||{};v.acctId=i;g(o,v)}; g.clearUserCookie=function(){}; g._w={};y='XMLHttpRequest';g._w[y]=m[y];y='fetch';g._w[y]=m[y]; if(m[y])m[y]=function(){return g._w[y].apply(this,arguments)}; g._v="1.2.0"; })(window,document,window['_fs_namespace'],'script','user'); </script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="{% if customer %}customer-logged-in {% endif %}template{{ template | split: '.' | first | camelize }}">
+  
+  <!-- Header -->
+  <header id="top" class="fadeInDown clearfix">
+    {% include 'header' %} 
+    
+   
+  </header>
+  <div class="myoverlay"></div>
+  <div class="mycartoverlay"></div>
+  <div id="content-wrapper-parent">
+    <div id="content-wrapper">  
+      
+      {% if template == 'index' %}
+      {% include 'home-carousel' %}
+      {% endif %}  
+      
+      <!-- Content -->
+      <div id="content" class="clearfix">        
+        {% if template != 'index' %}
+         {% if template != 'collection' %}
+         {% if template != 'page.brand' %}
+         {% if template != 'page.faq' %}
+         {% if template != 'blog' %}
+        {% if template != 'article' %}
+         {% if template != 'product.jewelry' %}
+         {% if template != 'page.contact' %}
+         {% if template != 'search' %}
+        {% if template != 'page' %}
+      {% comment %}  {% include 'breadcrumb' %}  {% endcomment %} 
+        {% endif %} 
+         {% endif %} 
+        {% endif %} 
+        {% endif %} 
+        {% endif %} 
+         {% endif %}
+         {% endif %} 
+        {% endif %} 
+        {% endif %} 
+        {% endif %} 
+        <section class="content">
+          {% if template == 'collection' %}
+         	{% if collection.handle == "women"%}
+              <div class="col_banner women col_banner_collection">
+                   
+                <div class="col_banner_info">
+                  
+                    <div class="col_banner_caption">
+                       <h2>{{settings.w_main_heading}}</h2>
+                       <h3>{{settings.w_heading}}</h3>
+                    </div>
+                   
+                    {% if settings.home_banner_action %}
+                    <div class="col-banner-action">
+                      <a href="{{ settings.w_banner_link }}">{{settings.w_banner_action}}</a>
+                    </div>
+                    {% endif %}
+                
+                   </div>
+              </div>
+          <div class="collection-header">
+            <h1>Shop All</h1>
+          </div>
+            {% endif %}
+          	{% if collection.handle == "men"%}
+              <div class="col_banner men col_banner_collection">
+                   
+                <div class="col_banner_info">
+                  
+                    <div class="col_banner_caption">
+                       <h2>{{settings.m_main_heading}}</h2>
+                       <h3>{{settings.m_heading}}</h3>
+                    </div>
+                   
+                    {% if settings.home_banner_action %}
+                    <div class="col-banner-action">
+                      <a href="{{ settings.m_banner_link }}">{{settings.m_banner_action}}</a>
+                    </div>
+                    {% endif %}
+                
+                   </div>
+              </div>
+             <div class="collection-header">
+              <h1>Shop All</h1>
+            </div>
+            {% endif %}
+          {% endif %}
+          
+          {% if template != 'index' %}
+          {% if template != 'page.contact' %}
+          {% if template != 'page.faq' %}
+          {% if template != 'page' %}
+          {% if template != 'page.brand' %}
+           {% if template != 'blog' %}
+          <div class="container">
+            <div class="row">
+               {% endif %}
+              {% endif %}
+              {% endif %}
+              {% endif %}
+              {% endif %}
+              {% endif %}
+              {% if template == 'list-collections' %}
+              {% include 'collection-listing' %}
+              {% else %}
+              {{ content_for_layout }}
+              
+            
+              
+              {% endif %}
+              {% if template != 'index' %}
+              {% if template != 'page.contact' %}
+              {% if template != 'page.faq' %}
+              {% if template != 'page' %}
+              {% if template != 'page.brand' %}
+               {% if template != 'blog' %}
+            </div>
+          </div>
+           {% endif %}
+           {% endif %}
+          {% endif %}
+           {% endif %}
+          {% endif %}
+			 {% endif %}
+        </section>   
+        
+      
+      </div>
+    </div>
+  </div>
+
+  <footer id="footer">      
+    {% include 'footer' %}    
+  </footer>
+
+  {% if template == 'index' %}
+  {% if settings.show_popup_mc %}
+  <div class="newsletter-popup" style="display: none;">
+    <form action="{{ settings.mailchimp_form_action }}" method="post" name="mc-embedded-subscribe-form" target="_blank">
+
+      <h4>{{ settings.mailing_list_heading }}</h4>
+      
+      <p class="tagline">{{ settings.mailing_list_tagline }}</p>
+      
+      <div class="group_input">
+        <input class="form-control" type="email" name="EMAIL" placeholder="{{ settings.mailing_list_emailtext }}" />
+        <button class="btn" type="submit"><i class="fa fa-paper-plane"></i></button>
+      </div> 
+    </form>
+    <div id="popup-hide">
+      <input type="checkbox" id="mc-popup-hide" value="1" checked="checked"> <label for="mc-popup-hide">{{settings.mailing_list_ignoretext}}</label>
+    </div>
+  </div>
+  {% endif %}
+  {% endif %}
+  
+  {% if settings.totop_show %}
+  <div id="scroll-to-top" class="btooltip" data-toggle="tooltip" data-placement="top" title="{{settings.totop_label}}">
+    <i class="fa fa-angle-up"></i>
+  </div>
+  {% endif %}
+  
+  {{ 'cs.global.js' | asset_url | script_tag }}
+  
+  {{ 'cs.wishlist.js' | asset_url | script_tag }}
+  
+  
+  
+  
+  {% include 'lightbox-wishlist' %}
+  
+  <script type="text/javascript">
+    var wishlistpage = 0;
+    {% if template contains 'wish-list'%}wishlistpage=1;{% endif %}
+    //<![CDATA[    
+    // Including api.jquery.js conditionnally.
+    if (typeof Shopify.onCartShippingRatesUpdate === 'undefined') {
+      document.write({{ "api.jquery.js" | shopify_asset_url | script_tag | json }});
+    }    
+    //]]>
+  </script>   
+  {% include 'api.jquery.custom' %}
+  {% include 'quick-shop' %}
+  {% include 'currencies' %}
+  
+  {% if settings.color_swatch %}
+  <script>
+    jQuery(function() {
+      jQuery('.swatch :radio').change(function() {
+        var optionIndex = jQuery(this).closest('.swatch').attr('data-option-index');
+        var optionValue = jQuery(this).val();
+        jQuery(this)
+        .closest('form')
+        .find('.single-option-selector')
+        .eq(optionIndex)
+        .val(optionValue)
+        .trigger('change');
+      }); 
+    });
+  </script>
+  {% endif %}
+
+  {% include 'tracking-body' %}
+  
+</body>
+</html>

@@ -1,0 +1,29 @@
+{% assign product_collection = product.collections.first %}
+{% assign current_product = product.handle %}
+<script src="https://wiser.expertvillagemedia.com/assets/js/wiser_recom.js" data-maincollection-id="{{collection.id}}" data-productid="{{product.id}}" data-collectid="{% if product_collection %}{{ product_collection.id }}{% endif %}" data-page="{{template}}" data-shop-id="everlume.myshopify.com"></script>
+<script>
+  {% if template == "product" %}
+  var pHandle = "{{current_product}}";
+  var evm_recent_products=getCookie("evm_recent_products");
+  if(pHandle){
+    if(evm_recent_products == null){
+      setCookie("evm_recent_products",pHandle,3);
+    }
+    var currentProducts = [];
+    if(evm_recent_products != null){
+      currentProducts = evm_recent_products.split(","); 
+    }
+    var index = currentProducts.indexOf(pHandle);
+    if (index > -1) {
+      currentProducts.splice(index, 1);
+    } 
+    if(currentProducts.indexOf(pHandle) == -1){
+      currentProducts.push(pHandle); 
+    }
+    if(currentProducts.length > 0){
+      setCookie("evm_recent_products",currentProducts.join(","),3);
+    }
+  }  
+  {% endif %}
+</script>
+ 

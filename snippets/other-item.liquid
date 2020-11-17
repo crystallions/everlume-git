@@ -1,0 +1,16 @@
+<form action="{{ prod.url | within: collection }}" enctype="multipart/form-data">
+  <ul class="list-unstyled text-center clearfix">
+    <li class="row-left">
+      <img class="img-responsive" src="{{ prod.featured_image | product_img_url: 'medium' }}" alt="" />
+    </li>
+    <li class="row-right text-left animMix">
+      <a class="title-5" href="{{ prod.url | within: collection }}">{{ prod.title }}</a>
+      <p class="hidden-grid">
+        {{ prod.content | strip_html | truncatewords: 30 }}
+      </p>
+      <p class="hidden-list">
+        {{ prod.content | strip_html | truncatewords: 50 }}
+      </p>
+    </li>
+  </ul>
+</form>

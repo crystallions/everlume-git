@@ -1,0 +1,131 @@
+
+<div id="page-header">
+  {% if search.results.size >= 1 %}
+  	
+  {% if search.results.size == 1 %}
+  <h1 id="page-title">{{ search.results.size }} search result for "{{ search.terms }}" </h1>
+   {% else %}
+  <h1 id="page-title">{{ search.results.size }} search results for "{{ search.terms }}" </h1>
+  {% endif %}
+  {% endif %}
+</div>
+
+
+ 
+
+{% paginate search.results by settings.collection_pagination_limit %}
+<div id="col-main" class="search search-page col-md-24">   
+
+  {% if search.results.size <= 0 %}
+  <div class="row group_search">
+    <form class="col-md-6 col-xs-6 search-form" action="/search" method="get">
+      <input type="hidden" name="type" value="product" />
+      <input type="text" class="input-block-level" name="q" value="" accesskey="4" autocomplete="off" placeholder="Search..." />
+      {% if settings.search_icon %}
+      <button type="submit" class="search-submit" title="Search">
+        <i class="fa fa-search"></i>
+      </button>
+      {% endif %}
+    </form>
+  </div>
+  {% endif %}
+
+  {% if search.performed %}
+
+  {% if search.results.size > 0 %}
+  <div class="row container-nav clearfix">
+
+    <div id="options" class="container-nav clearfix">
+      <ul class="list-inline text-right">
+        {% if settings.collection_grid_list %}
+        <li class="grid_list">
+          <ul class="list-inline option-set hidden-xs" data-option-key="layoutMode">
+            <label>{{ 'collections.view_as.title' | t }}</label>
+            <li data-option-value="fitRows" id="goGrid" class="goAction btooltip{% if settings.collection_grid_list_default == 'grid' %} active{% endif %}" data-toggle="tooltip" data-placement="top" title="Grid">
+              <span></span>
+            </li>
+            <li data-option-value="straightDown" id="goList" class="goAction btooltip{% if settings.collection_grid_list_default == 'list' %} active{% endif %}" data-toggle="tooltip" data-placement="top" title="List">
+              <span></span>
+            </li>
+          </ul>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+
+  <div id="sandBox-wrapper" class="group-product-item">
+    <ul id="sandBox" class="list-unstyled row">
+      {% for product in search.results %}
+      <li class="element{% cycle ' first', '', '', '' %} no_full_width" data-alpha="{{product.title}}" data-price="{{product.price}}">
+        {% include 'product-item' %}
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  {% include 'pagination' %}
+
+
+  {% else %}
+  <h6 class="empty">{{ 'general.search.no_results_html' | t: search: search.terms }}</h6>
+  {% endif %}
+  {% else %}
+  <h6 class="empty">{{ 'general.search.no_results_html' | t: search: search.terms }}</h6>
+  {% endif %}
+
+</div>
+{% endpaginate %}
+
+<script type="text/javascript">
+
+  // $(document).ready(function() {
+
+  //   imagesLoaded( '#sandBox', function() {
+  //     var $container = $('#sandBox');
+
+  //     $container.isotope({
+  //       itemSelector : '.element',
+  //       layoutMode : 'fitRows',
+  //     });
+
+
+  //     var $optionSets = $('#options .option-set'),
+  //         $optionLinks = $optionSets.find('li');
+
+  //     $optionLinks.click(function(){
+  //       var $this = $(this);
+  //       // don't proceed if already selected
+  //       if ( $this.hasClass('selected') ) {
+  //         return false;
+  //       }
+
+  //       var $direction = $(this).attr('data-order');
+  //       var key1 = 'sortAscending',
+  //           value1 = true;
+
+  //       var $optionSet = $this.parents('.option-set');
+  //       $optionSet.find('.selected').removeClass('selected');
+  //       $this.addClass('selected');
+
+  //       // make option object dynamically, i.e. { filter: '.my-filter-class' }
+  //       var options = {},
+  //           key = $optionSet.attr('data-option-key'),
+  //           value = $this.attr('data-option-value');
+  //       // parse 'false' as false boolean
+  //       value = value === 'false' ? false : value;
+  //       options[ key ] = value;
+  //       options[ key1 ] = value1;
+  //       if ( key === 'layoutMode' && typeof changeLayoutMode === 'function' ) {
+  //         // changes in layout modes need extra logic
+  //         changeLayoutMode( $this, options )
+  //       } else {
+  //         // otherwise, apply new options
+  //         $container.isotope( options );
+  //       }
+
+  //       return false;
+  //     });
+  //   });
+  // });
+</script>{% include 'wiser_recentview' %}{% include 'wiser_trending' %}{% include 'wiser_topselling' %}{% include 'wiser_newarrivals' %}{% include 'wiser_featured' %}{% include 'wiser_recent_related' %}

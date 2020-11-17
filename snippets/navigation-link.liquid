@@ -1,0 +1,899 @@
+{% assign submenu = l.title | handleize %}
+
+{% if settings.megamenu_items_1 == l.title or settings.megamenu_items_2 == l.title or settings.megamenu_items_3 == l.title or settings.megamenu_items_4 == l.title or settings.megamenu_items_5 == l.title  %}
+<li class="{% if l.active %}active {% endif %}dropdown mega-menu">
+  <a href="{{ l.url }}" class="dropdown-toggle dropdown-link" data-toggle="dropdown">
+    <span>{{ l.title }}</span>
+    {% if navigation-link == 0 %}
+    <i class="fa fa-chevron-down"></i>
+    {% endif %}
+    <i class="sub-dropdown1 visible-sm visible-md visible-lg"></i>
+    <i class="sub-dropdown visible-sm visible-md visible-lg"></i>
+  </a>
+  {% if settings.megamenu_items_1 == l.title %}
+  <div class="megamenu-container megamenu-container-1 dropdown-menu banner-bottom mega-col-{{settings.mega_column_1}} show-i-{{settings.display_menu_image_1}}">
+    {% assign mega-col01 = settings.mega_column_1 | plus: 0 %}
+     
+    
+    <ul class="sub-mega-menu">
+	  {% if settings.mega_linklist_1 != "" and mega-col01 >= 1 %}
+      <li>
+        {% assign list = linklists[settings.mega_linklist_1] %}
+        <ul>
+          <li class="list-title">{{ settings.megamenu_1_label }}</li>
+          {% for link in list.links %}
+          <li class="list-unstyled li-sub-mega">
+            <a href="{{ link.url }}">{{ link.title | escape }}
+            {% if settings.megamenu_new_1_label != "" and settings.megamenu_new_1_label == link.title%}
+            	<span class="megamenu-label new-label" >New</span>
+            {% endif %}
+            {% if settings.megamenu_hot_1_label != "" and settings.megamenu_hot_1_label == link.title%}
+            	<span class="megamenu-label hot-label" >Hot</span>
+            {% endif %}
+            {% if settings.megamenu_sale_1_label != "" and settings.megamenu_sale_1_label == link.title%}
+            	<span class="megamenu-label sale-label" >Sale</span>
+            {% endif %}
+            {% if settings.megamenu_fea_1_label != "" and settings.megamenu_fea_1_label == link.title%}
+            	<span class="megamenu-label feature-label" >Featured</span>
+            {% endif %}
+            </a>      
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+      {% endif %}
+	  {% if settings.mega_linklist_2 != "" and mega-col01 >= 2 %}
+      <li>
+        {% assign list = linklists[settings.mega_linklist_2] %}
+        <ul>
+          <li class="list-title">{{ settings.megamenu_2_label }}</li>
+          {% for link in list.links %}
+          <li class="list-unstyled li-sub-mega">
+            <a href="{{ link.url }}">{{ link.title | escape }}
+            {% if settings.megamenu_new_2_label != "" and settings.megamenu_new_2_label == link.title%}
+            	<span class="megamenu-label new-label" >New</span>
+            {% endif %}
+            {% if settings.megamenu_hot_2_label != "" and settings.megamenu_hot_2_label == link.title%}
+            	<span class="megamenu-label hot-label" >Hot</span>
+            {% endif %}
+            {% if settings.megamenu_sale_2_label != "" and settings.megamenu_sale_2_label == link.title%}
+            	<span class="megamenu-label sale-label" >Sale</span>
+            {% endif %}
+            {% if settings.megamenu_fea_2_label != "" and settings.megamenu_fea_2_label == link.title%}
+            	<span class="megamenu-label feature-label" >Featured</span>
+            {% endif %} 
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+	  {% endif %}
+      {% if settings.mega_linklist_3 != "" and mega-col01 >= 3 %}
+      <li>
+        {% assign list = linklists[settings.mega_linklist_3] %}
+        <ul>
+          <li class="list-title">{{ settings.megamenu_3_label }}</li>
+          {% for link in list.links %}
+          <li class="list-unstyled li-sub-mega">
+            <a href="{{ link.url }}">{{ link.title | escape }}
+            {% if settings.megamenu_new_3_label != "" and settings.megamenu_new_3_label == link.title%}
+            	<span class="megamenu-label new-label" >New</span>
+            {% endif %}
+            {% if settings.megamenu_hot_3_label != "" and settings.megamenu_hot_3_label == link.title%}
+            	<span class="megamenu-label hot-label" >Hot</span>
+            {% endif %}
+            {% if settings.megamenu_sale_3_label != "" and settings.megamenu_sale_3_label == link.title%}
+            	<span class="megamenu-label sale-label" >Sale</span>
+            {% endif %}
+            {% if settings.megamenu_fea_3_label != "" and settings.megamenu_fea_3_label == link.title%}
+            	<span class="megamenu-label feature-label" >Featured</span>
+            {% endif %}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+	  {% endif %}
+      {% if settings.mega_linklist_4 != "" and mega-col01 >= 4 %}
+      <li>
+        {% assign list = linklists[settings.mega_linklist_4] %}
+        <ul>
+          <li class="list-title">{{ settings.megamenu_4_label }}</li>
+          {% for link in list.links %}
+          <li class="list-unstyled li-sub-mega">
+            <a href="{{ link.url }}">{{ link.title | escape }}
+            {% if settings.megamenu_new_4_label != "" and settings.megamenu_new_4_label == link.title%}
+            	<span class="megamenu-label new-label" >New</span>
+            {% endif %}
+            {% if settings.megamenu_hot_4_label != "" and settings.megamenu_hot_4_label == link.title%}
+            	<span class="megamenu-label hot-label" >Hot</span>
+            {% endif %}
+            {% if settings.megamenu_sale_4_label != "" and settings.megamenu_sale_4_label == link.title%}
+            	<span class="megamenu-label sale-label" >Sale</span>
+            {% endif %}
+            {% if settings.megamenu_fea_4_label != "" and settings.megamenu_fea_4_label == link.title%}
+            	<span class="megamenu-label feature-label" >Featured</span>
+            {% endif %}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+      {% endif %}
+      {% if settings.mega_linklist_5 != "" and mega-col01 >= 5 %}
+      <li>
+        {% assign list = linklists[settings.mega_linklist_5] %}
+        <ul>
+          <li class="list-title">{{ settings.megamenu_5_label }}</li>
+          {% for link in list.links %}
+          <li class="list-unstyled li-sub-mega">
+            <a href="{{ link.url }}">{{ link.title | escape }}
+            {% if settings.megamenu_new_5_label != "" and settings.megamenu_new_5_label == link.title%}
+            	<span class="megamenu-label new-label" >New</span>
+            {% endif %}
+            {% if settings.megamenu_hot_5_label != "" and settings.megamenu_hot_5_label == link.title%}
+            	<span class="megamenu-label hot-label" >Hot</span>
+            {% endif %}
+            {% if settings.megamenu_sale_5_label != "" and settings.megamenu_sale_5_label == link.title%}
+            	<span class="megamenu-label sale-label" >Sale</span>
+            {% endif %}
+            {% if settings.megamenu_fea_5_label != "" and settings.megamenu_fea_5_label == link.title%}
+            	<span class="megamenu-label feature-label" >Featured</span>
+            {% endif %}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+      {% endif %}
+      {% if settings.mega_linklist_6 != "" and mega-col01 >= 6 %}
+      <li>
+        {% assign list = linklists[settings.mega_linklist_6] %}
+        <ul>
+          <li class="list-title">{{ settings.megamenu_6_label }}</li>
+          {% for link in list.links %}
+          <li class="list-unstyled li-sub-mega">
+            <a href="{{ link.url }}">{{ link.title | escape }}
+            {% if settings.megamenu_new_6_label != "" and settings.megamenu_new_6_label == link.title%}
+            	<span class="megamenu-label new-label" >New</span>
+            {% endif %}
+            {% if settings.megamenu_hot_6_label != "" and settings.megamenu_hot_6_label == link.title%}
+            	<span class="megamenu-label hot-label" >Hot</span>
+            {% endif %}
+            {% if settings.megamenu_sale_6_label != "" and settings.megamenu_sale_6_label == link.title%}
+            	<span class="megamenu-label sale-label" >Sale</span>
+            {% endif %}
+            {% if settings.megamenu_fea_6_label != "" and settings.megamenu_fea_6_label == link.title%}
+            	<span class="megamenu-label feature-label" >Featured</span>
+            {% endif %}
+            </a>
+          </li>
+          {% endfor %}
+         
+        </ul>
+      </li>
+      {% endif %}
+        
+    </ul>
+   {% if settings.display_menu_image_1 %}
+    <ul class="menu-img">
+      
+      <li> <a href="{{ settings.menu_image_1_call_to_action }}"> <img src="{{'menu_image_1.png' | asset_url}}" /> </a> </li>
+    </ul> 
+    {% endif %}
+  </div>
+
+  {% elsif settings.megamenu_items_2 == l.title %}
+  <div class="megamenu-container megamenu-container-2 dropdown-menu banner-right mega-col-{{settings.mega_column_2}}  show-i-{{settings.display_menu_image_2}}">
+    {% assign mega-col02 = settings.mega_column_2 | plus: 0 %}
+    <ul class="sub-mega-menu">
+      {% if settings.mega_linklist_7 != "" and mega-col02 >= 1 %}
+      <li>
+        {% assign list = linklists[settings.mega_linklist_7] %}
+        <ul>
+          <li class="list-title">{{ settings.megamenu_7_label }}</li>
+          {% for link in list.links %}
+          <li class="list-unstyled li-sub-mega">
+            <a href="{{ link.url }}">{{ link.title | escape }}
+            {% if settings.megamenu_new_7_label != "" and settings.megamenu_new_7_label == link.title%}
+            	<span class="megamenu-label new-label" >New</span>
+            {% endif %}
+            {% if settings.megamenu_hot_7_label != "" and settings.megamenu_hot_7_label == link.title%}
+            	<span class="megamenu-label hot-label" >Hot</span>
+            {% endif %}
+            {% if settings.megamenu_sale_7_label != "" and settings.megamenu_sale_7_label == link.title%}
+            	<span class="megamenu-label sale-label" >Sale</span>
+            {% endif %}
+            {% if settings.megamenu_fea_7_label != "" and settings.megamenu_fea_7_label == link.title%}
+            	<span class="megamenu-label feature-label" >Featured</span>
+            {% endif %}
+            </a>            
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+      {% endif %}
+      {% if settings.mega_linklist_8 != "" and mega-col02 >= 2 %}
+      <li>
+        {% assign list = linklists[settings.mega_linklist_8] %}
+        <ul>
+          <li class="list-title">{{ settings.megamenu_8_label }}</li>
+          {% for link in list.links %}
+          <li class="list-unstyled li-sub-mega">
+            <a href="{{ link.url }}">{{ link.title | escape }}
+            {% if settings.megamenu_new_8_label != "" and settings.megamenu_new_8_label == link.title%}
+            	<span class="megamenu-label new-label" >New</span>
+            {% endif %}
+            {% if settings.megamenu_hot_8_label != "" and settings.megamenu_hot_8_label == link.title%}
+            	<span class="megamenu-label hot-label" >Hot</span>
+            {% endif %}
+            {% if settings.megamenu_sale_8_label != "" and settings.megamenu_sale_8_label == link.title%}
+            	<span class="megamenu-label sale-label" >Sale</span>
+            {% endif %}
+            {% if settings.megamenu_fea_8_label != "" and settings.megamenu_fea_8_label == link.title%}
+            	<span class="megamenu-label feature-label" >Featured</span>
+            {% endif %}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+	  {% endif %}
+      {% if settings.mega_linklist_9 != "" and mega-col02 >= 3 %}
+      <li>
+        {% assign list = linklists[settings.mega_linklist_9] %}
+        <ul>
+          <li class="list-title">{{ settings.megamenu_9_label }}</li>
+          {% for link in list.links %}
+          <li class="list-unstyled li-sub-mega">
+            <a href="{{ link.url }}">{{ link.title | escape }}
+            {% if settings.megamenu_new_9_label != "" and settings.megamenu_new_9_label == link.title%}
+            	<span class="megamenu-label new-label" >New</span>
+            {% endif %}
+            {% if settings.megamenu_hot_9_label != "" and settings.megamenu_hot_9_label == link.title%}
+            	<span class="megamenu-label hot-label" >Hot</span>
+            {% endif %}
+            {% if settings.megamenu_sale_9_label != "" and settings.megamenu_sale_9_label == link.title%}
+            	<span class="megamenu-label sale-label" >Sale</span>
+            {% endif %}
+            {% if settings.megamenu_fea_9_label != "" and settings.megamenu_fea_9_label == link.title%}
+            	<span class="megamenu-label feature-label" >Featured</span>
+            {% endif %}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+	  {% endif %}
+      {% if settings.mega_linklist_10 != "" and mega-col02 >= 4 %}
+      <li>
+        {% assign list = linklists[settings.mega_linklist_10] %}
+        <ul>
+          <li class="list-title">{{ settings.megamenu_10_label }}</li>
+          {% for link in list.links %}
+          <li class="list-unstyled li-sub-mega">
+            <a href="{{ link.url }}">{{ link.title | escape }}
+            {% if settings.megamenu_new_10_label != "" and settings.megamenu_new_10_label == link.title%}
+            	<span class="megamenu-label new-label" >New</span>
+            {% endif %}
+            {% if settings.megamenu_hot_10_label != "" and settings.megamenu_hot_10_label == link.title%}
+            	<span class="megamenu-label hot-label" >Hot</span>
+            {% endif %}
+            {% if settings.megamenu_sale_10_label != "" and settings.megamenu_sale_10_label == link.title%}
+            	<span class="megamenu-label sale-label" >Sale</span>
+            {% endif %}
+            {% if settings.megamenu_fea_10_label != "" and settings.megamenu_fea_10_label == link.title%}
+            	<span class="megamenu-label feature-label" >Featured</span>
+            {% endif %} 
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+      {% endif %}
+      {% if settings.mega_linklist_11 != "" and mega-col02 >= 5 %}
+      <li>
+        {% assign list = linklists[settings.mega_linklist_11] %}
+        <ul>
+          <li class="list-title">{{ settings.megamenu_11_label }}</li>
+          {% for link in list.links %}
+          <li class="list-unstyled li-sub-mega">
+            <a href="{{ link.url }}">{{ link.title | escape }}
+            {% if settings.megamenu_new_11_label != "" and settings.megamenu_new_11_label == link.title%}
+            	<span class="megamenu-label new-label" >New</span>
+            {% endif %}
+            {% if settings.megamenu_hot_11_label != "" and settings.megamenu_hot_11_label == link.title%}
+            	<span class="megamenu-label hot-label" >Hot</span>
+            {% endif %}
+            {% if settings.megamenu_sale_11_label != "" and settings.megamenu_sale_11_label == link.title%}
+            	<span class="megamenu-label sale-label" >Sale</span>
+            {% endif %}
+            {% if settings.megamenu_fea_11_label != "" and settings.megamenu_fea_11_label == link.title%}
+            	<span class="megamenu-label feature-label" >Featured</span>
+            {% endif %} 
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+	  {% endif %}
+      {% if settings.mega_linklist_12 != "" and mega-col02 >= 6 %}
+      <li>
+        {% assign list = linklists[settings.mega_linklist_12] %}
+        <ul>
+          <li class="list-title">{{ settings.megamenu_12_label }}</li>
+          {% for link in list.links %}
+          <li class="list-unstyled li-sub-mega">
+            <a href="{{ link.url }}">{{ link.title | escape }}
+            {% if settings.megamenu_new_12_label != "" and settings.megamenu_new_12_label == link.title%}
+            	<span class="megamenu-label new-label" >New</span>
+            {% endif %}
+            {% if settings.megamenu_hot_12_label != "" and settings.megamenu_hot_12_label == link.title%}
+            	<span class="megamenu-label hot-label" >Hot</span>
+            {% endif %}
+            {% if settings.megamenu_sale_12_label != "" and settings.megamenu_sale_12_label == link.title%}
+            	<span class="megamenu-label sale-label" >Sale</span>
+            {% endif %}
+            {% if settings.megamenu_fea_12_label != "" and settings.megamenu_fea_12_label == link.title%}
+            	<span class="megamenu-label feature-label" >Featured</span>
+            {% endif %}
+            </a> 
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+      {% endif %}
+    </ul>    
+     {% if settings.display_menu_image_2 %}
+    <ul class="menu-img">
+      
+      <li> <a href="{{ settings.menu_image_2_call_to_action }}"> <img src="{{'menu_image_2.png' | asset_url}}" /> </a> </li>
+    </ul> 
+    {% endif %}
+  </div>
+  
+  {% elsif settings.megamenu_items_3 == l.title %}
+  <div class="megamenu-container megamenu-container-2 megamenu-container-3 dropdown-menu banner-right mega-col-{{settings.mega_column_3}}   show-i-{{settings.display_menu_image_3}}">
+    {% assign mega-col02 = settings.mega_column_3 | plus: 0 %}
+    <ul class="sub-mega-menu">
+      {% if settings.mega_linklist_13 != "" and mega-col02 >= 1 %}
+      <li>
+        {% assign list = linklists[settings.mega_linklist_13] %}
+        <ul>
+          <li class="list-title">{{ settings.megamenu_13_label }}</li>
+          {% for link in list.links %}
+          <li class="list-unstyled li-sub-mega">
+            <a href="{{ link.url }}">{{ link.title | escape }}
+            {% if settings.megamenu_new_13_label != "" and settings.megamenu_new_13_label == link.title%}
+            	<span class="megamenu-label new-label" >New</span>
+            {% endif %}
+            {% if settings.megamenu_hot_13_label != "" and settings.megamenu_hot_13_label == link.title%}
+            	<span class="megamenu-label hot-label" >Hot</span>
+            {% endif %}
+            {% if settings.megamenu_sale_13_label != "" and settings.megamenu_sale_13_label == link.title%}
+            	<span class="megamenu-label sale-label" >Sale</span>
+            {% endif %}
+            {% if settings.megamenu_fea_13_label != "" and settings.megamenu_fea_13_label == link.title%}
+            	<span class="megamenu-label feature-label" >Featured</span>
+            {% endif %}
+            </a>            
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+      {% endif %}
+      {% if settings.mega_linklist_14 != "" and mega-col02 >= 2 %}
+      <li>
+        {% assign list = linklists[settings.mega_linklist_14] %}
+        <ul>
+          <li class="list-title">{{ settings.megamenu_14_label }}</li>
+          {% for link in list.links %}
+          <li class="list-unstyled li-sub-mega">
+            <a href="{{ link.url }}">{{ link.title | escape }}
+            {% if settings.megamenu_new_14_label != "" and settings.megamenu_new_14_label == link.title%}
+            	<span class="megamenu-label new-label" >New</span>
+            {% endif %}
+            {% if settings.megamenu_hot_14_label != "" and settings.megamenu_hot_14_label == link.title%}
+            	<span class="megamenu-label hot-label" >Hot</span>
+            {% endif %}
+            {% if settings.megamenu_sale_14_label != "" and settings.megamenu_sale_14_label == link.title%}
+            	<span class="megamenu-label sale-label" >Sale</span>
+            {% endif %}
+            {% if settings.megamenu_fea_14_label != "" and settings.megamenu_fea_14_label == link.title%}
+            	<span class="megamenu-label feature-label" >Featured</span>
+            {% endif %}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+	  {% endif %}
+      {% if settings.mega_linklist_15 != "" and mega-col02 >= 3 %}
+      <li>
+        {% assign list = linklists[settings.mega_linklist_15] %}
+        <ul>
+          <li class="list-title">{{ settings.megamenu_15_label }}</li>
+          {% for link in list.links %}
+          <li class="list-unstyled li-sub-mega">
+            <a href="{{ link.url }}">{{ link.title | escape }}
+            {% if settings.megamenu_new_15_label != "" and settings.megamenu_new_15_label == link.title%}
+            	<span class="megamenu-label new-label" >New</span>
+            {% endif %}
+            {% if settings.megamenu_hot_15_label != "" and settings.megamenu_hot_15_label == link.title%}
+            	<span class="megamenu-label hot-label" >Hot</span>
+            {% endif %}
+            {% if settings.megamenu_sale_15_label != "" and settings.megamenu_sale_15_label == link.title%}
+            	<span class="megamenu-label sale-label" >Sale</span>
+            {% endif %}
+            {% if settings.megamenu_fea_15_label != "" and settings.megamenu_fea_15_label == link.title%}
+            	<span class="megamenu-label feature-label" >Featured</span>
+            {% endif %}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+	  {% endif %}
+      {% if settings.mega_linklist_16 != "" and mega-col02 >= 4 %}
+      <li>
+        {% assign list = linklists[settings.mega_linklist_16] %}
+        <ul>
+          <li class="list-title">{{ settings.megamenu_16_label }}</li>
+          {% for link in list.links %}
+          <li class="list-unstyled li-sub-mega">
+            <a href="{{ link.url }}">{{ link.title | escape }}
+            {% if settings.megamenu_new_16_label != "" and settings.megamenu_new_16_label == link.title%}
+            	<span class="megamenu-label new-label" >New</span>
+            {% endif %}
+            {% if settings.megamenu_hot_16_label != "" and settings.megamenu_hot_16_label == link.title%}
+            	<span class="megamenu-label hot-label" >Hot</span>
+            {% endif %}
+            {% if settings.megamenu_sale_16_label != "" and settings.megamenu_sale_16_label == link.title%}
+            	<span class="megamenu-label sale-label" >Sale</span>
+            {% endif %}
+            {% if settings.megamenu_fea_16_label != "" and settings.megamenu_fea_16_label == link.title%}
+            	<span class="megamenu-label feature-label" >Featured</span>
+            {% endif %} 
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+      {% endif %}
+      {% if settings.mega_linklist_17 != "" and mega-col02 >= 5 %}
+      <li>
+        {% assign list = linklists[settings.mega_linklist_17] %}
+        <ul>
+          <li class="list-title">{{ settings.megamenu_17_label }}</li>
+          {% for link in list.links %}
+          <li class="list-unstyled li-sub-mega">
+            <a href="{{ link.url }}">{{ link.title | escape }}
+            {% if settings.megamenu_new_17_label != "" and settings.megamenu_new_17_label == link.title%}
+            	<span class="megamenu-label new-label" >New</span>
+            {% endif %}
+            {% if settings.megamenu_hot_17_label != "" and settings.megamenu_hot_17_label == link.title%}
+            	<span class="megamenu-label hot-label" >Hot</span>
+            {% endif %}
+            {% if settings.megamenu_sale_17_label != "" and settings.megamenu_sale_17_label == link.title%}
+            	<span class="megamenu-label sale-label" >Sale</span>
+            {% endif %}
+            {% if settings.megamenu_fea_17_label != "" and settings.megamenu_fea_17_label == link.title%}
+            	<span class="megamenu-label feature-label" >Featured</span>
+            {% endif %} 
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+	  {% endif %}
+      {% if settings.mega_linklist_18 != "" and mega-col02 >= 6 %}
+      <li>
+        {% assign list = linklists[settings.mega_linklist_18] %}
+        <ul>
+          <li class="list-title">{{ settings.megamenu_18_label }}</li>
+          {% for link in list.links %}
+          <li class="list-unstyled li-sub-mega">
+            <a href="{{ link.url }}">{{ link.title | escape }}
+            {% if settings.megamenu_new_18_label != "" and settings.megamenu_new_18_label == link.title%}
+            	<span class="megamenu-label new-label" >New</span>
+            {% endif %}
+            {% if settings.megamenu_hot_18_label != "" and settings.megamenu_hot_18_label == link.title%}
+            	<span class="megamenu-label hot-label" >Hot</span>
+            {% endif %}
+            {% if settings.megamenu_sale_18_label != "" and settings.megamenu_sale_18_label == link.title%}
+            	<span class="megamenu-label sale-label" >Sale</span>
+            {% endif %}
+            {% if settings.megamenu_fea_18_label != "" and settings.megamenu_fea_18_label == link.title%}
+            	<span class="megamenu-label feature-label" >Featured</span>
+            {% endif %}
+            </a> 
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+      {% endif %}
+    </ul> 
+      {% if settings.display_menu_image_3 %}
+    <ul class="menu-img">
+      
+      <li> <a href="{{ settings.menu_image_3_call_to_action }}"> <img src="{{'menu_image_3.png' | asset_url}}" /> </a> </li>
+    </ul> 
+    {% endif %}
+  </div>
+  
+   {% elsif settings.megamenu_items_4 == l.title %}
+  <div class="megamenu-container megamenu-container-2 megamenu-container-4 dropdown-menu banner-right mega-col-{{settings.mega_column_4}} show-i-{{settings.display_menu_image_4}}">
+    {% assign mega-col02 = settings.mega_column_4 | plus: 0 %}
+    <ul class="sub-mega-menu">
+      {% if settings.mega_linklist_19 != "" and mega-col02 >= 1 %}
+      <li>
+        {% assign list = linklists[settings.mega_linklist_19] %}
+        <ul>
+          <li class="list-title">{{ settings.megamenu_19_label }}</li>
+          {% for link in list.links %}
+          <li class="list-unstyled li-sub-mega">
+            <a href="{{ link.url }}">{{ link.title | escape }}
+            {% if settings.megamenu_new_19_label != "" and settings.megamenu_new_19_label == link.title%}
+            	<span class="megamenu-label new-label" >New</span>
+            {% endif %}
+            {% if settings.megamenu_hot_19_label != "" and settings.megamenu_hot_19_label == link.title%}
+            	<span class="megamenu-label hot-label" >Hot</span>
+            {% endif %}
+            {% if settings.megamenu_sale_19_label != "" and settings.megamenu_sale_19_label == link.title%}
+            	<span class="megamenu-label sale-label" >Sale</span>
+            {% endif %}
+            {% if settings.megamenu_fea_19_label != "" and settings.megamenu_fea_19_label == link.title%}
+            	<span class="megamenu-label feature-label" >Featured</span>
+            {% endif %}
+            </a>            
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+      {% endif %}
+      {% if settings.mega_linklist_20 != "" and mega-col02 >= 2 %}
+      <li>
+        {% assign list = linklists[settings.mega_linklist_20] %}
+        <ul>
+          <li class="list-title">{{ settings.megamenu_20_label }}</li>
+          {% for link in list.links %}
+          <li class="list-unstyled li-sub-mega">
+            <a href="{{ link.url }}">{{ link.title | escape }}
+            {% if settings.megamenu_new_20_label != "" and settings.megamenu_new_20_label == link.title%}
+            	<span class="megamenu-label new-label" >New</span>
+            {% endif %}
+            {% if settings.megamenu_hot_20_label != "" and settings.megamenu_hot_20_label == link.title%}
+            	<span class="megamenu-label hot-label" >Hot</span>
+            {% endif %}
+            {% if settings.megamenu_sale_20_label != "" and settings.megamenu_sale_20_label == link.title%}
+            	<span class="megamenu-label sale-label" >Sale</span>
+            {% endif %}
+            {% if settings.megamenu_fea_20_label != "" and settings.megamenu_fea_20_label == link.title%}
+            	<span class="megamenu-label feature-label" >Featured</span>
+            {% endif %}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+	  {% endif %}
+      {% if settings.mega_linklist_21 != "" and mega-col02 >= 3 %}
+      <li>
+        {% assign list = linklists[settings.mega_linklist_21] %}
+        <ul>
+          <li class="list-title">{{ settings.megamenu_21_label }}</li>
+          {% for link in list.links %}
+          <li class="list-unstyled li-sub-mega">
+            <a href="{{ link.url }}">{{ link.title | escape }}
+            {% if settings.megamenu_new_21_label != "" and settings.megamenu_new_21_label == link.title%}
+            	<span class="megamenu-label new-label" >New</span>
+            {% endif %}
+            {% if settings.megamenu_hot_21_label != "" and settings.megamenu_hot_21_label == link.title%}
+            	<span class="megamenu-label hot-label" >Hot</span>
+            {% endif %}
+            {% if settings.megamenu_sale_21_label != "" and settings.megamenu_sale_21_label == link.title%}
+            	<span class="megamenu-label sale-label" >Sale</span>
+            {% endif %}
+            {% if settings.megamenu_fea_21_label != "" and settings.megamenu_fea_21_label == link.title%}
+            	<span class="megamenu-label feature-label" >Featured</span>
+            {% endif %}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+	  {% endif %}
+      {% if settings.mega_linklist_22 != "" and mega-col02 >= 4 %}
+      <li>
+        {% assign list = linklists[settings.mega_linklist_22] %}
+        <ul>
+          <li class="list-title">{{ settings.megamenu_22_label }}</li>
+          {% for link in list.links %}
+          <li class="list-unstyled li-sub-mega">
+            <a href="{{ link.url }}">{{ link.title | escape }}
+            {% if settings.megamenu_new_22_label != "" and settings.megamenu_new_22_label == link.title%}
+            	<span class="megamenu-label new-label" >New</span>
+            {% endif %}
+            {% if settings.megamenu_hot_22_label != "" and settings.megamenu_hot_22_label == link.title%}
+            	<span class="megamenu-label hot-label" >Hot</span>
+            {% endif %}
+            {% if settings.megamenu_sale_22_label != "" and settings.megamenu_sale_22_label == link.title%}
+            	<span class="megamenu-label sale-label" >Sale</span>
+            {% endif %}
+            {% if settings.megamenu_fea_22_label != "" and settings.megamenu_fea_22_label == link.title%}
+            	<span class="megamenu-label feature-label" >Featured</span>
+            {% endif %} 
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+      {% endif %}
+      {% if settings.mega_linklist_23 != "" and mega-col02 >= 5 %}
+      <li>
+        {% assign list = linklists[settings.mega_linklist_23] %}
+        <ul>
+          <li class="list-title">{{ settings.megamenu_23_label }}</li>
+          {% for link in list.links %}
+          <li class="list-unstyled li-sub-mega">
+            <a href="{{ link.url }}">{{ link.title | escape }}
+            {% if settings.megamenu_new_23_label != "" and settings.megamenu_new_23_label == link.title%}
+            	<span class="megamenu-label new-label" >New</span>
+            {% endif %}
+            {% if settings.megamenu_hot_23_label != "" and settings.megamenu_hot_23_label == link.title%}
+            	<span class="megamenu-label hot-label" >Hot</span>
+            {% endif %}
+            {% if settings.megamenu_sale_23_label != "" and settings.megamenu_sale_23_label == link.title%}
+            	<span class="megamenu-label sale-label" >Sale</span>
+            {% endif %}
+            {% if settings.megamenu_fea_23_label != "" and settings.megamenu_fea_23_label == link.title%}
+            	<span class="megamenu-label feature-label" >Featured</span>
+            {% endif %} 
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+	  {% endif %}
+      {% if settings.mega_linklist_24 != "" and mega-col02 >= 6 %}
+      <li>
+        {% assign list = linklists[settings.mega_linklist_24] %}
+        <ul>
+          <li class="list-title">{{ settings.megamenu_24_label }}</li>
+          {% for link in list.links %}
+          <li class="list-unstyled li-sub-mega">
+            <a href="{{ link.url }}">{{ link.title | escape }}
+            {% if settings.megamenu_new_24_label != "" and settings.megamenu_new_24_label == link.title%}
+            	<span class="megamenu-label new-label" >New</span>
+            {% endif %}
+            {% if settings.megamenu_hot_24_label != "" and settings.megamenu_hot_24_label == link.title%}
+            	<span class="megamenu-label hot-label" >Hot</span>
+            {% endif %}
+            {% if settings.megamenu_sale_24_label != "" and settings.megamenu_sale_24_label == link.title%}
+            	<span class="megamenu-label sale-label" >Sale</span>
+            {% endif %}
+            {% if settings.megamenu_fea_24_label != "" and settings.megamenu_fea_24_label == link.title%}
+            	<span class="megamenu-label feature-label" >Featured</span>
+            {% endif %}
+            </a> 
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+      {% endif %}
+    </ul>
+    
+      {% if settings.display_menu_image_4 %}
+    <ul class="menu-img">
+      
+      <li> <a href="{{ settings.menu_image_4_call_to_action }}"> <img src="{{'menu_image_4.png' | asset_url}}" /> </a> </li>
+    </ul> 
+    {% endif %}
+  </div>
+  
+   {% elsif settings.megamenu_items_5 == l.title %}
+  <div class="megamenu-container megamenu-container-2 megamenu-container-5 dropdown-menu banner-right mega-col-{{settings.mega_column_5}} show-i-{{settings.display_menu_image_5}}">
+    {% assign mega-col02 = settings.mega_column_5 | plus: 0 %}
+    <ul class="sub-mega-menu">
+      {% if settings.mega_linklist_25 != "" and mega-col02 >= 1 %}
+      <li>
+        {% assign list = linklists[settings.mega_linklist_25] %}
+        <ul>
+          <li class="list-title">{{ settings.megamenu_25_label }}</li>
+          {% for link in list.links %}
+          <li class="list-unstyled li-sub-mega">
+            <a href="{{ link.url }}">{{ link.title | escape }}
+            {% if settings.megamenu_new_25_label != "" and settings.megamenu_new_25_label == link.title%}
+            	<span class="megamenu-label new-label" >New</span>
+            {% endif %}
+            {% if settings.megamenu_hot_25_label != "" and settings.megamenu_hot_25_label == link.title%}
+            	<span class="megamenu-label hot-label" >Hot</span>
+            {% endif %}
+            {% if settings.megamenu_sale_25_label != "" and settings.megamenu_sale_25_label == link.title%}
+            	<span class="megamenu-label sale-label" >Sale</span>
+            {% endif %}
+            {% if settings.megamenu_fea_25_label != "" and settings.megamenu_fea_25_label == link.title%}
+            	<span class="megamenu-label feature-label" >Featured</span>
+            {% endif %}
+            </a>            
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+      {% endif %}
+      {% if settings.mega_linklist_26 != "" and mega-col02 >= 2 %}
+      <li>
+        {% assign list = linklists[settings.mega_linklist_26] %}
+        <ul>
+          <li class="list-title">{{ settings.megamenu_26_label }}</li>
+          {% for link in list.links %}
+          <li class="list-unstyled li-sub-mega">
+            <a href="{{ link.url }}">{{ link.title | escape }}
+            {% if settings.megamenu_new_26_label != "" and settings.megamenu_new_26_label == link.title%}
+            	<span class="megamenu-label new-label" >New</span>
+            {% endif %}
+            {% if settings.megamenu_hot_26_label != "" and settings.megamenu_hot_26_label == link.title%}
+            	<span class="megamenu-label hot-label" >Hot</span>
+            {% endif %}
+            {% if settings.megamenu_sale_26_label != "" and settings.megamenu_sale_26_label == link.title%}
+            	<span class="megamenu-label sale-label" >Sale</span>
+            {% endif %}
+            {% if settings.megamenu_fea_26_label != "" and settings.megamenu_fea_26_label == link.title%}
+            	<span class="megamenu-label feature-label" >Featured</span>
+            {% endif %}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+	  {% endif %}
+      {% if settings.mega_linklist_27 != "" and mega-col02 >= 3 %}
+      <li>
+        {% assign list = linklists[settings.mega_linklist_27] %}
+        <ul>
+          <li class="list-title">{{ settings.megamenu_27_label }}</li>
+          {% for link in list.links %}
+          <li class="list-unstyled li-sub-mega">
+            <a href="{{ link.url }}">{{ link.title | escape }}
+            {% if settings.megamenu_new_27_label != "" and settings.megamenu_new_27_label == link.title%}
+            	<span class="megamenu-label new-label" >New</span>
+            {% endif %}
+            {% if settings.megamenu_hot_27_label != "" and settings.megamenu_hot_27_label == link.title%}
+            	<span class="megamenu-label hot-label" >Hot</span>
+            {% endif %}
+            {% if settings.megamenu_sale_27_label != "" and settings.megamenu_sale_21_label == link.title%}
+            	<span class="megamenu-label sale-label" >Sale</span>
+            {% endif %}
+            {% if settings.megamenu_fea_27_label != "" and settings.megamenu_fea_27_label == link.title%}
+            	<span class="megamenu-label feature-label" >Featured</span>
+            {% endif %}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+	  {% endif %}
+      {% if settings.mega_linklist_28 != "" and mega-col02 >= 4 %}
+      <li>
+        {% assign list = linklists[settings.mega_linklist_28] %}
+        <ul>
+          <li class="list-title">{{ settings.megamenu_28_label }}</li>
+          {% for link in list.links %}
+          <li class="list-unstyled li-sub-mega">
+            <a href="{{ link.url }}">{{ link.title | escape }}
+            {% if settings.megamenu_new_28_label != "" and settings.megamenu_new_28_label == link.title%}
+            	<span class="megamenu-label new-label" >New</span>
+            {% endif %}
+            {% if settings.megamenu_hot_28_label != "" and settings.megamenu_hot_28_label == link.title%}
+            	<span class="megamenu-label hot-label" >Hot</span>
+            {% endif %}
+            {% if settings.megamenu_sale_28_label != "" and settings.megamenu_sale_28_label == link.title%}
+            	<span class="megamenu-label sale-label" >Sale</span>
+            {% endif %}
+            {% if settings.megamenu_fea_28_label != "" and settings.megamenu_fea_28_label == link.title%}
+            	<span class="megamenu-label feature-label" >Featured</span>
+            {% endif %} 
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+      {% endif %}
+      {% if settings.mega_linklist_29 != "" and mega-col02 >= 5 %}
+      <li>
+        {% assign list = linklists[settings.mega_linklist_29] %}
+        <ul>
+          <li class="list-title">{{ settings.megamenu_29_label }}</li>
+          {% for link in list.links %}
+          <li class="list-unstyled li-sub-mega">
+            <a href="{{ link.url }}">{{ link.title | escape }}
+            {% if settings.megamenu_new_29_label != "" and settings.megamenu_new_29_label == link.title%}
+            	<span class="megamenu-label new-label" >New</span>
+            {% endif %}
+            {% if settings.megamenu_hot_29_label != "" and settings.megamenu_hot_29_label == link.title%}
+            	<span class="megamenu-label hot-label" >Hot</span>
+            {% endif %}
+            {% if settings.megamenu_sale_29_label != "" and settings.megamenu_sale_29_label == link.title%}
+            	<span class="megamenu-label sale-label" >Sale</span>
+            {% endif %}
+            {% if settings.megamenu_fea_29_label != "" and settings.megamenu_fea_29_label == link.title%}
+            	<span class="megamenu-label feature-label" >Featured</span>
+            {% endif %} 
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+	  {% endif %}
+      {% if settings.mega_linklist_30 != "" and mega-col02 >= 6 %}
+      <li>
+        {% assign list = linklists[settings.mega_linklist_30] %}
+        <ul>
+          <li class="list-title">{{ settings.megamenu_30_label }}</li>
+          {% for link in list.links %}
+          <li class="list-unstyled li-sub-mega">
+            <a href="{{ link.url }}">{{ link.title | escape }}
+            {% if settings.megamenu_new_30_label != "" and settings.megamenu_new_30_label == link.title%}
+            	<span class="megamenu-label new-label" >New</span>
+            {% endif %}
+            {% if settings.megamenu_hot_30_label != "" and settings.megamenu_hot_30_label == link.title%}
+            	<span class="megamenu-label hot-label" >Hot</span>
+            {% endif %}
+            {% if settings.megamenu_sale_30_label != "" and settings.megamenu_sale_30_label == link.title%}
+            	<span class="megamenu-label sale-label" >Sale</span>
+            {% endif %}
+            {% if settings.megamenu_fea_30_label != "" and settings.megamenu_fea_30_label == link.title%}
+            	<span class="megamenu-label feature-label" >Featured</span>
+            {% endif %}
+            </a> 
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+      {% endif %}
+    </ul>     
+    
+      {% if settings.display_menu_image_5 %}
+    <ul class="menu-img">
+      
+      <li> <a href="{{ settings.menu_image_5_call_to_action }}"> <img src="{{'menu_image_5.png' | asset_url}}" /> </a> </li>
+    </ul> 
+    {% endif %}
+    
+  </div>
+  
+  
+  {% endif %}
+</li>
+
+{% else %}
+
+{% if linklists[submenu].links.size > 0 %}
+<li class="nav-item{% if l.active %} active{% endif %} dropdown">
+  <a href="{{ l.url }}" class="dropdown-toggle dropdown-link" data-toggle="dropdown">
+
+    <span>{{ l.title }}</span>
+    {% if navigation-link == 0 %}
+    <i class="fa fa-chevron-down"></i> 
+    {% endif %}
+
+    <i class="sub-dropdown1  visible-sm visible-md visible-lg"></i>
+    <i class="sub-dropdown visible-sm visible-md visible-lg"></i>
+  </a>
+  <ul class="dropdown-menu">
+    {% for l in linklists[submenu].links %}
+    {% include 'navbar-sub-links' with forloop.index %}
+    {% endfor %}
+  </ul>
+</li>
+{% else %}
+<li class="nav-item{% if l.active %} active{% endif %}">
+  <a href="{{ l.url }}">
+    <span>{{ l.title }}</span>
+  </a>
+</li>
+{% endif %}
+{% endif %}
+
+
+

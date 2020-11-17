@@ -1,0 +1,105 @@
+{% if settings.nav_linklist != '' %}
+<nav class="navbar" role="navigation">
+  <div class="clearfix">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="">
+        <span class="sr-only">Toggle main navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <script>
+      
+      $(".navbar-toggle").click(function(){
+  $(".navbar-toggle").toggleClass("collapsed");
+   $(".myoverlay").toggleClass("active");
+        //$(".navbar-collapse").toggleClass("collapse");
+        $(".navbar-collapse").toggleClass("in"); 
+});
+      
+    </script>
+
+    <div class="is-mobile visible-xs">
+      <ul class="list-inline">
+        <li class="is-mobile-menu">
+          <div class="btn-navbar" data-toggle="collapse" data-target="">
+            <span class="icon-bar-group">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </span>
+          </div>
+        </li>
+
+      {% comment %}  {% if shop.customer_accounts_enabled %}
+        <li class="is-mobile-login">
+          <div class="btn-group">
+            <div class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-user"></i>
+            </div>
+            <ul class="customer dropdown-menu">
+              {% if customer %}
+              <li class="logout">
+                <a href="/account/logout">{{ 'layout.customer.log_out' | t }}</a>
+              </li>
+              <li class="account">
+                <a href="/account">{{ 'layout.customer.my_account' | t }}</a>
+              </li>
+              {% else %}
+              <li class="logout">
+                <a href="/account/login">{{ 'layout.customer.login' | t }}</a>
+              </li>
+              <li class="account">
+                <a href="/account/register">{{ 'layout.customer.register' | t }}</a>
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+        </li>
+        
+        {% if settings.show_wish_list %}
+        <li class="is-mobile-wl">
+          <a href="/pages/wish-list"><i class="fa fa-heart"></i></a>
+        </li>
+        {% endif %}
+        
+        {% endif %}   {% endcomment %}
+         <li class="top-logo">
+        <a id="site-title" href="/" title="{{ shop.name | escape }}">
+          {% if settings.logo_image == "logo.png" %}
+          <img class="img-responsive" src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name | escape }}" />
+          {% else %}
+          {{ settings.logo_text | escape }}
+          {% endif %}
+        </a>
+      </li>
+
+        <li class="is-mobile-cart hidden-xs">
+          <a href="/cart"><span class="cart-icon"></span></a>
+        </li>
+       
+      </ul>
+    </div>
+
+    <div class="collapse navbar-collapse"> 
+      <ul class="nav navbar-nav hoverMenuWrapper">
+         {% if settings.show_header_search %}
+      <li class="mobile-search visible-xs">
+        <form id="mobile-search" class="search-form" action="/search" method="get">
+          <input type="hidden" name="type" value="product" />
+          <input type="text" class="" name="q" value="" accesskey="4" autocomplete="off" placeholder="search" />
+          {% if settings.search_icon %}
+          <button type="submit" class="search-submit" title="search"><i class="search-icon"></i></button>
+          {% endif %}
+        </form>
+      </li>
+      {% endif %} 
+        {% for l in linklists[settings.nav_linklist].links %}
+        {% include 'navigation-link' with 0 %}
+        {% endfor %}
+      </ul>       
+    </div>
+  </div>
+</nav>
+{% endif %}

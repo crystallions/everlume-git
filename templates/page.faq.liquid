@@ -1,0 +1,165 @@
+<div class="pagefaq container">
+  <div class="row">
+    <div id="page-header" class="col-md-24">
+      <h1 id="page-title">{{ page.title }}</h1>
+    </div>
+  </div>
+
+<div class="row">
+ {% if settings.show_faq_link_list %}
+    <div class="sidebar-link-list col-md-6">
+      <div class="group">
+        {% assign list = linklists[settings.faq_linklist] %}
+        <ul class="list-unstyled list-styled">
+          {% for link in list.links %}
+          <li class="list-unstyled">
+            <a href="{{ link.url }}">{{ link.title | escape }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    {% endif %}  
+
+<div id="col-main" class="contact-page clearfix col-md-18"> 
+  <div class="group-faq clearfix">
+    <header>{{page.content}}</header>
+    <div class="content">
+      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingOne">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                {{settings.faq-text1-head}}
+              </a>
+            </h4>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body">
+              {{settings.faq-text1-cont}}
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingTwo">
+            <h4 class="panel-title">
+              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                {{settings.faq-text2-head}}
+              </a>
+            </h4>
+          </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+            <div class="panel-body">
+              {{settings.faq-text2-cont}}
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingThree">
+            <h4 class="panel-title">
+              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                {{settings.faq-text3-head}}
+              </a>
+            </h4>
+          </div>
+          <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+            <div class="panel-body">
+              {{settings.faq-text3-cont}}
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingFour">
+            <h4 class="panel-title">
+              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                {{settings.faq-text4-head}}
+              </a>
+            </h4>
+          </div>
+          <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+            <div class="panel-body">
+              {{settings.faq-text4-cont}}
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingFive">
+            <h4 class="panel-title">
+              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                {{settings.faq-text5-head}}
+              </a>
+            </h4>
+          </div>
+          <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+            <div class="panel-body">
+              {{settings.faq-text5-cont}}
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingSix">
+            <h4 class="panel-title">
+              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                {{settings.faq-text6-head}}
+              </a>
+            </h4>
+          </div>
+          <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
+            <div class="panel-body">
+              {{settings.faq-text6-cont}}
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingSeven">
+            <h4 class="panel-title">
+              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                {{settings.faq-text7-head}}
+              </a>
+            </h4>
+          </div>
+          <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+            <div class="panel-body">
+              {{settings.faq-text7-cont}}
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingEight">
+            <h4 class="panel-title">
+              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                {{settings.faq-text8-head}}
+              </a>
+            </h4>
+          </div>
+          <div id="collapseEight" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingEight">
+            <div class="panel-body">
+              {{settings.faq-text8-cont}}
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <script>
+         jQuery(function ($) {
+           
+            var $active = $('#accordion .panel-collapse.in').prev().addClass('active');
+            $active.find('a').prepend('<i class="fa-icon fa fa-minus"></i> ');
+            $('#accordion .panel-heading').not($active).find('a').prepend('<i class="fa-icon fa fa-plus"></i> ');
+            $('#accordion').on('show.bs.collapse', function (e) {
+                $('#accordion .panel-heading.active').removeClass('active').find('.fa-icon').toggleClass('fa fa-plus fa fa-minus');
+                $(e.target).prev().addClass('active').find('.fa-icon').toggleClass('fa fa-plus fa fa-minus');
+            })
+        });
+        
+        
+        $(".panel-heading").click(function(){
+         $(".panel-heading").removeClass('active').find('.fa-icon').removeClass('fa fa-minus').addClass('fa fa-plus');;
+        });
+      </script>
+      
+    </div>
+  </div>
+</div>
+  </div>
+  </div>

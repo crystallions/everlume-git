@@ -1,0 +1,27 @@
+<div class="group_sidebar">
+  <div class="row sb-wrapper unpadding-top">
+    <h6 class="sb-title">{{ 'customer.account.account_details' | t }}</h6>
+    <span class="mini-line"></span>
+    <ul id="customer_detail" class="list-unstyled sb-content">
+      <li>
+        <address class="clearfix">
+          <div class="info">
+            <i class="fa fa-user"></i>
+            <span class="address-group"> 
+              <span class="author">{{ customer.name }}</span> 
+              <span class="email">{{ customer.email }}</span> 
+            </span>
+          </div>
+          <div class="address">
+            <span class="address-group"> 
+              <span class="address1">{{ customer.default_address.address1 }}{% if customer.default_address.city != empty and customer.default_address.city != blank %}, {{ customer.default_address.city}}{% endif %}{% if customer.default_address.country != empty and customer.default_address.country != blank %}, {{customer.default_address.country}}{% endif %}<span class="phone-number">{{ customer.default_address.phone }}</span> </span> 
+            </span>
+          </div>
+        </address>
+      </li>
+      <li>
+        <button class="btn btn-1" id="view_address" onclick="window.location='/account/addresses'">Manager Address ({{ customer.addresses_count }})</button>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<div id="page-header">
+  <h1 id="page-title">Collection</h1>
+</div>
+
+{% if settings.show_sidebar_prodcoll %}
+<div id="prodcoll" class="col-sm-6 col-md-6 sidebar hidden-xs">
+  {% include 'sidebar-prodcoll' %}
+</div>
+{% endif %}
+
+<div id="col-main" class="allcollections-page{% if settings.show_sidebar_prodcoll %} col-sm-18 col-md-18{% else %} col-md-24 col-sm-24{% endif %}">
+
+  <h6 class="general-title">{{'collections.general.title'|t}}</h6>
+  <ul id="collections" class="hoverBackgroundWrapper list-unstyled list-item row{% if settings.show_sidebar_prodcoll %} main-has-slidebar{% endif %}">
+    {% for collection in collections %}
+    {% unless collection.handle == 'frontpage' or collection.handle == 'all' %}
+    <li class="collection-item item">
+      {% include 'collection-item' %}
+    </li>
+    {% endunless %}
+    {% endfor %}
+  </ul>
+</div>

@@ -1,0 +1,223 @@
+<div id="page-header" class="col-md-24">
+  <h1 id="page-title">{{ 'cart.general.title' | t }}</h1>
+</div>
+
+<div id="col-main" class="col-md-24 cart-page content">
+
+  {% if cart.items == empty %} 
+  <p class="cart empty">{{ 'cart.general.empty' | t }}</p>
+  <a href="/collections/all" class="btn">{{ 'cart.general.continue_shopping' | t }}</a>
+
+  {% else %}
+  
+  <form action="/cart" method="post" id="cartform" class="clearfix">
+      <div id="checkout-proceed-top" class="last1 text-right"> 
+    <button class="btn" type="submit" id="update-cart" name="checkout">{{ 'cart.general.checkout' | t }}</button>
+    </div> 
+    <div class="row table-cart">
+      <div class="table-title">Cart</div>
+      <div class="wrap-table">
+        <table class="cart-items haft-border">
+        <colgroup>
+            <col class="checkout-image" />
+            <col class="checkout-info" />
+            <col class="checkout-price" />
+            <col class="checkout-quantity" />
+            <col class="checkout-totals" />
+          </colgroup> 
+
+         {% comment %}   <thead>
+            <tr class="top-labels">
+              <th>{{ 'cart.label.item_name' | t }}</th>
+              <th>{{ 'cart.label.price' | t }}</th>
+              <th>{{ 'cart.label.qty' | t }}</th>
+              <th>{{ 'cart.label.subTotal' | t }}</th>
+              <th>&nbsp;</th>
+            </tr>
+          </thead>{% endcomment %} 
+
+          <tbody>
+            {% for item in cart.items %}
+            <tr class="item {{ item.product.handle }}">
+               <td class="item-title text-left display-mo">
+                  <ul class="list-inline">
+                  <li class="link">
+                    <a href="{{item.product.url }}">
+                      <span class="title-5">{{ item.product.title }}</span>
+                    </a>
+                  
+                  </li>
+                </ul>
+              </td>
+              <td class="title text-left item-image">
+                <ul class="list-inline">
+                  <li class="image">
+                    <a href="{{ item.product.url }}">
+                      <img src="{{ item.product.featured_image | product_img_url: '124x128' }}"  alt="{{ item.product.title }}" />
+                    </a>
+                  </li> </ul>
+                  </td>
+               <td class="item-title text-left hide-mo">
+                  <ul class="list-inline">
+                  <li class="link">
+                    <a href="{{item.product.url }}" class="">
+                      <span class="title-5">{{ item.product.title }}</span>
+                    </a>
+                    <br class="hide-mo">
+                    {% if item.product.variants.size > 1 %}
+                    <span class="variant_title">{{ item.variant.title }}</span>
+                    <br />
+                    {% endif %}
+                  </li>
+                </ul>
+              </td>
+              {% if item.product.variants.size > 1 %}
+               <td class="item-title text-left hide-desk">
+                  <ul class="list-inline">
+                  <li class="link">
+                   
+                   
+                    
+                    <span class="variant_title">{{ item.variant.title }}</span>
+                    <br />
+                   
+                  </li>
+                </ul>
+              </td>
+               {% endif %}
+          {% comment %}        <td class="title-1">{{ item.price | money }}</td>  {% endcomment %}   
+              <td class="qty-col">
+                <div class="cart-quantity">
+  <input type="button" value="-" class="qtyminus"   field="cupdates_{{ item.id }}" />
+  <input type="number" name="updates[]" id="cupdates_{{ item.id }}" class="quantity" variantid="{{ item.id }}" value="{{ item.quantity }}" />
+  <input type="button" value="+" class="qtyplus" field="cupdates_{{ item.id }}" />
+</div>
+{% comment %}
+                <input class="form-control input-1 replace"  maxlength="5" size="5" id="updates_{{ item.id }}" name="updates[]" value="{{ item.quantity }}" /> 
+                {% endcomment %}
+              </td>
+              <td class="total title-1">{{ item.line_price | money }}</td>
+          {% comment %}    <td class="action"><button type="button" onclick="window.location='/cart/change?line={{ forloop.index }}&quantity=0'"><i class="fa fa-times"></i>{{ 'cart.label.remove' | t }}</button></td> {% endcomment %}   
+            </tr>
+            {% endfor %}
+          </tbody>
+
+          <tfoot>
+            <tr class="bottom-summary">
+              <td>&nbsp;</td>
+             {% comment %}    <td>&nbsp;</td>  {% endcomment %}  
+               <td>&nbsp;</td> 
+              <td class="update-quantities">  <button type="submit" id="update-cart" class="btn btn-2" name="update">{{ 'cart.general.update' | t }}</button> </td>
+              <td class="subtotal title-1">{{ cart.total_price | money }}</td>
+             
+            </tr>
+          </tfoot>
+        </table>
+        
+         {% if settings.allow_add_note %}
+   
+      <div id="checkout-addnote">
+        <div class="wrapper-title">
+          <span class="title-5">{{ 'cart.general.note' | t }}</span>
+        </div>
+        <textarea id="note" rows="5" class="form-control" name="note">{{ cart.note }}</textarea>
+      </div>
+    
+     {% endif %}
+        
+      </div>
+    </div>
+
+    <div class="clearfix summary-row">
+      <div class="table-title">Order summary</div>
+      <div class="summary_table">
+        {% assign var_net = cart.total_price | divided_by:1.2 %}   
+        {% assign var_tax = cart.total_price | minus: var_net %}
+      	<table>
+          <tr><td class="s-label">Sub-total</td> <td class="s-value sb">{{ cart.total_price | money }}</td></tr>
+          <tr><td class="s-label">Shipping</td> <td class="s-value sp">Calculated at Checkout</td></tr>
+       	  <tr><td class="s-label">Tax and fees</td> <td class="s-value tax">$0</td></tr>
+          <tr><td class="s-label field-total">Total</td> <td class="s-value field-total"> {{ cart.total_price | money }}</td></tr>
+        </table>
+      </div>
+      <div id="checkout-proceed" class="last1 text-right">
+        <button class="btn" type="submit" id="update-cart" name="checkout">{{ 'cart.general.checkout' | t }}</button>
+       {% comment %} {% if additional_checkout_buttons %}
+        <div id="additional-checkout-buttons">
+          <span id="additional-checkout-buttons-label">{{ 'cart.general.other_checkout' | t }}</span>
+          {{ content_for_additional_checkout_buttons }}
+        </div>
+        {% endif %}   {% endcomment %}                      
+      </div>
+      
+      <div class="note_box">
+  <p><span class="dark">Free shipping:</span> All day, every day</p>
+  <p><span class="dark">Free returns:</span> Send it back to us within 45 days</p>
+  <p><span class="dark">Need help?</span> <span class="blue">Contact our customer assistance specialists.</span></p>
+</div>
+ {% comment %}
+<label class="container-ch">Subcribe to newsletter to access special offer and products updates
+  <input type="checkbox">
+  <span class="checkmark"></span>
+</label>
+       {% endcomment %}
+      
+    </div>
+
+  
+  </form>
+
+  {% include 'shipping-calculator' %}
+
+  {% endif %}
+
+</div>{% include 'wiser_trending' %}{% include 'wiser_recentview' %}{% include 'wiser_newarrivals' %}{% include 'wiser_featured' %}{% include 'wiser_topselling' %}{% include 'wiser_recent_related' %}
+
+<script>
+ jQuery(document).ready(function(){
+    // This button will increment the value
+   $("#cartform").on("click", ".qtyplus", function(e){
+        // Stop acting like a button
+        e.preventDefault();
+        // Get the field name
+        fieldName = $(this).attr('field');
+     	  fieldId = $('input[id='+fieldName+']').attr('variantid');
+     var variantid= parseInt(fieldName.replace("cupdates_", ""));
+        // Get its current value
+        var currentVal = parseInt($('input[id='+fieldName+']').val());
+        // If is not undefined
+        if (!isNaN(currentVal)) {
+            // Increment
+            $('input[id='+fieldName+']').val(currentVal + 1);
+        } else {
+            // Otherwise put a 0 there
+            $('input[id='+fieldName+']').val(0);
+        }
+        // updateDrawer(fieldId,$('input[id='+fieldName+']').val());
+     $(".update-quantities .btn").trigger("click");
+		
+    });
+    // This button will decrement the value till 0
+    $("#cartform").on("click", ".qtyminus", function(e){
+        // Stop acting like a button
+        e.preventDefault();
+        // Get the field name
+     	
+        fieldName = $(this).attr('field');
+       fieldId = $('input[id='+fieldName+']').attr('variantid');
+        // Get its current value
+        var currentVal = parseInt($('input[id='+fieldName+']').val());
+        // If it isn't undefined or its greater than 0
+        if (!isNaN(currentVal) && currentVal > 0) {
+            // Decrement one
+            $('input[id='+fieldName+']').val(currentVal - 1);
+        } else {
+            // Otherwise put a 0 there
+            $('input[id='+fieldName+']').val(0);
+        }
+      	 $(".update-quantities .btn").trigger("click");
+      });	
+});
+  
+
+</script>

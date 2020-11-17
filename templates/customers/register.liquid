@@ -1,0 +1,46 @@
+{% layout settings.customer_layout %}
+
+<div id="page-header" class="col-md-24">
+  <h1 id="page-title">{{ 'customer.register.title' | t }}</h1> 
+</div>
+
+<div id="col-main" class="col-md-24 register-page clearfix">
+
+  {% form 'create_customer' %}
+
+  {% if form.errors %}
+  <div class="alert alert-danger">
+    <button type="button" class="close btooltip" data-toggle="tooltip" data-placement="top" title="Close" data-dismiss="alert">×</button>
+    {{ form.errors | default_errors }}
+  </div>
+  {% endif %}
+
+  <ul id="register-form" class="row list-unstyled">
+    <li id="first_name">
+      <label class="control-label" for="first_name">{{ 'customer.register.first_name' | t }}</label>
+      <input type="text" value="{{ form.first_name }}" name="customer[first_name]" id="first_name" class="form-control" />
+    </li>
+    <li class="clearfix"></li>
+    <li id="last_name">
+      <label class="control-label" for="last_name">{{ 'customer.register.last_name' | t }}</label>
+      <input type="text" value="{{ form.last_name }}" name="customer[last_name]" id="last_name" class="form-control {% if form.errors contains 'last_name' %} error{% endif %}" />
+    </li>
+    <li class="clearfix"></li>
+    <li id="email" class="{% if form.errors contains 'email' %} has-error{% endif %}">
+      <label class="control-label" for="email">{{ 'customer.register.email' | t }} <span class="req">*</span></label>
+      <input type="email" value="{{ form.email }}" name="customer[email]" id="email" class="form-control {% if form.errors contains 'email' %} error{% endif %}" />
+    </li>
+    <li class="clearfix"></li>
+    <li id="password" class="{% if form.errors contains 'password' %} has-error{% endif %}">
+      <label class="control-label" for="password">{{ 'customer.register.password' | t }} <span class="req">*</span></label>
+      <input type="password" value="" name="customer[password]" id="password" class="form-control password{% if form.errors contains 'password' %} error{% endif %}" />
+    </li>
+    <li class="clearfix"></li>
+    
+    <li class="unpadding-top action-last">
+      <button class="btn" type="submit">{{ 'customer.register.submit' | t }}</button>
+    </li>
+  </ul>
+  {% endform %}
+
+</div>

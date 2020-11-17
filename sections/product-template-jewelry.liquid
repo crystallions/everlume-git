@@ -1,0 +1,276 @@
+{% capture language %}{{ request.locale.iso_code }}{% endcapture %}
+{{ 'https://store.jewelry.systems/css/catalog.css' | stylesheet_tag }}
+<style type="text/css">.jewelry-item-selectors .jewelry-metal-selector .jewelry-metals li img,.jewelry-product>.available-variants>span>img,.jewelry-product>.available-variants-hover>span>img{border-radius:0px}#jewelry-product #AddToCart {background-color:#0081A3;color:#FFFFFF}.jewelry-catalog-container .jewelry-products-list .jewelry-row .jewelry-product > h4{color:#555555}.jewelry-catalog-container .jewelry-products-list .jewelry-row .jewelry-product p.jewelry-product-price{color:#0081A3}.jewelry-catalog-container .jewelry-products-list .jewelry-row .jewelry-product p.jewelry-product-price .jewelry-sale{color:#808080}.jewelry-catalog-container .jewelry-products-list .jewelry-row .jewelry-product p.jewelry-product-sku{color:#808080}.jewelry-catalog-container .jewelry-products-list .jewelry-row .jewelry-product p.jewelry-product-barcode{color:#808080}#jewelry-product .jewelry-product-container .jewelry-row .jewelry-col.jewelry-details-container span[itemprop="brand"]{color:#555555}#jewelry-product .jewelry-product-container .jewelry-row .jewelry-col.jewelry-details-container h1[itemprop="name"]{color:#555555}#jewelry-product .jewelry-product-container .jewelry-row .jewelry-col.jewelry-details-container .jewelry-single-price{color:#0081A3}#jewelry-product .jewelry-product-container .jewelry-row .jewelry-col.jewelry-details-container .jewelry-sale-price{color:#808080}#jewelry-product .jewelry-product-container .jewelry-row .jewelry-col.jewelry-details-container .product-description{color:#555}#jewelry-product .jewelry-product-container .jewelry-row .jewelry-col.jewelry-details-container .jewelry-sku{color:#808080}#jewelry-product .jewelry-product-container .jewelry-row .jewelry-col.jewelry-details-container .jewelry-barcode{color:#808080}</style>
+<div id="jewelry-product" data-language="{{ language }}" itemscope itemtype="http://schema.org/Product">
+
+  {% comment %}To replace breadcrumbs part use "jewelry-store-breadcrumbs" snippet.{% endcomment %}
+  {% capture replace %}{% include 'jewelry-store-breadcrumbs' %}{% endcapture %}
+
+  {% if replace contains "Liquid error" %}
+    {% unless template.name == 'index' or template.name == 'cart' %}
+<nav class="breadcrumb" role="navigation" aria-label="breadcrumbs">
+  <a href="/" title="Home">Home</a>
+
+  {% if template.name == 'product' %}
+
+    {% if collection %}
+      <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+      {% if collection.handle %}
+        {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+        {{ collection.title | link_to: url }}
+      {% endif %}
+    {% endif %}
+    <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+    <span>{{ product.title }}</span>
+
+  {% elsif template.name == 'collection' and collection.handle %}
+
+    <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+    {% if current_tags %}
+      {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+      {{ collection.title | link_to: url }}
+      <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+      <span>{{ current_tags | join: " + " }}</span>
+    {% else %}
+      <span>{{ collection.title }}</span>
+    {% endif %}
+
+  {% elsif template.name == 'blog' %}
+
+    <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+    {% if current_tags %}
+      {{ blog.title | link_to: blog.url }}
+      <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+      <span>{{ current_tags | join: " + " }}</span>
+    {% else %}
+    <span>{{ blog.title }}</span>
+    {% endif %}
+
+  {% elsif template.name == 'article' %}
+
+    <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+    {{ blog.title | link_to: blog.url }}
+    <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+    <span>{{ article.title }}</span>
+
+  {% elsif template.name == 'page' %}
+
+   <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+   <span>{{ page.title }}</span>
+
+  {% else %}
+
+   <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+   <span>{{ page_title }}</span>
+
+  {% endif %}
+</nav>
+{% endunless %}
+  {% else %}
+  	{{ replace }}
+  {% endif %}
+
+  <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
+  <meta itemprop="image" content="{{ product.featured_image.src | img_url: 'grande' }}">
+
+  {% assign approved_customer = false %}
+  {% for customer_tag in customer.tags %}
+  {% if customer_tag == 'APPROVED RETAILER' %}
+  {% assign approved_customer = true %}
+  {% endif %}
+  {%endfor%}
+
+  <div class="jewelry-product-container" data-product-id="{{ product.id }}" data-shop="{{ shop.permanent_domain }}">
+    <div class="jewelry-row">
+      <div class="jewelry-col jewelry-media-container">
+        {% comment %}To add custom content here use "jewelry-store-product-images-before" snippet.{% endcomment %}
+        {% capture hook %}{% include 'jewelry-store-product-images-before' %}{% endcapture %}
+
+        {% unless hook contains "Liquid error" %}{{ hook }}{% endunless  %}
+
+        {% comment %}To replace images part use "jewelry-store-product-images" snippet.{% endcomment %}
+        {% capture replace %}{% include 'jewelry-store-product-images' %}{% endcapture %}
+
+        {% if replace contains "Liquid error" %}
+        <div class="jewelry-app-product-images">
+              <div class="ph-item" style="border: none;padding: 0">
+                 <div class="ph-col-12" style="padding-left: 0;padding-right: 0">
+                      <div class="ph-row" style="margin-bottom: 0">
+                           <div class="ph-col-12" style="padding-bottom: 100%"></div>
+                      </div>
+                 </div>
+            </div>
+        </div>
+        {% else %}
+        	{{ replace }}
+        {% endif %}
+
+        {% comment %}To add custom content here use "jewelry-store-product-images-after" snippet.{% endcomment %}
+        {% capture hook %}{% include 'jewelry-store-product-images-after' %}{% endcapture %}
+
+        {% unless hook contains "Liquid error" %}{{ hook }}{% endunless  %}
+      </div>
+      <div class="jewelry-col jewelry-details-container">
+        <div class="jewelry-sticky-details">
+            {% comment %}To add custom content here use "jewelry-store-product-vendor-before" snippet.{% endcomment %}
+            {% capture hook %}{% include 'jewelry-store-product-vendor-before' %}{% endcapture %}
+            {% unless hook contains "Liquid error" %}{{ hook }}{% endunless %}
+            <span class="h3" itemprop="brand">{{ product.vendor }}</span>
+            {% comment %}To add custom content here use "jewelry-store-product-vendor-after" snippet.{% endcomment %}
+            {% capture hook %}{% include 'jewelry-store-product-vendor-after' %}{% endcapture %}
+            {% unless hook contains "Liquid error" %}{{ hook }}{% endunless  %}
+            {% comment %}To add custom content here use "jewelry-store-product-title-before" snippet.{% endcomment %}
+            {% capture hook %}{% include 'jewelry-store-product-title-before' %}{% endcapture %}
+            {% unless hook contains "Liquid error" %}{{ hook }}{% endunless  %}
+            <h1 itemprop="name">{{ product.title }}</h1>
+            {% comment %}To add custom content here use "jewelry-store-product-title-after" snippet.{% endcomment %}
+            {% capture hook %}{% include 'jewelry-store-product-title-after' %}{% endcapture %}
+            {% unless hook contains "Liquid error" %}{{ hook }}{% endunless  %}
+
+
+            <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+              {% assign variant = product.selected_or_first_available_variant %}
+
+              <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+              <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
+
+              <div class="product-single__prices">
+                {% comment %}To add custom content here use "jewelry-store-product-price-before" snippet.{% endcomment %}
+                {% capture hook %}{% include 'jewelry-store-product-price-before' %}{% endcapture %}
+                {% unless hook contains "Liquid error" %}{{ hook }}{% endunless  %}
+                
+                <span id="JewelryProductPrice" class="jewelry-single-price" itemprop="price" content="{{ product.price | divided_by: 100.00 }}" style="display:none;">
+                  {{ product.price | money }}
+                </span>
+    
+                {% if product.compare_at_price > product.price %}
+                  <s id="JewelrySalePrice" class="jewelry-sale-price" style="display:none">
+                    {{ product.compare_at_price_max | money }}
+                  </s>
+                {% endif %}
+                {% comment %}To add custom content here use "jewelry-store-product-price-after" snippet.{% endcomment %}
+                {% capture hook %}{% include 'jewelry-store-product-price-after' %}{% endcapture %}
+                {% unless hook contains "Liquid error" %}{{ hook }}{% endunless  %}
+              </div>
+
+              <form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm">
+                {% comment %}To add custom content here use "jewelry-store-product-selectors-before" snippet.{% endcomment %}
+                {% capture hook %}{% include 'jewelry-store-product-selectors-before' %}{% endcapture %}
+                {% unless hook contains "Liquid error" %}{{ hook }}{% endunless  %}
+
+                <div class="jewelry-item-selectors" data-product-id="{{ product.id }}" data-shop="{{shop.permanent_domain}}">
+                  <div class="ph-item" style="border: none;margin-bottom: 20px;padding: 0;">
+                       <div class="ph-col-12" style="padding-left: 0;padding-right: 0">
+                            <div class="ph-row" style="margin-bottom: 20px">
+                                 <div class="ph-col-8" style="height: 15px;"></div><div class="ph-col-12" style="height: 25px;"></div>
+                            </div>
+                            <div class="ph-row" style="margin-bottom: 0">
+                                 <div class="ph-col-8" style="height: 15px;"></div><div class="ph-col-12" style="height: 25px;"></div>
+                            </div>
+                       </div>
+                  </div>
+                </div>
+
+                {% comment %}To add custom content here use "jewelry-store-product-selectors-after" snippet.{% endcomment %}
+                {% capture hook %}{% include 'jewelry-store-product-selectors-after' %}{% endcapture %}
+                {% unless hook contains "Liquid error" %}{{ hook }}{% endunless  %}
+
+                <select name="id" id="productSelect" class="product-single__variants">
+                  {% for variant in product.variants %}
+                    {% if variant.available %}
+                      <option data-inventory-policy="{{ variant.inventory_policy }}" data-inventory-quantity="{{ variant.inventory_quantity }}" data-price="{{ variant.price | money }}" data-compare-at-price="{{ variant.compare_at_price | money }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" data-barcode="{{ variant.barcode }}" value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | times : 1.00 | money_with_currency }}</option>
+                    {% else %}
+                      <option data-inventory-policy="{{ variant.inventory_policy }}" data-inventory-quantity="{{ variant.inventory_quantity }}" data-price="{{ variant.price | money }}" data-compare-at-price="{{ variant.compare_at_price | money }}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" data-barcode="{{ variant.barcode }}" value="{{ variant.id }}" disabled="disabled">
+                        {{ variant.title }} - Sold out
+                      </option>
+                    {% endif %}
+                  {% endfor %}
+                </select>
+
+                {% comment %}To add custom content here use "jewelry-store-product-addtocart-before" snippet.{% endcomment %}
+                {% capture hook %}{% include 'jewelry-store-product-addtocart-before' %}{% endcapture %}
+                {% unless hook contains "Liquid error" %}{{ hook }}{% endunless  %}
+
+                
+                <div class="product-single__quantity" style="display:none">
+                  <label for="Quantity">{{ 'products.product.quantity' | t }}</label>
+                  <input type="number" id="Quantity" name="quantity" value="1" min="1" class="quantity-selector">
+                </div>
+    
+                <button type="submit" name="add" id="AddToCart" class="btn" style="display: none">
+                  <span id="AddToCartText">Add to cart</span>
+                  <span id="SpecialOrderText" style="display:none;">Special order</span>
+                  <span id="SoldOutText" style="display:none;">Sold out</span>
+                </button>
+
+                {% comment %}To add custom content here use "jewelry-store-product-addtocart-after" snippet.{% endcomment %}
+                {% capture hook %}{% include 'jewelry-store-product-addtocart-after' %}{% endcapture %}
+                {% unless hook contains "Liquid error" %}{{ hook }}{% endunless  %}
+              </form>
+
+                          {% comment %}To add custom content here use "jewelry-store-product-description-before" snippet.{% endcomment %}
+            {% capture hook %}{% include 'jewelry-store-product-description-before' %}{% endcapture %}
+            {% unless hook contains "Liquid error" %}{{ hook }}{% endunless  %}
+<div class="product-description rte" itemprop="description">{{ product.description }}</div>
+            {% comment %}To add custom content here use "jewelry-store-product-description-after" snippet.{% endcomment %}
+            {% capture hook %}{% include 'jewelry-store-product-description-after' %}{% endcapture %}
+            {% unless hook contains "Liquid error" %}{{ hook }}{% endunless  %}
+            {% comment %}To add custom content here use "jewelry-store-product-sku-before" snippet.{% endcomment %}
+            {% capture hook %}{% include 'jewelry-store-product-sku-before' %}{% endcapture %}
+            {% unless hook contains "Liquid error" %}{{ hook }}{% endunless  %}
+<span class="jewelry-sku" data-before="SKU: "></span>
+            {% comment %}To add custom content here use "jewelry-store-product-sku-after" snippet.{% endcomment %}
+            {% capture hook %}{% include 'jewelry-store-product-sku-after' %}{% endcapture %}
+            {% unless hook contains "Liquid error" %}{{ hook }}{% endunless  %}
+            {% comment %}To add custom content here use "jewelry-store-product-barcode-before" snippet.{% endcomment %}
+            {% capture hook %}{% include 'jewelry-store-product-barcode-before' %}{% endcapture %}
+            {% unless hook contains "Liquid error" %}{{ hook }}{% endunless  %}
+<span class="jewelry-barcode" data-before="Barcode: "></span>            {% comment %}To add custom content here use "jewelry-store-product-barcode-after" snippet.{% endcomment %}
+            {% capture hook %}{% include 'jewelry-store-product-barcode-after' %}{% endcapture %}
+            {% unless hook contains "Liquid error" %}{{ hook }}{% endunless  %}
+{% capture permalinkURL %}{{ shop.url }}{{ product.url }}{% endcapture %}{% capture shareTitle %}{{ product.title | url_param_escape }}{% endcapture %}            {% comment %}To add custom content here use "jewelry-store-product-social-before" snippet.{% endcomment %}
+            {% capture hook %}{% include 'jewelry-store-product-social-before' %}{% endcapture %}
+            {% unless hook contains "Liquid error" %}{{ hook }}{% endunless  %}
+<div class="jewelry-social-sharing" data-permalink="{{ permalinkURL }}"><a target="_blank" href="//www.facebook.com/sharer.php?u={{ permalinkURL }}" class="jewelry-share-facebook"></a><a target="_blank" href="//twitter.com/share?text={{ shareTitle }}&amp;url={{ permalinkURL }}" class="jewelry-share-twitter"></a>{% if product.featured_image or article.image %}<a target="_blank" href="//pinterest.com/pin/create/button/?url={{ permalinkURL }}&amp;media=http:{% if template.name == 'product' %}{{ product | img_url: '1024x1024' }}{% else %}{{ article | img_url: '1024x1024' }}{% endif %}&amp;description={{ shareTitle }}" class="jewelry-share-pinterest"></a>{% endif %}<a target="_blank" href="mailto:?Subject=Check%20this%20Jewelry&amp;Body=Hi,%0A%0AI%20think%20this%20jewelry%20is%20for%20you:%0A%0A{{ shareTitle }}%0A{{ permalinkURL }}" class="jewelry-share-email"></a></div>            {% comment %}To add custom content here use "jewelry-store-product-social-after" snippet.{% endcomment %}
+            {% capture hook %}{% include 'jewelry-store-product-social-after' %}{% endcapture %}
+            {% unless hook contains "Liquid error" %}{{ hook }}{% endunless  %}
+            {% comment %}To add custom content here use "jewelry-store-product-details-before" snippet.{% endcomment %}
+            {% capture hook %}{% include 'jewelry-store-product-details-before' %}{% endcapture %}
+            {% unless hook contains "Liquid error" %}{{ hook }}{% endunless  %}
+<div class="jewelry-item-details" data-product-id="{{ product.id }}" data-shop="{{shop.permanent_domain}}"></div>            {% comment %}To add custom content here use "jewelry-store-product-details-after" snippet.{% endcomment %}
+            {% capture hook %}{% include 'jewelry-store-product-details-after' %}{% endcapture %}
+            {% unless hook contains "Liquid error" %}{{ hook }}{% endunless  %}
+
+
+            </div>
+
+        </div>
+      </div>
+    </div>
+
+    {% comment %}To replace images part use "jewelry-store-product-related" snippet.{% endcomment %}
+    {% capture replace %}{% include 'jewelry-store-product-related' %}{% endcapture %}
+
+    {% if replace contains "Liquid error" %}
+                {% comment %}To add custom content here use "jewelry-store-product-related-before" snippet.{% endcomment %}
+            {% capture hook %}{% include 'jewelry-store-product-related-before' %}{% endcapture %}
+            {% unless hook contains "Liquid error" %}{{ hook }}{% endunless  %}
+{% assign number_of_products = 4 %}{% assign number_of_products_to_fetch = number_of_products | plus: 1 %}{% if collection == null or collection.handle == 'frontpage' or collection.handle == 'all' %}{% assign found_a_collection = false %}{% for c in product.collections %}{% if found_a_collection == false and c.handle != 'frontpage' and c.handle != 'all' and c.all_products_count > 1 %}{% assign found_a_collection = true %}{% assign collection = c %}{% endif %}{% endfor %}{% endif %}{% if collection and collection.products_count > 1 %}<div class="jewelry-row"><div class="jewelry-related-products"><h4>You might also like</h4><div class="jewelry-related-products-list">{% assign current_product = product %}{% assign current_product_found = false %}{% for product in collection.products limit: number_of_products_to_fetch %}{% if product.handle == current_product.handle %}{% assign current_product_found = true %}{% else %}{% unless current_product_found == false and forloop.last %}<div class="jewelry-product" data-id="{{ product.id }}"><div class="ph-item" style="padding: 0;border: 0;"><div class="ph-col-12" style="padding: 0;"><div class="ph-picture"></div><div class="ph-row"><div class="ph-col-6 big"></div><div class="ph-col-4 empty big"></div><div class="ph-col-2 big"></div><div class="ph-col-4"></div><div class="ph-col-8 empty"></div><div class="ph-col-6"></div><div class="ph-col-6 empty"></div><div class="ph-col-12"></div></div></div></div></div>{% endunless %}{% endif %}{% endfor %}</div></div></div>{% endif %}            {% comment %}To add custom content here use "jewelry-store-product-related-after" snippet.{% endcomment %}
+            {% capture hook %}{% include 'jewelry-store-product-related-after' %}{% endcapture %}
+            {% unless hook contains "Liquid error" %}{{ hook }}{% endunless  %}
+
+    {% else %}
+    	{{ replace }}
+    {% endif %}
+
+  </div>
+
+
+</div>
+<script src="https://store.jewelry.systems/js/product.js?shop={{ shop.permanent_domain }}&t=1603779803" type="text/javascript"></script>
+
+{% unless product == empty %}
+  <script type="application/json" id="ProductJson-{{ section.id }}">
+    {{ product | json }}
+  </script>
+{% endunless %}

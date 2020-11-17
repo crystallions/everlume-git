@@ -1,0 +1,396 @@
+{% comment %}
+  This file can be overwritten at any moment
+{% endcomment %}
+{% capture language %}{{ request.locale.iso_code }}{% endcapture %}
+{% assign approved_customer = false %}
+{% for customer_tag in customer.tags %}
+{% if customer_tag == 'APPROVED RETAILER' %}
+{% assign approved_customer = true %}
+{% endif %}
+{%endfor%}
+
+<link rel="stylesheet" href="https://store.jewelry.systems/css/catalog.css" />
+<style type="text/css">.jewelry-item-selectors .jewelry-metal-selector .jewelry-metals li img,.jewelry-product>.available-variants>span>img,.jewelry-product>.available-variants-hover>span>img{border-radius:0px}#jewelry-product #AddToCart {background-color:#0081A3;color:#FFFFFF}.jewelry-catalog-container .jewelry-products-list .jewelry-row .jewelry-product > h4{color:#555555}.jewelry-catalog-container .jewelry-products-list .jewelry-row .jewelry-product p.jewelry-product-price{color:#0081A3}.jewelry-catalog-container .jewelry-products-list .jewelry-row .jewelry-product p.jewelry-product-price .jewelry-sale{color:#808080}.jewelry-catalog-container .jewelry-products-list .jewelry-row .jewelry-product p.jewelry-product-sku{color:#808080}.jewelry-catalog-container .jewelry-products-list .jewelry-row .jewelry-product p.jewelry-product-barcode{color:#808080}#jewelry-product .jewelry-product-container .jewelry-row .jewelry-col.jewelry-details-container span[itemprop="brand"]{color:#555555}#jewelry-product .jewelry-product-container .jewelry-row .jewelry-col.jewelry-details-container h1[itemprop="name"]{color:#555555}#jewelry-product .jewelry-product-container .jewelry-row .jewelry-col.jewelry-details-container .jewelry-single-price{color:#0081A3}#jewelry-product .jewelry-product-container .jewelry-row .jewelry-col.jewelry-details-container .jewelry-sale-price{color:#808080}#jewelry-product .jewelry-product-container .jewelry-row .jewelry-col.jewelry-details-container .product-description{color:#555}#jewelry-product .jewelry-product-container .jewelry-row .jewelry-col.jewelry-details-container .jewelry-sku{color:#808080}#jewelry-product .jewelry-product-container .jewelry-row .jewelry-col.jewelry-details-container .jewelry-barcode{color:#808080}</style>
+<div class="jewelry-catalog-container" data-language="{{ language }}" data-ac="{{ approved_customer }}" data-search="{{ search.terms | escape }}" data-money-format="{{ shop.money_format }}" data-collection-id="{{ collection.id }}" data-shop="{{ shop.permanent_domain }}">
+
+    {% comment %}To replace breadcrumbs part use "jewelry-solution-breadcrumbs" snippet.{% endcomment %}
+    {% capture replace %}{% include 'jewelry-solution-breadcrumbs' %}{% endcapture %}
+
+    {% if replace contains "Liquid error" %}
+      {% unless template.name == 'index' or template.name == 'cart' %}
+<nav class="breadcrumb" role="navigation" aria-label="breadcrumbs">
+  <a href="/" title="Home">Home</a>
+
+  {% if template.name == 'product' %}
+
+    {% if collection %}
+      <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+      {% if collection.handle %}
+        {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+        {{ collection.title | link_to: url }}
+      {% endif %}
+    {% endif %}
+    <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+    <span>{{ product.title }}</span>
+
+  {% elsif template.name == 'collection' and collection.handle %}
+
+    <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+    {% if current_tags %}
+      {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+      {{ collection.title | link_to: url }}
+      <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+      <span>{{ current_tags | join: " + " }}</span>
+    {% else %}
+      <span>{{ collection.title }}</span>
+    {% endif %}
+
+  {% elsif template.name == 'blog' %}
+
+    <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+    {% if current_tags %}
+      {{ blog.title | link_to: blog.url }}
+      <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+      <span>{{ current_tags | join: " + " }}</span>
+    {% else %}
+    <span>{{ blog.title }}</span>
+    {% endif %}
+
+  {% elsif template.name == 'article' %}
+
+    <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+    {{ blog.title | link_to: blog.url }}
+    <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+    <span>{{ article.title }}</span>
+
+  {% elsif template.name == 'page' %}
+
+   <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+   <span>{{ page.title }}</span>
+
+  {% else %}
+
+   <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+   <span>{{ page_title }}</span>
+
+  {% endif %}
+</nav>
+{% endunless %}
+    {% else %}
+    	{{ replace }}
+    {% endif %}
+
+
+    <div class="jewelry-header">
+        <h1>{{ collection.title }}</h1>
+    </div>
+
+    {% if collection.description != blank %}
+    <div class="jewelry-description">
+        {{ collection.description }}
+    </div>
+    {% endif %}
+
+    <button id="jewelry-show-filter-mobile">Filters</button>
+    <div class="jewelry-sidebar ">
+        <form id="jewelry-catalog-filter-form">
+            <div class="jewelry-filters cols-4">
+                <div class="jewelry-filter">
+                    <div class="ph-item" style="border: none;padding: 0">
+                        <div class="ph-col-12" style="padding-left: 0;padding-right: 0">
+                            <div class="ph-row" style="margin-bottom: 0">
+                                <div class="ph-col-12" style="height: 35px"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div><div class="jewelry-filter">
+                <div class="ph-item" style="border: none;padding: 0">
+                    <div class="ph-col-12" style="padding-left: 0;padding-right: 0">
+                        <div class="ph-row" style="margin-bottom: 0">
+                            <div class="ph-col-12" style="height: 35px"></div>
+                        </div>
+                    </div>
+                </div>
+                </div><div class="jewelry-filter">
+                    <div class="ph-item" style="border: none;padding: 0">
+                        <div class="ph-col-12" style="padding-left: 0;padding-right: 0">
+                            <div class="ph-row" style="margin-bottom: 0">
+                                <div class="ph-col-12" style="height: 35px"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div><div class="jewelry-filter">
+                    <div class="ph-item" style="border: none;padding: 0">
+                        <div class="ph-col-12" style="padding-left: 0;padding-right: 0">
+                            <div class="ph-row" style="margin-bottom: 0">
+                                <div class="ph-col-12" style="height: 35px"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="jewelry-filter">
+                    <div class="ph-item" style="border: none;padding: 0">
+                        <div class="ph-col-12" style="padding-left: 0;padding-right: 0">
+                            <div class="ph-row" style="margin-bottom: 0">
+                                <div class="ph-col-12" style="height: 35px"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div><div class="jewelry-filter">
+                <div class="ph-item" style="border: none;padding: 0">
+                    <div class="ph-col-12" style="padding-left: 0;padding-right: 0">
+                        <div class="ph-row" style="margin-bottom: 0">
+                            <div class="ph-col-12" style="height: 35px"></div>
+                        </div>
+                    </div>
+                </div>
+                </div><div class="jewelry-filter">
+                    <div class="ph-item" style="border: none;padding: 0">
+                        <div class="ph-col-12" style="padding-left: 0;padding-right: 0">
+                            <div class="ph-row" style="margin-bottom: 0">
+                                <div class="ph-col-12" style="height: 35px"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div><div class="jewelry-filter">
+                    <div class="ph-item" style="border: none;padding: 0">
+                        <div class="ph-col-12" style="padding-left: 0;padding-right: 0">
+                            <div class="ph-row" style="margin-bottom: 0">
+                                <div class="ph-col-12" style="height: 35px"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="jewelry-content">
+            <div class="jewelry-filters-select">
+      <label for="jewelry-select-by">Sort by:</label>
+      <select id="jewelry-select-by" name="order">
+        <option value="featured">Featured</option>
+        <option value="date_new">Date: new to old</option>
+        <option value="date_old">Date: old to new</option>
+        <option value="title_az">Title: A-Z</option>
+        <option value="title_za">Title: Z-A</option>
+        <option value="price_low">Price: low to high</option>
+        <option value="price_high">Price: high to low</option>
+      </select>
+</div>
+            <div class="jewelry-filters-applied">
+                <div class="jewelry-current-filter-status">
+                  <div class="ph-item" style="padding: 0;border: 0;">
+                         <div class="ph-col-4" style="padding: 0;">
+                               <div class="ph-row">
+                                    <div class="ph-col-12" style="height:20px;"></div>
+                               </div>
+                         </div>
+                   </div>
+              </div>
+              <div class="clearfix"></div>
+              <ul class="jewelry-current-filters-enabled"></ul>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="jewelry-products-list">
+            <div class="jewelry-products-list-preloading">
+                <div class="jewelry-row jewelry-columns-4"><div class="jewelry-product">
+                        <div class="ph-item" style="padding: 0;border: 0;">
+                            <div class="ph-col-12" style="padding: 0;">
+                                <div class="ph-picture"></div>
+                                <div class="ph-row">
+                                    <div class="ph-col-6 big"></div>
+                                    <div class="ph-col-4 empty big"></div>
+                                    <div class="ph-col-2 big"></div>
+                                    <div class="ph-col-4"></div>
+                                    <div class="ph-col-8 empty"></div>
+                                    <div class="ph-col-6"></div>
+                                    <div class="ph-col-6 empty"></div>
+                                    <div class="ph-col-12"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><div class="jewelry-product">
+                        <div class="ph-item" style="padding: 0;border: 0;">
+                            <div class="ph-col-12" style="padding: 0;">
+                                <div class="ph-picture"></div>
+                                <div class="ph-row">
+                                    <div class="ph-col-6 big"></div>
+                                    <div class="ph-col-4 empty big"></div>
+                                    <div class="ph-col-2 big"></div>
+                                    <div class="ph-col-4"></div>
+                                    <div class="ph-col-8 empty"></div>
+                                    <div class="ph-col-6"></div>
+                                    <div class="ph-col-6 empty"></div>
+                                    <div class="ph-col-12"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><div class="jewelry-product">
+                        <div class="ph-item" style="padding: 0;border: 0;">
+                            <div class="ph-col-12" style="padding: 0;">
+                                <div class="ph-picture"></div>
+                                <div class="ph-row">
+                                    <div class="ph-col-6 big"></div>
+                                    <div class="ph-col-4 empty big"></div>
+                                    <div class="ph-col-2 big"></div>
+                                    <div class="ph-col-4"></div>
+                                    <div class="ph-col-8 empty"></div>
+                                    <div class="ph-col-6"></div>
+                                    <div class="ph-col-6 empty"></div>
+                                    <div class="ph-col-12"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><div class="jewelry-product">
+                        <div class="ph-item" style="padding: 0;border: 0;">
+                            <div class="ph-col-12" style="padding: 0;">
+                                <div class="ph-picture"></div>
+                                <div class="ph-row">
+                                    <div class="ph-col-6 big"></div>
+                                    <div class="ph-col-4 empty big"></div>
+                                    <div class="ph-col-2 big"></div>
+                                    <div class="ph-col-4"></div>
+                                    <div class="ph-col-8 empty"></div>
+                                    <div class="ph-col-6"></div>
+                                    <div class="ph-col-6 empty"></div>
+                                    <div class="ph-col-12"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><div class="jewelry-product">
+                        <div class="ph-item" style="padding: 0;border: 0;">
+                            <div class="ph-col-12" style="padding: 0;">
+                                <div class="ph-picture"></div>
+                                <div class="ph-row">
+                                    <div class="ph-col-6 big"></div>
+                                    <div class="ph-col-4 empty big"></div>
+                                    <div class="ph-col-2 big"></div>
+                                    <div class="ph-col-4"></div>
+                                    <div class="ph-col-8 empty"></div>
+                                    <div class="ph-col-6"></div>
+                                    <div class="ph-col-6 empty"></div>
+                                    <div class="ph-col-12"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><div class="jewelry-product">
+                        <div class="ph-item" style="padding: 0;border: 0;">
+                            <div class="ph-col-12" style="padding: 0;">
+                                <div class="ph-picture"></div>
+                                <div class="ph-row">
+                                    <div class="ph-col-6 big"></div>
+                                    <div class="ph-col-4 empty big"></div>
+                                    <div class="ph-col-2 big"></div>
+                                    <div class="ph-col-4"></div>
+                                    <div class="ph-col-8 empty"></div>
+                                    <div class="ph-col-6"></div>
+                                    <div class="ph-col-6 empty"></div>
+                                    <div class="ph-col-12"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><div class="jewelry-product">
+                        <div class="ph-item" style="padding: 0;border: 0;">
+                            <div class="ph-col-12" style="padding: 0;">
+                                <div class="ph-picture"></div>
+                                <div class="ph-row">
+                                    <div class="ph-col-6 big"></div>
+                                    <div class="ph-col-4 empty big"></div>
+                                    <div class="ph-col-2 big"></div>
+                                    <div class="ph-col-4"></div>
+                                    <div class="ph-col-8 empty"></div>
+                                    <div class="ph-col-6"></div>
+                                    <div class="ph-col-6 empty"></div>
+                                    <div class="ph-col-12"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><div class="jewelry-product">
+                        <div class="ph-item" style="padding: 0;border: 0;">
+                            <div class="ph-col-12" style="padding: 0;">
+                                <div class="ph-picture"></div>
+                                <div class="ph-row">
+                                    <div class="ph-col-6 big"></div>
+                                    <div class="ph-col-4 empty big"></div>
+                                    <div class="ph-col-2 big"></div>
+                                    <div class="ph-col-4"></div>
+                                    <div class="ph-col-8 empty"></div>
+                                    <div class="ph-col-6"></div>
+                                    <div class="ph-col-6 empty"></div>
+                                    <div class="ph-col-12"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><div class="jewelry-product">
+                        <div class="ph-item" style="padding: 0;border: 0;">
+                            <div class="ph-col-12" style="padding: 0;">
+                                <div class="ph-picture"></div>
+                                <div class="ph-row">
+                                    <div class="ph-col-6 big"></div>
+                                    <div class="ph-col-4 empty big"></div>
+                                    <div class="ph-col-2 big"></div>
+                                    <div class="ph-col-4"></div>
+                                    <div class="ph-col-8 empty"></div>
+                                    <div class="ph-col-6"></div>
+                                    <div class="ph-col-6 empty"></div>
+                                    <div class="ph-col-12"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><div class="jewelry-product">
+                        <div class="ph-item" style="padding: 0;border: 0;">
+                            <div class="ph-col-12" style="padding: 0;">
+                                <div class="ph-picture"></div>
+                                <div class="ph-row">
+                                    <div class="ph-col-6 big"></div>
+                                    <div class="ph-col-4 empty big"></div>
+                                    <div class="ph-col-2 big"></div>
+                                    <div class="ph-col-4"></div>
+                                    <div class="ph-col-8 empty"></div>
+                                    <div class="ph-col-6"></div>
+                                    <div class="ph-col-6 empty"></div>
+                                    <div class="ph-col-12"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><div class="jewelry-product">
+                        <div class="ph-item" style="padding: 0;border: 0;">
+                            <div class="ph-col-12" style="padding: 0;">
+                                <div class="ph-picture"></div>
+                                <div class="ph-row">
+                                    <div class="ph-col-6 big"></div>
+                                    <div class="ph-col-4 empty big"></div>
+                                    <div class="ph-col-2 big"></div>
+                                    <div class="ph-col-4"></div>
+                                    <div class="ph-col-8 empty"></div>
+                                    <div class="ph-col-6"></div>
+                                    <div class="ph-col-6 empty"></div>
+                                    <div class="ph-col-12"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><div class="jewelry-product">
+                        <div class="ph-item" style="padding: 0;border: 0;">
+                            <div class="ph-col-12" style="padding: 0;">
+                                <div class="ph-picture"></div>
+                                <div class="ph-row">
+                                    <div class="ph-col-6 big"></div>
+                                    <div class="ph-col-4 empty big"></div>
+                                    <div class="ph-col-2 big"></div>
+                                    <div class="ph-col-4"></div>
+                                    <div class="ph-col-8 empty"></div>
+                                    <div class="ph-col-6"></div>
+                                    <div class="ph-col-6 empty"></div>
+                                    <div class="ph-col-12"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://store.jewelry.systems/js/catalog.js?shop={{ shop.permanent_domain }}&language={{ language }}&t=1603779805" type="text/javascript"></script>

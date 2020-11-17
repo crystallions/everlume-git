@@ -1,0 +1,202 @@
+
+{% comment %}<div id="page-header" class="col-md-24">
+  <h1 id="page-title" class="large">{{ 'blogs.article.title' | t }}</h1>
+</div>
+{% endcomment %}
+
+{% assign layout = "col-sm-24 col-md-24" %}
+{% if settings.blog_post_layout == "left" or settings.blog_post_layout == "right" or article.title == "sample blog post with left slidebar" %}
+  {% capture layout %}col-xs-24 col-sm-24{% endcapture %}
+{% endif %}
+{% if article.title == "sample blog post full width" or settings.blog_post_layout == "full" %}
+  {% capture layout %}col-xs-24 col-sm-24{% endcapture %}
+{% endif %}
+{% paginate article.comments by settings.comment_pagination_limit %}
+<div id="col-main" class="blog article-page {{layout}} {% if settings.blog_post_layout == "left" or article.title == "sample blog post with left slidebar" %}have-left-slidebar{% endif %}">
+  <div class="article">
+    <article class="blogs-item">
+
+      <div class="row">
+        <div class="article-content col-md-24">
+          <div class="blogs-image article-main">
+            <img src="{{article.image | img_url: 'master'}}" alt="" />
+          </div>
+          
+             
+            
+          <div class="blog-header">
+           {% comment %} <div class="date"><p><small>{{ article.published_at | date: "%B" }}</small><span>{{ article.published_at | date: "%d" }}</span></p></div>  {% endcomment %} 
+            <h2 class="blog-cat">{{ blog.title }}</h2>
+            <h4 class="blog-title">{{ article.title }}</h4>            
+          </div>
+         
+          <div class="share-section">
+          {% include "social-buttons"  %}
+</div>
+
+          <div class="intro">{{ article.content }}</div>
+	{% comment %}
+          <footer class="article-extras clearfix">
+
+            <ul class="post list-inline">
+              <li class="author">{{ article.author }}</li>
+              <li>/</li>
+              <li class="comment">
+                <a href="{{article.url}}#comments">
+                  <span>{{ article.comments_count }}</span> {{ article.comments_count | pluralize: 'Comment', 'Commen(s)' }}
+                </a>
+              </li>
+              <li class="post-action hidden-xs">
+                {% if blog.previous_article  %}
+                <a class="btn btn-prev{% if blog.next_article %} br{% endif %}" href="{{ blog.previous_article  }}" title="{{ 'blogs.article.prev' | t }}"><i class="fa fa-chevron-left"></i></a>
+                {% endif %}
+
+                {% if blog.next_article %}
+                <a class="btn btn-next" href="{{ blog.next_article }}" title="{{ 'blogs.article.next' | t }}"><i class="fa fa-chevron-right"></i></a>
+                {% endif %} 
+              </li>
+            </ul>
+
+          </footer>
+          {% endcomment %}
+
+          {% if blog.comments_enabled? %}
+
+          {% form article %}
+          <div id="comment-form" class="comments">
+            <h6 class="general-title">{{ 'blogs.comments.form_title' | t }}</h6>
+            {% if blog.moderated? %}
+            <p class="notice">{{ 'blogs.comments.moderated' | t }}</p>
+            {% endif %}
+
+            {% if form.posted_successfully? %}
+            {% if blog.moderated? %}
+            <div class="alert alert-success">
+              <button type="button" class="close btooltip" data-toggle="tooltip" data-placement="top" title="Close" data-dismiss="alert">×</button>
+              <ul>
+                <li>{{ 'blogs.comments.success_moderated' | t }}.</li>
+              </ul>
+            </div>
+            {% else %}
+            <div class="alert alert-success">
+              <button type="button" class="close btooltip" data-toggle="tooltip" data-placement="top" title="Close" data-dismiss="alert">×</button>
+              <ul>
+                <li>{{ 'blogs.comments.success' | t }}</li>
+              </ul>
+            </div>
+            {% endif %}
+            {% endif %}
+
+            {% if form.errors %}
+            <div class="alert alert-danger">
+              <button type="button" class="close btooltip" data-toggle="tooltip" data-placement="top" title="Close" data-dismiss="alert">×</button>
+              <p class="subtext error">{{ 'blogs.comments.error' | t }}</p>
+            </div>
+            {% endif %}
+
+            <ul class="contact-form row list-unstyled">
+              <li class="col-md-24{% if form.errors contains 'author' %} has-error{% endif %}">
+                <label for="comment_author" class="control-label">{{ 'blogs.comments.name' | t }} <span class="req">*</span></label>
+                <input type="text" id="comment_author" name="comment[author]" value="{% if form.author %}{{ form.author }}{% elsif customer %}{{ customer.first_name }} {{ customer.last_name }}{% endif %}" class="form-control" />
+              </li>
+              <li class="clearfix"></li>
+              <li class="col-md-24{% if form.errors contains 'email' %} has-error{% endif %}">
+                <label for="comment_email" class="control-label">{{ 'blogs.comments.email' | t }} <span class="req">*</span></label>
+                <input type="text" id="comment_email" name="comment[email]" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" class="form-control" />
+              </li>
+              <li class="clearfix"></li>
+              <li class="col-md-24{% if form.errors contains 'body' %} has-error{% endif %}">
+                <label for="comment_body" class="control-label">{{ 'blogs.comments.message' | t }} <span class="req">*</span></label>
+                <textarea id="comment_body" name="comment[body]" cols="40" rows="5" class="form-control">{{form.body}}</textarea>
+              </li>
+              <li class="clearfix"></li>
+              <li class="col-md-24 unpadding-top unpadding-bottom">
+                <button type="submit" id="comment-submit" class="btn btn-1 unmargin">{{ 'blogs.comments.post' | t }}</button>
+              </li>
+            </ul>
+          </div>
+          {% endform %}
+
+        </div>
+      </div>
+    </article>
+  </div>
+
+  {% if article.comments != blank %}
+
+  <div id="comments" class="comments">
+    <h6 class="title-comment">Comments ({{ article.comments_count }})</h6>
+    {% comment %} Loop through approved comments: {% endcomment %}        
+    {% for comment in article.comments %}
+    {% include 'comment-template' %}
+    {% endfor %}  
+
+    {% comment %} Show a comment that was *just* submitted {% endcomment %}
+    {% if comment and comment.created_at %}
+    {% include 'comment-template' %}
+    {% endif %}       
+
+    {% include 'pagination' %}
+
+  </div>
+  {% endif %}
+
+  {% endif %}
+
+</div>
+{% endpaginate %}
+
+
+{% if settings.blog_sidebar_show %}
+  {% if settings.blog_post_layout == "left" or article.title == "sample blog post with left slidebar" %}
+    <div class="col-xs-24 col-sm-6 sidebar left-slidebar">
+      {% include 'sidebar-blog' %}
+    </div>
+  {% endif %}
+{% endif %}
+
+{% if settings.blog_sidebar_show %}
+  {% if settings.blog_post_layout == "right" %}
+    {% if article.title != "sample blog post with left slidebar" and article.title != "sample blog post full width" %}
+    <div class="col-xs-24 col-sm-6 sidebar left-slidebar">
+      {% include 'sidebar-blog' %}
+    </div>
+    {% endif %}
+  {% endif %}
+{% endif %}
+
+<div class="evm-featured-collections-product"></div>
+{% comment %}
+<div class="insta-title">
+  <h3>See How Other Are <br> Wearing it</h3>
+</div>
+<div id="insta-feed"></div>
+{% endcomment %}
+
+{% if settings.bl_banner_show %}
+  <div class="home-banner-wrapper blog-banner-wrapper col-xs-24 col-sm-24  col-md-24">
+
+    <div class="container">
+      <div id="home-banner" class="text-center clearfix">
+        {% if settings.bl_banne_caption %}
+       <div class="home-banner-caption">
+          <p>{{settings.bl_banne_caption}}</p>
+        </div>
+        {% endif %}
+        
+          {% if settings.bl_banne_caption_small %}
+       <div class="home-banner-caption-small">
+          <p>{{settings.bl_banne_caption_small}}</p>
+        </div>
+        {% endif %}
+
+        {% if settings.bl_banner_action %}
+        <div class="home-banner-action">
+          <a href="{{ settings.bl_banner_link }}">{{settings.bl_banner_action}}</a>
+        </div>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+  {% endif %}

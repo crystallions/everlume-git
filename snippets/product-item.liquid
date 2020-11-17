@@ -1,0 +1,163 @@
+  <ul class="row-container list-unstyled clearfix">
+    <li class="row-left">
+     <div class="product-top-detail">
+      <div class="product-content-left">
+        <a class="title-5" href="{{ product.url | within: collection }}">{{ product.title }}</a>
+        {% if settings.enable_rating_product %}
+          <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+        {% endif %}
+      </div>
+      <div class="product-content-right">
+      <div class="product-price">
+        {% if product.available %}
+        {% if product.compare_at_price_max > product.price %}
+
+        {% assign found_one_in_stock = false %}
+        {% for variant in product.variants %}
+        {% if variant.available and variant.compare_at_price and found_one_in_stock == false %}
+        {% assign found_one_in_stock = true %}
+        
+        <span class="price_sale">{{ variant.price | money }}</span>
+        <del class="price_compare"> {{ variant.compare_at_price | money }}</del>
+
+        {% endif %}
+        {% endfor %}
+
+        {% if found_one_in_stock == false %}
+        {% for variant in product.variants %}
+        {% if variant.available and found_one_in_stock == false %}
+        {% assign found_one_in_stock = true %}
+        <span class="price">
+          {{ variant.price | money }}
+        </span>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        {% else %}
+        <span class="price">
+          {% if product.price_varies %} 
+          {{ product.price | money }}
+          {% else %}
+          {{ product.price | money }}
+          {% endif %}
+        </span>
+        {% endif %}  
+        {% else %}
+        <span class="sold_out">{{ 'products.product.sold_out_html' | t }}</span>
+        {% endif %} 
+      </div>
+      </div>
+      </div>
+      <a href="{{ product.url | within: collection }}" class="container_item">
+
+        <img src="{{ product.featured_image | product_img_url: 'grande' }}" class="img-responsive" alt="{{ product.featured_image.alt | escape }}" />
+
+        {% if product.price_min < product.compare_at_price_min %}
+        <span class="sale_banner">
+          {% if settings.use_saleoff == 'saleoff_txt' %}
+          <span class="sale_text">{{settings.saleoff_txt}}</span>
+          {% else %}
+          <img src="{{'saleoff.png' | asset_url}}" title="{{settings.saleoff_txt}}" alt="{{settings.saleoff_txt}}" />
+          {% endif %}
+        </span>
+        {% endif %}
+      </a>
+
+      <div class="hbw">
+        <span class="hoverBorderWrapper"></span>
+      </div>
+
+    </li>
+
+    <li class="row-right parent-fly animMix">
+	  
+      <div class="list-mode-description">
+        {{ product.description | strip_html | truncatewords: 60 }}
+      </div>
+      <div class="hover-appear">
+        <form action="/cart/add" method="post">
+          {% if product.available %}
+          <div class="hide clearfix"> 
+            <select name="id" >
+              {% if product.compare_at_price_max > product.price %}
+
+              {% assign found_one_in_stock = false %}
+              {% for variant in product.variants %}
+              {% if variant.available and variant.compare_at_price and found_one_in_stock == false %}
+              {% assign found_one_in_stock = true %}
+              {% assign found_variant_id = variant.id %}
+              {% break %}
+              {% endif %}
+              {% endfor %}
+
+              {% if found_one_in_stock == false %}
+              {% for variant in product.variants %}
+              {% if variant.available and found_one_in_stock == false %}
+              {% assign found_one_in_stock = true %}
+              {% assign found_variant_id = variant.id %}
+              {% break %}
+              {% endif %}
+              {% endfor %}
+              {% endif %}
+
+              {% for variant in product.variants %}
+              {% if variant.id == found_variant_id %}
+              <option selected="selected" value="{{ variant.id }}">{{ variant.title | escape }}</option>
+              {% else %}
+              <option value="{{ variant.id }}">{{ variant.title | escape }}</option>
+              {% endif %}
+              {% endfor %}
+              {% else %}
+              {% assign found_one_in_stock = false %}
+              {% for variant in product.variants %}
+              {% if variant.available and found_one_in_stock == false %}
+              {% assign found_one_in_stock = true %}
+              <option selected="selected" value="{{ variant.id }}">{{ variant.title | escape }}</option>
+              {% else %}
+              <option value="{{ variant.id }}">{{ variant.title | escape }}</option>
+              {% endif %}
+              {% endfor %}
+              {% endif %}
+            </select>
+          </div>
+          {% endif %}
+          <div class="effect-ajax-cart">
+            {% if product.available %}
+            <input type="hidden" name="quantity" value="1" />
+            {% if product.variants.size > 1 %}
+            <button class="select-option" type="button" onclick="window.location='{{product.url}}';">View Details<span class="list-mode">{{ 'products.product.select_option' | t }}</span></button>
+			 <button class="add-to-cart" type="submit" name="add">Add to cart<span class="list-mode">{{ 'products.product.add_to_cart' | t }}</span></button>
+           
+            {% else %}
+            <button class="select-option" type="button" onclick="window.location='{{product.url}}';">View Details<span class="list-mode">{{ 'products.product.select_option' | t }}</span></button>
+
+            <button class="add-to-cart" type="submit" name="add">Add to cart<span class="list-mode">{{ 'products.product.add_to_cart' | t }}</span></button>
+            
+            {% endif %}
+            {% else %}
+            {% comment %}
+            
+            <button class="disabled" disabled="disabled" type="button" name="add"><i class="fa fa-shopping-cart"></i><span class="list-mode">{{ 'products.product.add_to_cart' | t }}</span></button>
+            {% endcomment%}
+            <button class="select-option" type="button" onclick="window.location='{{product.url}}';">View Details<span class="list-mode">{{ 'products.product.select_option' | t }}</span></button>
+
+             <button class="add-to-cart disabled" disabled="disabled" type="submit" name="add">Add to cart<span class="list-mode">{{ 'products.product.add_to_cart' | t }}</span></button>
+            
+            
+            {% endif %}
+          </div>        
+        </form>
+       
+        {% if product.available %}
+       {% comment %} <div class="product-ajax-qs hidden-xs hidden-sm">
+            <div data-handle="{{product.handle}}" data-target="#quick-shop-modal" class="quick_shop" data-toggle="modal">
+              <i class="fa fa-eye" title="Quick view"></i><span class="list-mode">{{ 'products.general.quick_view' | t }}</span>
+              <span class="product-json hide">{{ product | json }}</span>
+            </div>
+        </div>
+        
+        <a class="wish-list wishlist wishlist-{{ product.handle }}" title="Add To Wishlist" data-wishlisthandle="{{ product.handle }}"><i class="fa fa-heart"></i><span class="list-mode">{{'wish-list.add_to_wishlist'|t}}</span></a> {% endcomment %}
+        {% endif %}
+      </div>
+    </li>
+  </ul> 

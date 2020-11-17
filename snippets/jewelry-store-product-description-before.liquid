@@ -1,0 +1,23 @@
+<div class="label_desc">
+  DESCRIPTION <span class="fa fa-caret-up"></span>
+</div>
+
+
+
+
+<script>
+  
+  
+  $(".label_desc .fa").click(function(){
+    if($(".product-description.rte").hasClass("close-desc")){
+      $(".product-description.rte").removeClass("close-desc");
+      $(this).removeClass('fa-caret-down').addClass('fa-caret-up');
+    }
+    else
+    {
+      $(".product-description.rte").addClass("close-desc");
+      $(this).removeClass('fa-caret-up').addClass('fa-caret-down');
+    }
+    
+});
+</script>

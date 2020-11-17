@@ -1,0 +1,34 @@
+{% if paginate.pages > 1 %}
+<div class="pagination clearfix">
+  <ul class="list-inline">
+    {% if paginate.previous %}
+    <li class="prev"><a href="{{ paginate.previous.url }}"><i class="fa fa-angle-double-left"></i>Previous</a></li>
+    {% else %}
+    <li class="prev"><a class="disabled" href="javascript:;"><i class="fa fa-angle-double-left"></i>Previous</a></li>
+    {% endif %}
+
+    {% if template != 'blog' %}
+    {% for part in paginate.parts %}
+    {% if part.is_link %}
+    <li><a href="{{ part.url }}">{{ part.title }}</a></li>
+    {% else %}
+    {% if part.title == '&hellip;' %}
+    <li class="ellipsis"><a class="disabled" href="javascript:;">{{ part.title }}</a></li>
+    {% else %}
+    <li class="active"><a href="javascript:;">{{ part.title }}</a></li>
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+
+    {% if paginate.next %}
+    <li class="next"><a href="{{ paginate.next.url }}">Next<i class="fa fa-angle-double-right"></i></a></li>
+    {% else %}
+    <li class="next"><a class="disabled" href="javascript:;">Next<i class="fa fa-angle-double-right"></i></a></li>
+    {% endif %}   
+  </ul>
+  <p class="pagination-num-showing hidden-xs">
+    Showing {{ paginate.current_offset | plus: 1 }} - {% if paginate.next %}{{ paginate.current_offset | plus: paginate.page_size }}{% else %}{{ paginate.items }}{% endif %} of {{ paginate.items }} total
+  </p>
+</div>
+{% endif %}

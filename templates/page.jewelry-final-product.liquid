@@ -1,0 +1,88 @@
+{% comment %}
+  This file can be overwritten at any moment
+{% endcomment %}
+{% capture language %}{{ request.locale.iso_code }}{% endcapture %}
+{% assign approved_customer = false %}
+{% for customer_tag in customer.tags %}
+{% if customer_tag == 'APPROVED RETAILER' %}
+{% assign approved_customer = true %}
+{% endif %}
+{%endfor%}
+
+<link rel="stylesheet" href="https://store.jewelry.systems/css/catalog.css" />
+<style type="text/css">.jewelry-item-selectors .jewelry-metal-selector .jewelry-metals li img,.jewelry-product>.available-variants>span>img,.jewelry-product>.available-variants-hover>span>img{border-radius:0px}#jewelry-product #AddToCart {background-color:#0081A3;color:#FFFFFF}.jewelry-catalog-container .jewelry-products-list .jewelry-row .jewelry-product > h4{color:#555555}.jewelry-catalog-container .jewelry-products-list .jewelry-row .jewelry-product p.jewelry-product-price{color:#0081A3}.jewelry-catalog-container .jewelry-products-list .jewelry-row .jewelry-product p.jewelry-product-price .jewelry-sale{color:#808080}.jewelry-catalog-container .jewelry-products-list .jewelry-row .jewelry-product p.jewelry-product-sku{color:#808080}.jewelry-catalog-container .jewelry-products-list .jewelry-row .jewelry-product p.jewelry-product-barcode{color:#808080}#jewelry-product .jewelry-product-container .jewelry-row .jewelry-col.jewelry-details-container span[itemprop="brand"]{color:#555555}#jewelry-product .jewelry-product-container .jewelry-row .jewelry-col.jewelry-details-container h1[itemprop="name"]{color:#555555}#jewelry-product .jewelry-product-container .jewelry-row .jewelry-col.jewelry-details-container .jewelry-single-price{color:#0081A3}#jewelry-product .jewelry-product-container .jewelry-row .jewelry-col.jewelry-details-container .jewelry-sale-price{color:#808080}#jewelry-product .jewelry-product-container .jewelry-row .jewelry-col.jewelry-details-container .product-description{color:#555}#jewelry-product .jewelry-product-container .jewelry-row .jewelry-col.jewelry-details-container .jewelry-sku{color:#808080}#jewelry-product .jewelry-product-container .jewelry-row .jewelry-col.jewelry-details-container .jewelry-barcode{color:#808080}</style>
+<div id="jewelry-product" data-language="{{ language }}" data-ac="{{ approved_customer }}"  data-shop="{{ shop.permanent_domain }}">
+
+    {% comment %}To replace breadcrumbs part use "jewelry-solution-breadcrumbs" snippet.{% endcomment %}
+    {% capture replace %}{% include 'jewelry-solution-breadcrumbs' %}{% endcapture %}
+
+    {% if replace contains "Liquid error" %}
+      {% unless template.name == 'index' or template.name == 'cart' %}
+<nav class="breadcrumb" role="navigation" aria-label="breadcrumbs">
+  <a href="/" title="Home">Home</a>
+
+  {% if template.name == 'product' %}
+
+    {% if collection %}
+      <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+      {% if collection.handle %}
+        {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+        {{ collection.title | link_to: url }}
+      {% endif %}
+    {% endif %}
+    <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+    <span>{{ product.title }}</span>
+
+  {% elsif template.name == 'collection' and collection.handle %}
+
+    <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+    {% if current_tags %}
+      {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+      {{ collection.title | link_to: url }}
+      <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+      <span>{{ current_tags | join: " + " }}</span>
+    {% else %}
+      <span>{{ collection.title }}</span>
+    {% endif %}
+
+  {% elsif template.name == 'blog' %}
+
+    <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+    {% if current_tags %}
+      {{ blog.title | link_to: blog.url }}
+      <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+      <span>{{ current_tags | join: " + " }}</span>
+    {% else %}
+    <span>{{ blog.title }}</span>
+    {% endif %}
+
+  {% elsif template.name == 'article' %}
+
+    <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+    {{ blog.title | link_to: blog.url }}
+    <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+    <span>{{ article.title }}</span>
+
+  {% elsif template.name == 'page' %}
+
+   <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+   <span>{{ page.title }}</span>
+
+  {% else %}
+
+   <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+   <span>{{ page_title }}</span>
+
+  {% endif %}
+</nav>
+{% endunless %}
+    {% else %}
+    	{{ replace }}
+    {% endif %}
+
+    <div class="jewelry-product-container jewelry-final-product" data-shop="{{ shop.permanent_domain }}">
+        <div class="jewelry-final-product-container"></div>
+    </div>
+
+</div>
+<script src="https://store.jewelry.systems/js/product.js?shop={{ shop.permanent_domain }}&language={{ language }}&t=1603779804" type="text/javascript"></script>

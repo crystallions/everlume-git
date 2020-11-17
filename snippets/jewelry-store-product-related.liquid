@@ -1,0 +1,195 @@
+<div class="shipping_det_section">
+  <div class="shipping_container">
+    <div class="ship_box">
+      {% assign seconds = 2 | times: 24 | times: 60 | times: 60 %}
+      
+      {% comment %}<h3>Ships by: {{ 'now' | date: "%s" | plus: seconds | date: "%a, %b %d" }}</h3>{% endcomment %}
+      <h3>{{ settings.ship_by_date }}</h3>
+      <p>{{ settings.ship_by_note }}</p>
+      
+      <ul>
+        <li>{{ settings.line1 }}</li>
+        <li>{{ settings.line2 }}</li>
+      </ul>
+      <ul>
+        <li>{{ settings.line3 }}</li>
+        <li>{{ settings.line4 }}</li>
+      </ul>
+    </div>
+    
+    <div class="payment_box">
+      <h3>{{ settings.ftitle }}</h3>
+      
+      <ul>
+        <li>{{ settings.fline1 }}</li>
+        <li>{{ settings.fline2 }}</li>
+        <li>{{ settings.fline3 }}</li>
+      </ul>
+    </div>
+    
+  </div>
+</div>
+
+	
+<style>
+ /* @media (min-width: 769px){
+  .owl-carousel{
+  transform: rotate(90deg);
+  width: 770px !important; 
+  margin-top:100px;
+} 
+.item{
+  transform: rotate(-90deg);
+}
+.owl-carousel .owl-nav{
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  width: 100%;
+  top: calc(50% - 33px);
+  left:-3px;
+}
+div.owl-carousel .owl-nav .owl-prev, div.owl-carousel .owl-nav .owl-next{
+    font-size:36px;
+    top:unset;
+    bottom: 15px; 
+}
+  
+  .jewelry-app-product-images .jewelry-images-container .jewelry-images-list{
+  	position:absolute;
+    right:-286px;
+    top:326px;
+  }
+  
+  .jewelry-app-product-images .jewelry-images-container{
+  	position:relative;
+  }
+    
+  
+    
+  } */
+</style>
+
+<script>
+
+/*  
+
+  
+function owlInitialize() {
+  if($(".jewelry-images-list").length){
+if ($(window).width() >= 769) {
+  
+    $(".jewelry-images-list").addClass("owl-carousel");
+  $(".jewelry-images-list").addClass("owl-theme");
+   $(".jewelry-images-list").owlCarousel({
+    items:6,
+    loop: false,
+    mouseDrag: false,
+    touchDrag: false,
+    pullDrag: false,
+    rewind: false,
+    autoplay: false,
+    margin: 0,
+    nav: true,
+     
+  });
+  
+  var owl = $(".jewelry-images-list").data('owlCarousel');
+     
+   
+    owl.removeItem('5');
+ 	 owl.update();
+}else{
+  if($('.jewelry-images-list').hasClass('owl-carousel')){
+    $('.owl-carousel').owlCarousel('destroy');
+ // $('.owl-carousel').data('owlCarousel').destroy();
+    $('.jewelry-images-list').removeClass("owl-carousel");
+  $('.jewelry-images-list').removeClass("owl-theme");
+}
+}
+    
+  }
+}
+$( window ).load(function() {
+  
+  $('#productSelect').on('change',function(){
+    if($('.jewelry-images-list').hasClass('owl-carousel')){
+    	$('.owl-carousel').owlCarousel('destroy');
+    	$('.jewelry-images-list').removeClass("owl-carousel");
+    	$('.jewelry-images-list').removeClass("owl-theme");
+    }else{
+    	$('.owl-carousel').owlCarousel('refresh');
+    	$('.jewelry-images-list').removeClass("owl-carousel");
+    	$('.jewelry-images-list').removeClass("owl-theme");
+    }
+});
+  
+setTimeout(function(){  
+  
+  
+  
+   $(".jewelry-images-list a").each(function(n) {
+     if($(this).css('display') == 'none'){
+     	$(this).remove();
+     }
+      });
+  owlInitialize(); 
+
+
+
+}, 1000); 
+});
+$(window).resize(function() {
+  
+  
+  
+ owlInitialize();   
+});  */
+  
+  
+</script>
+
+{% comment %}
+  <link rel="stylesheet" href="https://www.codehim.com/demo/jquery-carousel-vertical/css/carousel-vertical.css">
+	<!-- Demo CSS -->
+	<link rel="stylesheet" href="https://www.codehim.com/demo/jquery-carousel-vertical/css/demo.css">
+ 
+{{ 'carousel-vertical.js' | asset_url | script_tag }} 
+ {% endcomment %}
+{% assign product_collection = product.collections[0] %}
+
+{% unless product_collection == blank %}
+<div class="info_section"><img src="{{ product_collection.image.src | collection_img_url: 'original' }}" alt="{{ product_collection.image.alt }}" title="{{ product_collection.title }}"></div>
+{% endunless %}
+
+{% comment %}
+{% if settings.display_edu %}
+<div class="info_graphic">
+  {{ settings.display_edu_content }}
+</div>
+{% endif %}
+{% endcomment %}
+
+{% comment %}
+<div class="insta-title">
+  <h3>See How Other Are <br> Wearing it</h3>
+</div>
+<div id="insta-feed"></div>
+{% endcomment %}
+
+
+<style>
+  #jewelry-product>*, .jewelry-catalog-container>* {
+    margin-left: 0% !important;
+    margin-right: 0% !important;
+    max-width: 100% !important;
+}
+</style>
+{% comment %}
+ {% include 'related-products' %} 
+{% endcomment %}
+
+
+<div class="evm-recommended-products"></div>
+
+  

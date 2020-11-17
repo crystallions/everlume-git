@@ -1,0 +1,78 @@
+{% if settings.layout_placement_slideshow == 'box'%}
+<div class="container">
+  {% endif %}
+  <div class="home-slider-wrapper clearfix">
+    {% comment %} Main Slideshow {% endcomment %}
+    {% if settings.show_slideshow %}
+    {% if settings.slide-active-1 or settings.slide-active-2 or settings.slide-active-3 or settings.slide-active-4 or settings.slide-active-5 %}
+    <div class="camera_wrap" id="home-slider">
+      {% for i in (1..5) %}
+      {% assign show = 'slide-active-' | append: i %}
+      {% if settings[show] %}
+      {% assign link = 'slide-link-' | append: i %}
+      {% assign cta = 'slide-action-' | append: i %}
+      {% assign image = 'slide-image-' | append: i %}
+      {% assign image-mobile = 'slide-image-mobile-' | append: i %}
+      {% assign title = 'slide-heading-' | append: i %}
+      {% assign title-animation = 'slide-main-heading-animation-' | append: i %}
+      {% assign main-title = 'slide-main-heading-' | append: i %}
+      {% assign main-title-animation = 'slide-main-heading-animation-' | append: i %}
+      {% assign caption = 'slide-caption-' | append: i %}
+      {% assign caption-animation = 'slide-caption-animation-' | append: i %}
+      {% assign color-heading = 'slide-heading-colour-' | append: i %}
+      {% assign color-main-heading = 'slide-main-heading-colour-' | append: i %}
+      {% assign color-caption = 'slide-caption-colour-' | append: i %}
+      {% assign image-caption-active = 'slide-image-caption-active-' | append: i %}
+      {% assign image_caption = 'slide-image-caption-' | append: i %}
+      {% assign image-caption-animation = 'slide-image-caption-animation-' | append: i %}
+      <div data-src="{{ image | append: '.jpg' | asset_url }}">
+        {% if settings[title] != blank %}
+        <div class="camera_caption camera_title_{{i}} {{settings[title-animation]}}">
+          <a href="{{ settings[link] }}" style="color:{{ settings[color-heading] }};">{{settings[title]}}</a>
+        </div>
+        {% endif %}
+        
+         {% if settings[main-title] != blank %}
+        <div class="camera_caption camera_main_title_{{i}} {{settings[main-title-animation]}}">
+          <a href="{{ settings[link] }}" style="color:{{ settings[color-main-heading] }};">{{settings[main-title]}}</a>
+        </div>
+        {% endif %}
+
+        {% if settings[caption] != blank %}
+        <div class="camera_caption camera_caption_{{i}} {{settings[caption-animation]}}" style="color:{{ settings[color-caption] }};">
+          {{settings[caption]}}
+        </div>
+        {% endif %}
+        
+        {% if settings[image-caption-active] %}
+        <div class="camera_caption camera_image-caption_{{i}} {{settings[image-caption-animation]}}">
+          <img src="{{ image_caption | append: '.png' | asset_url }}" alt="image_caption" />
+        </div>
+        {% endif %}
+        
+        {% if settings[mini-caption] != blank %}
+        <div class="camera_mc camera_mc_{{i}} {{settings[caption-animation]}}" style="color:{{ settings[color-mini-caption] }};">
+          {{settings[mini-caption]}}
+        </div>
+        {% endif %}
+
+        {% if settings[cta] != blank %}
+        <div class="camera_cta_{{i}}">
+          <a href="{{ settings[link] }}" class="btn">{{settings[cta]}}</a>
+        </div>
+        {% endif %}
+
+        <div class="camera_img_mobile">
+          <img src="{{ image-mobile | append: '.jpg' | asset_url }}" class="mobile-slide" />
+        </div>
+
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% endif %}
+  </div>
+  {% if settings.layout_placement_slideshow == 'box'%}
+</div>
+{% endif %}

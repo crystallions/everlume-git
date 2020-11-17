@@ -1,0 +1,69 @@
+{% if settings.show_header_customer %}
+{% if shop.customer_accounts_enabled %}
+<ul id="accounts" class="list-inline">
+ {% comment %} <li class="my-account">
+    <a href="/account">{{ 'layout.customer.my_account' | t }}</a>
+  </li> {% endcomment %}
+  {% if customer %}
+  {% if settings.show_wish_list %}
+  <li class="my-wl">
+    <a href="/pages/wish-list">{{'wish-list.my_wishlist'|t}}</a>
+  </li>
+  <li>/</li>
+  {% endif %}
+  
+  <li class="logout">
+    <a href="/account/logout">{{ 'layout.customer.log_out' | t }}</a>
+  </li>
+  {% else %}
+  <li class="login">
+    {% if settings.customer_login_dropdown %}
+    <span id="loginButton" class="dropdown-toggle" data-toggle="dropdown">
+      <span class="icon-user"></span>
+      <i class="sub-dropdown1"></i>
+      <i class="sub-dropdown"></i>
+    </span>
+
+    <!-- Customer Account Login -->
+    <div id="loginBox" class="dropdown-menu text-left">
+      {% form 'customer_login' %}
+
+      <div id="bodyBox">
+        <ul class="control-container customer-accounts list-unstyled">
+          <li class="clearfix">
+         {% comment %}   <label for="customer_email_box" class="control-label">{{ 'layout.login_dropdown.email' | t }} <span class="req">*</span></label>  {% endcomment %}
+            <input type="email" value="" name="customer[email]" id="customer_email_box" placeholder="{{ 'layout.login_dropdown.email' | t }} " class="form-control" />
+          </li>
+          {% if form.password_needed %}
+          <li class="clearfix">
+           {% comment %}  <label for="customer_password_box" class="control-label">{{ 'layout.login_dropdown.password' | t }} <span class="req">*</span></label> {% endcomment %}
+            <input type="password" value="" name="customer[password]" id="customer_password_box" placeholder="{{ 'layout.login_dropdown.password' | t }}" class="form-control password" />
+          </li>
+          {% endif %}
+          <li class="clearfix">
+            <button class="btn" type="submit">{{ 'layout.login_dropdown.login' | t }}</button>
+          </li>
+          <li class="clearfix">
+            <a class="action btn btn-1" href="/account/register">{{ 'layout.login_dropdown.create_account' | t }}</a>
+          </li>
+        </ul>
+      </div>
+      {% endform %}
+
+    </div>
+
+    {% else %}
+    {{ 'layout.customer.login' | customer_login_link }}
+    {% endif %}
+  </li>
+  {% comment %}
+  <li>/</li>
+  {% if shop.customer_accounts_optional %} 
+  <li class="register">
+    {{ 'layout.customer.create_account' | t | customer_register_link }}
+  </li>    
+  {% endif %} {% endcomment %} 
+  {% endif %}
+</ul>
+{% endif %}
+{% endif %}

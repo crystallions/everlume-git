@@ -1,0 +1,809 @@
+/*
+** Base CSS
+**/
+/* begin Headings, body, etc */
+html,
+html body{
+  line-height: 20px;
+}
+body {
+  margin: 0;
+  font-family: {{settings.general_font}};
+  font-size: 14px;
+  line-height: 20px;
+  color: {{settings.b_scaffolding_color}};
+  background-color: {{settings.b_scaffolding_bg}};
+}
+a {
+  color: {{settings.b_links_colour}};
+  font-size: {{settings.b_links_size}};
+  font-weight: {{settings.b_links_style}};
+  text-decoration: {{settings.b_links_decoration}};
+}
+a:hover,
+a:focus {
+  color: {{settings.b_links_colour_hover}};
+  font-size: {{settings.b_links_size_hover}};
+  font-weight: {{settings.b_links_style_hover}};
+  text-decoration: {{settings.b_links_decoration_hover}};
+}
+.text-error {
+  color: {{settings.b_states_alerts_error_txt}};
+}
+a.text-error:hover,
+a.text-error:focus {
+  color: {{settings.b_states_alerts_error_bg}};
+}
+.text-success {
+  color: {{settings.b_states_alerts_success_txt}};
+}
+a.text-success:hover,
+a.text-success:focus {
+  color: {{settings.b_states_alerts_success_bg}};
+}
+h1 small,
+h2 small,
+h3 small,
+h4 small,
+h5 small,
+h6 small {
+  color: {{settings.b_scaffolding_color}};
+}
+blockquote small {
+  color: {{settings.b_scaffolding_color}};
+}
+.label-success,
+.badge-success {
+  background-color: {{settings.b_states_alerts_success_txt}};
+}
+.label-success[href],
+.badge-success[href] {
+  background-color: {{settings.b_states_alerts_success_bg}};
+}
+/* end Headings, body, etc */
+
+/* begin Tables */
+table {
+  background-color: {{settings.b_tables_bg}};
+}
+.table th,
+.table td {
+  border-top: 1px solid {{settings.b_tables_border}};
+}
+.table tbody + tbody {
+  border-top: 2px solid {{settings.b_tables_border}};
+}
+.table .table {
+  background-color: {{settings.b_tables_bg}};
+}
+.table-bordered {
+  border: 1px solid {{settings.b_tables_border}};
+}
+.table-bordered th,
+.table-bordered td {
+  border-left: 1px solid {{settings.b_tables_border}};
+}
+.table-striped tbody > tr:nth-child(odd) > td,
+.table-striped tbody > tr:nth-child(odd) > th {
+  background-color: {{settings.b_tables_bg_accent}};
+}
+.table-hover tbody tr:hover > td,
+.table-hover tbody tr:hover > th {
+  background-color: {{settings.b_tables_bg_hover}};
+}
+.table tbody tr.success > td {
+  background-color: {{settings.b_states_alerts_success_bg}};
+}
+.table tbody tr.error > td {
+  background-color: {{settings.b_states_alerts_error_bg}};
+}
+.table tbody tr.warning > td {
+  background-color: {{settings.b_states_alerts_warning_bg}};
+}
+.table tbody tr.info > td {
+  background-color: {{settings.b_states_alerts_info_bg}};
+}
+.table-hover tbody tr.success:hover > td {
+  background-color: {{settings.b_states_alerts_success_txt}};
+}
+.table-hover tbody tr.error:hover > td {
+  background-color: {{settings.b_states_alerts_error_txt}};
+}
+.table-hover tbody tr.warning:hover > td {
+  background-color: {{settings.b_states_alerts_warning_txt}};
+}
+.table-hover tbody tr.info:hover > td {
+  background-color: {{settings.b_states_alerts_info_txt}};
+}
+/* end Tables */
+
+/* begin Forms */
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+.uneditable-input {
+  background-color: {{settings.b_forms_input_bg}};
+  border: 1px solid {{settings.b_forms_input_border}};
+}
+select {
+  border: 1px solid {{settings.b_forms_input_border}};
+  background-color: {{settings.b_forms_input_bg}};
+}
+input:-moz-placeholder,
+textarea:-moz-placeholder {
+  color: {{settings.b_forms_phd_txt}};
+}
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+  color: {{settings.b_forms_phd_txt}};
+}
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  color: {{settings.b_forms_phd_txt}};
+}
+.control-group.error .control-label,
+.control-group.error .help-block,
+.control-group.error .help-inline {
+  color: {{settings.b_states_alerts_error_txt}};
+}
+.control-group.error .checkbox,
+.control-group.error .radio,
+.control-group.error input,
+.control-group.error select,
+.control-group.error textarea {
+  color: {{settings.b_states_alerts_error_txt}};
+}
+.control-group.error input,
+.control-group.error select,
+.control-group.error textarea {
+  border-color: {{settings.b_states_alerts_error_txt}};
+}
+.control-group.error input:focus,
+.control-group.error select:focus,
+.control-group.error textarea:focus {
+  border-color: {{settings.b_states_alerts_error_bg}};
+}
+.control-group.error .input-prepend .add-on,
+.control-group.error .input-append .add-on {
+  color: {{settings.b_states_alerts_error_txt}};
+  background-color: {{settings.b_states_alerts_error_bg}};
+  border-color: {{settings.b_states_alerts_error_txt}};
+}
+.control-group.success .control-label,
+.control-group.success .help-block,
+.control-group.success .help-inline {
+  color: {{settings.b_states_alerts_success_txt}};
+}
+.control-group.success .checkbox,
+.control-group.success .radio,
+.control-group.success input,
+.control-group.success select,
+.control-group.success textarea {
+  color: {{settings.b_states_alerts_success_txt}};
+}
+.control-group.success input,
+.control-group.success select,
+.control-group.success textarea {
+  border-color: {{settings.b_states_alerts_success_txt}};
+}
+.control-group.success input:focus,
+.control-group.success select:focus,
+.control-group.success textarea:focus {
+  border-color: {{settings.b_states_alerts_success_bg}};
+}
+.control-group.success .input-prepend .add-on,
+.control-group.success .input-append .add-on {
+  color: {{settings.b_states_alerts_success_txt}};
+  background-color: {{settings.b_states_alerts_success_bg}};
+  border-color: {{settings.b_states_alerts_success_txt}};
+}
+/* end Forms */
+/*
+** end Base CSS
+**/
+
+
+/* CUSTOM BUTTON */
+/***
+Reset and overrides  
+***/
+/* general body settings */
+body { 
+  padding: 0px;
+  margin: 0px;
+  direction: ltr;
+}
+/* overides metro scrolbars in IE10 and makes them look like a default scrollbar */
+@-ms-viewport{ 
+  width: auto !important; 
+}
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 300;
+}
+button, input, select, textarea{
+  font: {{settings.general_font_size}} {{settings.general_font}};
+}
+/***
+Fix link outlines after click
+***/
+a,a:focus, a:hover, a:active {
+  outline: 0;
+  text-decoration: none;
+}
+div, input, select, textarea, span, img, table, td, th, p, a, button, ul, li {
+  -webkit-border-radius: 0 !important;
+  -moz-border-radius: 0 !important;
+  border-radius: 0 !important;
+}
+label{
+  cursor: default;
+}
+ol li{
+  padding: 5px 0;
+}
+dl dd{
+  margin-bottom: 20px;
+  margin-left: 0;
+}
+
+#buttons input, 
+#cancel-purchase a{
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  -ms-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+#cancel-purchase{
+  font-size: 100%;
+}
+#buttons input, 
+#cancel-purchase a{
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  white-space: nowrap;
+  padding: 6px 12px;
+  line-height: normal;
+  border-radius: 4px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  
+  filter: none;
+  cursor: pointer;
+  outline: none;
+  border-radius: 0;
+  margin-bottom: 3px;
+  
+  font-family: {{settings.header_font}};
+  padding-left: 18px;
+  padding-right: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+#cancel-purchase a{
+  background: {{settings.btn_btn1_bg}};
+  color: {{settings.btn_btn1_txt}};
+  border: 2px solid {{settings.btn_btn1_border}};
+  font-size: 13px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+#cancel-purchase a:hover,
+#cancel-purchase a:focus,
+#cancel-purchase a:active{
+  background: {{settings.btn_btn1_bg_hover}};
+  color: {{settings.btn_btn1_txt_hover}};
+  border-color: {{settings.btn_btn1_border_hover}};  
+  outline: none;
+}
+#create-account input[type="submit"],
+button#create-account-btn,
+#buttons input{
+  background: {{settings.btn_btn_bg}};
+  color: {{settings.btn_btn_txt}};
+  border: 2px solid {{settings.btn_btn_border}};  
+  padding-left: 18px;
+  padding-right: 18px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+#create-account input[type="submit"]:hover,
+button#create-account-btn:hover,
+#buttons input:hover,
+#buttons input:focus,
+#buttons input:active{
+  background: {{settings.btn_btn_bg_hover}};
+  color: {{settings.btn_btn_txt_hover}};
+  border-color: {{settings.btn_btn_border_hover}};  
+  outline: none;
+  cursor: pointer;
+}
+
+
+/* CUSTOM LAYOUT */
+body{
+  padding-bottom: 0;
+}
+body,
+label,
+button,
+select, 
+textarea, 
+input[type="text"], 
+input[type="password"], 
+input[type="datetime"], 
+input[type="datetime-local"], 
+input[type="date"], 
+input[type="month"], 
+input[type="time"], 
+input[type="week"], 
+input[type="number"], 
+input[type="email"], 
+input[type="url"], 
+input[type="search"], 
+input[type="tel"], 
+input[type="color"], 
+.uneditable-input{
+  color: {{ settings.b_scaffolding_color }};
+  font-size: {{settings.general_font_size}};
+}
+
+/*
+** Input settings
+*/
+textarea, 
+input[type="text"], 
+input[type="password"], 
+input[type="datetime"], 
+input[type="datetime-local"], 
+input[type="date"], 
+input[type="month"], 
+input[type="time"], 
+input[type="week"], 
+input[type="number"], 
+input[type="email"], 
+input[type="url"], 
+input[type="search"], 
+input[type="tel"], 
+input[type="color"], 
+.uneditable-input{
+  -webkit-appearance: none;
+  outline: none!important;
+  height: 42px;
+  padding: 0 15px;
+  line-height: 20px;
+  font-weight: normal;
+  vertical-align: top;
+  background-color: {{settings.b_forms_input_bg}};
+  background-image: none;
+  filter: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+  border-color: {{settings.b_forms_input_border}};
+  margin-bottom: 0;
+}
+input[type="text"], 
+input[type="password"], 
+input[type="datetime"], 
+input[type="datetime-local"], 
+input[type="date"], 
+input[type="month"], 
+input[type="time"], 
+input[type="week"], 
+input[type="number"], 
+input[type="email"], 
+input[type="url"], 
+input[type="search"], 
+input[type="tel"], 
+input[type="color"]{
+  height: 32px;  
+  box-shadow: inset 0px 0px 5px -1px {{settings.b_tables_bg_hover}};
+  -webkit-box-shadow: inset 0px 0px 5px -1px {{settings.b_tables_bg_hover}};
+  -moz-box-shadow: inset 0px 0px 5px -2px {{settings.b_tables_bg_hover}};
+}
+textarea{
+  height: 120px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  
+  box-shadow: inset 0px 0px 5px -1px {{settings.b_forms_input_border}};
+  -webkit-box-shadow: inset 0px 0px 5px -1px {{settings.b_forms_input_border}};
+  -moz-box-shadow: inset 0px 0px 5px -2px {{settings.b_forms_input_border}};
+}
+textarea:focus, 
+input[type="text"]:focus, 
+input[type="password"]:focus,
+input[type="datetime"]:focus, 
+input[type="datetime-local"]:focus, 
+input[type="date"]:focus, 
+input[type="month"]:focus, 
+input[type="time"]:focus,
+input[type="week"]:focus, 
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus, 
+input[type="search"]:focus, 
+input[type="tel"]:focus, 
+input[type="color"]:focus, 
+.uneditable-input:focus{
+  border-color: {{settings.b_forms_actions_bg}};
+  outline: 0;
+  outline: thin dotted \9;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+select {
+  width: 134px;
+  background-color: {{settings.b_forms_input_bg}};
+  background-image: none;
+  filter: none; 
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+  border: 1px solid {{settings.b_forms_input_border}};
+  outline: none;
+  height: 32px;
+  line-height: 20px;
+  
+  box-shadow: inset 0px 0px 5px -1px {{settings.b_tables_bg_hover}};
+  -webkit-box-shadow: inset 0px 0px 5px -1px {{settings.b_tables_bg_hover}};
+  -moz-box-shadow: inset 0px 0px 5px -2px {{settings.b_tables_bg_hover}};
+  
+}
+@-moz-document url-prefix() {
+  select{
+    padding: 7px;
+  }
+}
+select:focus{
+  outline-offset: -2px;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+  border-color: {{settings.b_forms_actions_bg}};
+  outline: 0 !important;
+}
+table{
+  background-color: transparent;
+}
+
+{% if settings.logo_image == 'logo.png' %}
+#logo{
+  background: url({{'logo.png' | asset_url}}) no-repeat center;
+  height: 100px;
+  background-color: {{settings.header_bg}};
+}
+{% endif %}
+
+#container,
+#container.slim{
+  width: 960px;
+  font-size: 100%;
+}
+
+#header{
+  padding-top: 0;
+}
+#main{
+  min-height: 925px;
+}
+#header,
+#main,
+#footer,
+#container.slim #header,
+#container.slim #main,
+#container.slim #footer{
+  width: 100%;
+  background: transparent;
+  
+  padding-left: 0;
+  padding-right: 0;
+}
+#header h1{
+  padding-left: 0;
+}
+#footer{
+  background: {{settings.footer_bg}}!important;
+  color: {{settings.footer_txt_colour}};
+  font-size: {{settings.footer_txt_size}};
+  padding: 25px 0px 40px;
+}
+#content{
+  padding: 0;
+  min-height: 200px;
+  margin-bottom: 50px;
+}
+#billing-is-shipping label,
+#marketing-box label{
+  display: inline;
+}
+#overview{
+  background: transparent;
+  border-bottom: 1px solid {{settings.b_tables_border}};
+  margin-bottom: 30px;
+  padding-left: 0;
+  padding-right: 0;
+}
+#products{
+  border-right: 0;
+}
+#thumbs div{
+  border: 0;
+  margin-right: 10px;
+}
+#thumbs td{
+  padding-right: 20px;
+}
+#thumbs img{  
+  margin-right: 5px;
+  float: left;
+}
+#overview .hint,
+#thumbs span,
+#thumbs h3 span{
+  color: {{settings.product_price_colour}};
+}
+#thumbs h3{
+  line-height: 14px;
+}
+#cost, #order-num{
+  font-family: {{settings.header_font}};
+  color: {{settings.product_price_colour}};
+  font-size: 30px;
+  line-height: 40px;
+  font-weight: bold;
+  text-shadow: none;
+}
+#addresses{
+  background: transparent;
+  margin-bottom: 0;
+}
+#addresses table td{
+  vertical-align: middle;
+}
+#buttons{
+  background: transparent;
+  border: 0;
+  padding: 30px 0 10px;
+}
+.group{
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+#tagline{
+  border-bottom: 1px solid {{settings.b_tables_border}};
+  font-size: 36px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  line-height: 41px;
+  padding: 20px 0;
+  text-transform: uppercase;
+}
+#tagline .title{
+  font-size: 24.5px;
+  line-height: 30px;
+  color: {{settings.home_heading_colour}};
+  font-weight: bold;
+}
+#credit-card-info label{
+  margin-bottom: 3px;
+  color: {{settings.typo_title_colour}};
+  display: block;
+}
+span.hint a{
+  position: relative;
+  top: -3px;
+  color: {{settings.typo_title_colour}};
+}
+span.hint a:hover{
+  color: {{settings.b_links_colour_hover}};
+}
+
+.address-notification{
+  background-color: {{settings.b_states_alerts_success_bg}};
+  border-color: {{settings.b_states_alerts_success_bg}};
+  color: {{settings.b_states_alerts_success_txt}};
+  padding: 10px 0;
+}
+.field-with-errors{
+  background-color: {{settings.b_states_alerts_error_bg}};
+  border-color: {{settings.b_states_alerts_error_bg}};
+  color: {{settings.b_states_alerts_error_txt}};
+  padding: 10px;
+  display: inline-block;
+}
+#payment-method .field-with-errors #credit_card_year{
+  margin-top: 10px;
+}
+.field-with-errors .error-message{
+  color: {{settings.b_states_alerts_error_txt}};
+}
+.gright{
+  width: 49%;
+  padding-left: 0;
+  margin-left: 0;
+  float: right;
+}
+#email{
+  padding: 0;
+  background: transparent;
+  border: 0;
+  margin-bottom: 50px;
+}
+#email input{
+  font-size: 100%;
+}
+
+.slim #overview,
+#marketing-box,
+#payment-method,
+#payment,
+#products,
+#email,
+.gleft,
+.gright{
+  position: relative;
+  margin-bottom: 25px;
+}
+.slim #overview h2,
+#marketing-box h3,
+#payment-method h3,
+#payment h3,
+#products h2,
+#email label,
+.gleft h3, 
+.gright h3{
+  text-transform: uppercase;
+  color: {{settings.home_heading_colour}};
+  font-size: {{settings.home_heading_size}};
+  font-style: {{settings.home_heading_style}};
+  font-weight: {{settings.home_heading_weight}};
+  border: 0;
+  margin-bottom: 15px;
+}
+
+span.sign-in-message{
+  display: block;
+  margin-left: 0;
+  margin-top: 10px;
+}
+.multiple_address_selection td,
+.form td{
+  padding-left: 0;
+  vertical-align: middle;
+}
+.form td[colspan="2"]{
+  width: 100%!important;
+}
+.form td.lbl{
+  width: 100px;
+}
+.form td.lbl label{
+  margin-top: 7px;
+  color: {{settings.typo_title_colour}};
+}
+.form ul.inline li{
+  padding-left: 0;
+}
+.form ul.inline li,
+#billing_address_province_li{
+  width: 100%!important;
+}
+#shipping_address_province_li,
+#billing_address_province_li{
+  margin-top: 10px;
+}
+.form ul.inline li label,
+#billing_address_province_li label {
+  display: inline-block;
+  width: 129px;
+  padding-right: 2px;
+  position: relative;
+  bottom: 3px;
+  color: {{settings.typo_title_colour}};
+}
+#billing_zonelabel{
+  top: 12px;
+}
+input[type="text"],
+#email input{
+  width: 218px!important;
+  
+  line-height: 30px;
+  margin: 0;
+}
+select{
+  width: 250px!important;
+  line-height: 30px;
+  margin: 0;
+}
+#payment-methods li{
+  padding-left: 0;
+}
+img.credit-card{
+  margin-left: 0;
+}
+#credit-card-info .hint{
+  position: relative;
+  top: 12px;
+}
+#payment-method .gleft{
+  width: 25%;
+}
+#payment-method .gright{
+  width: 75%;
+}
+#buttons input{
+  appearance: none;
+  -moz-appearance: none;		
+  -webkit-appearance: none;
+}
+.footer p{
+  color: #fff;
+}
+
+/*fix*/
+#customer-login-link:focus{
+  box-shadow: none !important;
+  background: none !important;
+}
+/*End fix*/
+@-moz-document url-prefix() {
+  .form ul.inline li label,
+  #billing_address_province_li label {
+    width: 100px!important;
+  }
+}
+@media  (min-width: 767px) and (max-width: 979px) { 
+  #container,
+  #container.slim{
+    width: 720px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .form ul.inline li label, #billing_address_province_li label{
+    width: 95px!important;
+  }
+  #wallet{
+    width: 230px;
+  }
+  #credit-card-info{
+    width: 100%;
+    display: block;
+  }
+  input[type="text"], #email input{
+  	width: 180px !important;
+  }
+  select {
+      width: 213px !important;
+  }
+}
+
+  

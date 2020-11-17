@@ -1,0 +1,37 @@
+{% layout settings.customer_layout %}
+
+<div id="page-header">
+  <h1 id="page-title">{{ 'customer.activate_account.title' | t }}</h1>	
+</div>
+
+<div id="col-main" class="col-md-24 active-page clearfix">
+
+  <div id="reset_password">
+
+    <p class="note">{{ 'customer.activate_account.subtext' | t }}</p>
+
+    {% form 'activate_customer_password' %}
+
+    {% if form.errors %}
+    <div class="alert alert-danger">
+      <button type="button" class="close btooltip" data-toggle="tooltip" data-placement="top" title="Close" data-dismiss="alert">×</button>
+      {{ form.errors | default_errors }}
+    </div>
+    {% endif %}
+
+    <div id="password" class="clearfix control-group">
+      <label class="control-label" for="password">{{ 'customer.activate_account.password' | t }}</label>
+      <input type="password" value="" name="customer[password]" id="customer_password" class="span8 password" />
+    </div>
+    <div id="password_confirm" class="clearfix control-group">
+      <label class="control-label" for="password_confirmation">{{ 'customer.activate_account.password_confirm' | t }}</label>
+      <input type="password" value="" name="customer[password_confirmation]" id="customer_password_confirmation" class="span8 password" />
+    </div>
+    <div class="control-group last1">
+      <button class="btn btn-1" type="submit">{{ 'customer.activate_account.submit' | t }}</button>
+      <button class="btn btn-1" type="submit" name="decline" id="customer_decline">{{ 'customer.activate_account.cancel' | t }}</button>
+    </div>
+    {% endform %}
+
+  </div>
+</div>
